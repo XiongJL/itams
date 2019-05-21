@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>IT资产管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-table.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+    <link rel="stylesheet" href="../css/tagsinput.css">
+    <link rel="stylesheet" href="../css/show.css">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body sec:authorize="hasRole('ROLE_cathode')">
+<div th:include="common/logo :: logo"></div>
+<!--    $("select").val()	"Amsterdam,Washington,Sydney,Beijing,Cairo"-->
+<!--    $("select").tagsinput('items')	["Amsterdam","Washington","Sydney","Beijing"]-->
+<div class="input-group" style="margin: 0 auto">
+    <input id="searchValue" type="text" placeholder="输入一个设备号后,敲回车"class="form-control col-md-2" value="" data-role="tagsinput" >
+    <div class="btn-group">
+        <button id="searchDevice" type="button" class="btn btn-default">搜索</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a id="searchAssets" href="#">搜索资产编号</a></li>
+            <li><a id="searchUserID" href="#">搜索工号</a></li>
+<!--            <li><a href="#">搜索姓名</a></li>-->
+            <li><a href="#">全局搜索</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id="exportSearch" href="#">导出搜索的资产</a></li>
+        </ul>
+    </div>
+</div>
+<!-- Split button -->
+
+<div class="content">
+    <table id="AssetsTabel" data-show-jumpto="true">
+    </table>
+
+</div>
+</body>
+
+
+<script src="../js/jquery-3.4.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-table.js"></script>
+<script src="../js/locale/bootstrap-table-zh-CN.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script src="../js/tagsinput.min.js"></script>
+<script src="../js/show/show.js"></script>
+<script src="../js/show/table-jumpto.js"></script>
+<script>
+    $(document).ready(function(){
+        //添加导航栏选中样式
+        $("#modify").addClass("active")
+    })
+</script>
+</html>

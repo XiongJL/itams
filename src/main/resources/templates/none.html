@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>空页 ,用以异常规避,并对特殊错误进行提示</title>
+    <link rel="stylesheet" href="../css/toastr.min.css">
+</head>
+<body>
+
+</body>
+<script src="../js/jquery-3.4.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/toastr.min.js"></script>
+<!--在js中使用th标签-->
+<script th:inline="javascript">
+    $(document).ready(function() {
+        var err = /*[[${err}]]*/ '';
+        if(err=="none"){
+            //初始化toastr弹出框
+            toastr.options.positionClass = 'toast-top-center';
+            //弹出错误提示
+            toastr.warning("搜索的资产或使用人员不存在");
+        }
+    })
+</script>
+</html>

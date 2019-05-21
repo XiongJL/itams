@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>IT资产管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div th:include="common/logo :: logo"></div>
+    <div id="container" class="col-sm-2" style="min-width:30rem;height:25rem"></div>
+    <div id="container2" class="col-sm-4" style="width:auto;"></div>
+</body>
+<script src="../js/jquery-3.4.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/highcharts2.js"></script>
+<script src="../js/exporting-1.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    $(document).ready(function(){
+        //添加导航栏选中样式
+        $("#show").addClass("active")
+    })
+    $(function () {
+        // create the chart
+        var use = /*[[${use/(use+notUse)*100}]]*/ 50;
+        var useNum = /*[[${use}]]*/ 50;
+        var noUse = /*[[${notUse/(use+notUse)*100}]]*/ 50;
+        var noUseNum = /*[[${notUse}]]*/ 50;
+        var chart = Highcharts.chart('container', {  //饼图一
+            title: {
+                text: '资产使用率<br>占比',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 55
+            },
+            tooltip: {
+                headerFormat: '{series.name}<br>',
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white',
+                            textShadow: '0px 1px 2px black'
+                        }
+                    },
+                    startAngle: -90, // 圆环的开始角度
+                    endAngle: 90,    // 圆环的结束角度
+                    center: ['50%', '75%']
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '资产使用率',
+                innerSize: '60%',
+                data: [
+                    ['使用'+useNum+'个', use],
+                    ['未使用'+noUseNum+'个', noUse],
+                ]
+            }]
+        });
+        $('#container2').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: '部门使用资产占比'
+            },
+            tooltip: {
+                headerFormat: '{series.name}<br>',
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        // 通过 format 或 formatter 来格式化数据标签显示
+                        //format: '值: {point.y} 占比 {point.percentage} %',
+                        formatter: function() {
+                            //this 为当前的点（扇区）对象，可以通过  console.log(this) 来查看详细信息
+                            return '<span style="color: ' + this.point.color + '"> 值：' + this.y + '，占比' + this.percentage + '%</span>';
+                        }
+                    },
+                    showInLegend: true  // 显示在图例中
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '各部门资产使用占比',
+                data: [
+                    ['IT',   45.0],
+                    ['IE',       26.8],
+                    {
+                        name: 'IE',
+                        y: 12.8,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['FE',    8.5],
+                    ['HR',     6.2],
+                    ['其他',   0.7]
+                ]
+            }],
+            exporting: {
+                chartOptions: {
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

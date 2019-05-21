@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>IT资产管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<style>
+    /*.brand{*/
+    /*    border-radius:10px;*/
+    /*    float: left;*/
+    /*}*/
+    /*.content span{*/
+    /*    color: #0f0f0f;*/
+    /*}*/
+    /*.state{color: red}*/
+    /*.all{*/
+    /*    margin-top: -10rem;*/
+    /*}*/
+</style>
+<body>
+<div class="all">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" >
+        <li role="presentation" th:each="hd,hdStat : ${hds}"><a th:href="'#assets'+${hdStat.index}"  aria-controls="home" role="tab" data-toggle="tab"><span th:text="'资产'+${hdStat.index+1}"></span></a></li>
+        <li role="presentation" class="active"><a href="#user" aria-controls="profile" role="tab" data-toggle="tab">使用人员</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane " th:each="hd,hdStat : ${hds}" th:id="'assets'+${hdStat.index}">
+                <h3 class="list-group-item list-group-item-danger">资产编号: <span th:text="${hd.getAssetsID()}?: 'None'"></span></h3>
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">类别:  <span th:text="${hd.getITtype()}?: 'None'"></span></li>
+                        <li class="list-group-item list-group-item-success">型号: <span th:text="${hd.getModel()}?: 'None'"></span></li>
+                        <li class="list-group-item list-group-item-success">所属部门: <span th:text="${hd.getDepartment()}?: 'None'"></span></li>
+                        <li class="list-group-item list-group-item-warning">
+                            <h4>详细信息:</h4>
+                            <div class="content">
+                                状态: <span class = "state" th:text="${hd.getLocation()}==0 ? '未使用':'使用中'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                CPU: <span th:text="${hd.getCPU()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                RAM: <span th:text="${hd.getRAM()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                HDD1: <span th:text="${hd.getHDD1()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                HDD2: <span th:text="${hd.getHDD2()}?: 'None'"></span>
+                                <br><br>
+                                有线MAC1: <span th:text="${hd.getWiredMAC1()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                有线MAC2: <span th:text="${hd.getWiredMAC2()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                无线MAC: <span th:text="${hd.getWirelessMAC()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <br><br>
+                                厂别位置: <span th:text="${hd.getLocation()}?: 'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                采购日期: <span th:text="${hd.getPurchaseDate()}?:'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                入系统日期: <span th:text="${hd.getEntryDate()}?:'None'"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        <!-- 使用人员-->
+        <div role="tabpanel" class="tab-pane active" id="user">
+            <h3 class="list-group-item list-group-item-danger">使用人员: <span th:text="${users[0].getUserName()}?: '无'"></span></h3>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-success">工号: <span th:text="${users[0].getUserID()}?: 'None'"></span></a>
+                <p href="#" class="list-group-item list-group-item-info">部门: <span th:text="${users[0].getUserDepartment()}?: 'None'"></span></p>
+                <p href="#" class="list-group-item list-group-item-warning">电话: <span th:text="${users[0].getTelephone()}?: 'None'"></span></p>
+                <p href="#" class="list-group-item list-group-item-danger">座机: <span th:text="${users[0].getLphone()}?: 'None'"></span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../js/jquery-3.4.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver  #sqlserver
+#    url: jdbc:sqlserver://172.60.6.27;DatabaseName=HRM
+#    username: sa
+#    password: sa@!admin1
+    url: jdbc:sqlserver://172.60.45.198;DatabaseName=HRM
+    username: sa
+    password: Lw123456
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true #\u663E\u793A\u67E5\u8BE2\u8BED\u53E5
+  devtools:
+    restart:
+      enabled: true
+      exclude: WEB/INF/**
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false  #\u7981\u6B62\u7F13\u5B58
+  servlet:
+    multipart:
+      max-file-size: 20MB  #\u6700\u5927\u4E0A\u4F20\u6587\u4EF6\u5355\u4E2A\u6700\u5927\u503C
+      max-request-size: 50MB #\u4E0A\u4F20\u6587\u4EF6\u603B\u7684\u6700\u5927\u503C
+server:
+  port: 8091
