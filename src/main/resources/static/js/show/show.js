@@ -116,38 +116,21 @@ var TableInit = function () {
                     async: false,           //很重要，这里要使用同步请求
                     dataType:"html",
                     success: function(data) {
-                        // console.log(data)
-                        // html += '<p >';
-                        // var index=1;
-                        // //遍历子表数据
-                        // $.each(data, function (key, value) {
-                        //
-                        //     value = value.toString().replace(/"null"/,'')
-                        //     console.log(key+":"+value)
-                        //     html+='<b class="">' + key + ':</b> <span class=""> ' + value + '</span> &nbsp; &nbsp; &nbsp; &nbsp;'
-                        //     if(index%6==0){
-                        //         html += "<br>"
-                        //     }
-                        //     index++
-                        // })
-                        //
-                        // html += '</p> '
-                        // console.log("ajax:"+html)
                         $detail.html(data); // 关键地方
                     }
                 });
-            },
-
-            rowStyle: function (row, index) {
-                var classesArr = ['success', 'info'];
-                var strclass = "";
-                if (index % 2 === 0) {//偶数行
-                    strclass = classesArr[0];
-                } else {//奇数行
-                    strclass = classesArr[1];
-                }
-                return { classes: strclass };
-            },//隔行变色
+            }
+            // ,
+            // rowStyle: function (row, index) {
+            //     var classesArr = ['success', 'info'];
+            //     var strclass = "";
+            //     if (index % 2 === 0) {//偶数行
+            //         strclass = classesArr[0];
+            //     } else {//奇数行
+            //         strclass = classesArr[1];
+            //     }
+            //     return { classes: strclass };
+            // },//隔行变色
         });
 
     };
