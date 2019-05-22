@@ -33,6 +33,7 @@
                     <li id="modify"><a href="/itams/datas">数据浏览</a></li>
                     <li id="operate"><a href="/itams/operate">数据录入</a></li>
                     <li id="show"><a href="/itams/showData">数据图表</a></li>
+                    <li th:if="${session.permission=='sadmin'|| session.permission=='admin'}" id="permission"><a href="/itams/role">权限管理</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多操作 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -63,9 +64,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span th:text="${session.username}">用户</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
+                            <li><a href="#">查看权限</a></li>
                             <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">申请临时权限</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/itams/logout">退出登录</a></li>
                         </ul>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>IT资产管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-table.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div th:include="common/logo :: logo"></div>
+
+<div>
+    <table id="RoleTable" data-show-jumpto="true"></table>
+</div>
+
+<!-- Modal copy -->
+<div class="modal fade" id="settingmod" tabindex="-1" role="dialog" aria-labelledby="setting">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal2">设置权限</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">添加权限</div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li value="superman" class="list-group-item">
+                                        <input id="sadmin" type="checkbox" value="superman" checked>
+                                        <label for="sadmin">超级管理员权限</label>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-md-offset-1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">已有权限</div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li value="superman" class="list-group-item">超级管理员权限</li>
+                                    <li value="注液一车间" class="list-group-item">注液一车间</li>
+                                    <li value="注液二车间" class="list-group-item">注液二车间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="uploadButton" type="button" class="fileUpload btn btn-warning" onclick="uploadfile();">上传</button>
+                <!-- 加载动画 -->
+                <div id="loading" class="container--box">
+                    <div class="box">
+                        <div class="spinner spinner--3"></div>
+                        处理中...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="../js/jquery-3.4.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-table.min.js"></script>
+<script src="../js/locale/bootstrap-table-zh-CN.js"></script>
+<script src="../js/show/table-jumpto.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script src="../js/show/role.js"></script>
+<script>
+    $(document).ready(function(){
+        //添加导航栏选中样式
+        $("#permission").addClass("active")
+    })
+</script>
+
+</html>

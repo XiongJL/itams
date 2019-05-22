@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body sec:authorize="hasRole('ROLE_cathode')">
+<body>
 <div th:include="common/logo :: logo"></div>
 <!--    $("select").val()	"Amsterdam,Washington,Sydney,Beijing,Cairo"-->
 <!--    $("select").tagsinput('items')	["Amsterdam","Washington","Sydney","Beijing"]-->

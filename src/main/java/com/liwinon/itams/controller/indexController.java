@@ -49,7 +49,7 @@ public class indexController {
     }
 
     /**
-     * 获取用户权限集 ,这里没有使用shiro ,业务特殊.
+     * 获取用户角色 ,这里没有使用shiro ,业务特殊.
      * @return
      */
     @GetMapping(value = "/itams/user/permission")
@@ -78,7 +78,10 @@ public class indexController {
         try {
             subject.login(token);
             HttpSession session = request.getSession();
+            List<UserRoleModel> urms = userDao.findByUname(username);
+            String permission = userDao.getPermissionByRole((String) urms.get(0).getName());
             session.setAttribute("username",username);
+            session.setAttribute("permission",permission);
         } catch (UnknownAccountException e) {
             System.out.println("账户或密码错误");
            // e.printStackTrace();

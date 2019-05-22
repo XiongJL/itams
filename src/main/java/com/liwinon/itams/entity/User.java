@@ -12,6 +12,7 @@ public class User {
     @Column(unique = true)
     private String uname;
     private String pwd;
+    private String PERSONID;
 //    //mappedBy指向的是要关联的属性
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
 //    private List<Role> roles;
@@ -23,6 +24,14 @@ public class User {
 //    public void setRoles(List<Role> roles) {
 //        this.roles = roles;
 //    }
+
+    public String getPERSONID() {
+        return PERSONID;
+    }
+
+    public void setPERSONID(String PERSONID) {
+        this.PERSONID = PERSONID;
+    }
 
     public int getUid() {
         return uid;
