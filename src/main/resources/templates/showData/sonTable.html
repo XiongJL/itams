@@ -54,8 +54,8 @@
                     <div class="form-group">
                         <div class="col-sm-2 infoline"> 性能状态: <span class="state" th:text="${as.getPState()}"></span></div>
                         <div class="col-sm-2 infoline">资产状态: <span class="state" th:text="${as.getAState()}"></span></div>
-                        <div class="col-sm-2 infoline">出厂编号: <span th:text="${as.getFactoryID()}?: 'None'"></span></div>
-                        <div class="col-sm-2 infoline">资产名称: <span th:text="${as.getAssetsName()}?: 'None'"></span></div>
+                        <div class="col-sm-4 infoline">出厂编号: <span th:text="${as.getFactoryID()}?: 'None'"></span></div>
+                        <div class="col-sm-4 infoline">资产名称: <span th:text="${as.getAssetsName()}?: 'None'"></span></div>
                         <div class="col-sm-2 infoline">规格型号: <span th:text="${as.getModels()}?: 'None'"></span></div>
                         <div class="col-sm-2 infoline">供应商: <span th:text="${as.getSupplier()}?: 'None'"></span></div>
                         <div class="col-sm-2 infoline">厂区: <span th:text="${as.getFaArea()}?: 'None'"></span></div>

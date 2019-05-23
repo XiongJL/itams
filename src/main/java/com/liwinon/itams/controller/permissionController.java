@@ -1,13 +1,7 @@
 package com.liwinon.itams.controller;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.HardwareDao;
-import com.liwinon.itams.dao.UserDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.Assets;
-import com.liwinon.itams.entity.DatasShowModel;
-import com.liwinon.itams.entity.RoleModel;
-import com.liwinon.itams.entity.UserInfo;
+import com.liwinon.itams.dao.*;
+import com.liwinon.itams.entity.*;
 import com.liwinon.itams.service.showService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +32,10 @@ public class permissionController {
     AssetsDao asDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    RoleDao roleDao;
+    @Autowired
+    UserRoleDao urDao;
     @GetMapping(value = "/itams/role")
     public String role(){
         return "common/role";
@@ -75,13 +75,13 @@ public class permissionController {
         return null;
     }
     /**
-     * 获取分页的用户角色
+     * 获取分页的用户角色  方法,记得封装到service
      * @param pageable
      * @return
      */
     public  Map<String ,Object>  tablesRole(Pageable pageable){
         Map<String ,Object> result = new HashMap<>();
-        Page<String[]> page = userDao.getAllUserRole(pageable);
+        Page<String[]> page = roleDao.getAllUserRole(pageable);
         System.out.println("总数total:"+page.getTotalElements());
         result.put("total",page.getTotalElements());
         List<String []> list = page.getContent();
@@ -97,5 +97,47 @@ public class permissionController {
         System.out.println(list.size());
         result.put("rows",datas);
         return result;
+    }
+
+    /**
+     * 获取所有的workshop
+     * @return
+     */
+    @GetMapping(value = "/itams/role/getWorkshop")
+    @ResponseBody
+    public List<String> getWorkShops(){
+        List<String> list =  roleDao.findWorkshops();
+        for(String s : list ){
+            System.out.println(s);
+        }
+        return list;
+    }
+
+    @GetMapping(value = "/itams/role/update")
+    @ResponseBody
+    public String updateRole(HttpServletRequest request){
+        //获取数组用  getParameterValues
+        String[] roles=request.getParameterValues("roles[]");
+        int uid = Integer.valueOf(request.getParameter("uid"));
+        System.out.println(uid);
+        //查找关联表
+        List<UserRole> list = urDao.findByUid(uid);
+        //全部删除
+        if (list.size()>0){
+            for(UserRole ur:list){
+                urDao.deleteById(ur.getId());
+            }
+        }
+        //全部添加
+        if(roles.length>0){
+            for (String s: roles){ //循环更新的所有权限
+                Role  role = roleDao.findByWorkshop(s);
+                UserRole a = new UserRole();
+                a.setUid(uid);
+                a.setRid(role.getRid());
+                urDao.save(a);
+            }
+        }
+        return "ok";
     }
 }

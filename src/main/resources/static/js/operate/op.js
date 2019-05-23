@@ -243,7 +243,6 @@ $("#commit").bind("click",function(){
 
 //提交表单,更新资产
 $("#update2").bind("click",function(){
-    console.log(checkRole())
     if(!checkRole()){ //无权修改
         toastr.warning("您没有权限修改此资产!")
     }else{

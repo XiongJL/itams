@@ -79,8 +79,11 @@ public class indexController {
             subject.login(token);
             HttpSession session = request.getSession();
             List<UserRoleModel> urms = userDao.findByUname(username);
+            /** 超级管理员只能有超级管理员权限!!!
+             * **/
             String permission = userDao.getPermissionByRole((String) urms.get(0).getName());
             session.setAttribute("username",username);
+            System.out.println("permission is  : " + permission);
             session.setAttribute("permission",permission);
         } catch (UnknownAccountException e) {
             System.out.println("账户或密码错误");

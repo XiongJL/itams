@@ -1,6 +1,6 @@
 //全局
-var content="";
-var type=null;
+var content = "";
+var type = null;
 
 $(function () {
     //1.初始化Table
@@ -17,7 +17,7 @@ var TableInit = function () {
             url: '/itams/datas/getData',         //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             toolbar: '#toolbar',                //工具按钮用哪个容器
-           // striped: false,                      //是否显示行间隔色
+            // striped: false,                      //是否显示行间隔色
             showLoading: true,
             showFullscreen: true,
             silent: true,
@@ -41,14 +41,14 @@ var TableInit = function () {
             clickToSelect: true,                //是否启用点击选中行
             height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             uniqueId: "id",                     //每一行的唯一标识，一般为主键列
-           // showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            // showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
             showExport: true,               //显示导出按钮
             clickToSelect: true,                //是否启用点击选中行
-      //    exportDataType: "selected",        //导出checkbox选中的行数
+            //    exportDataType: "selected",        //导出checkbox选中的行数
             cardView: false,                    //是否显示详细视图
             detailView: true,                   //是否显示父子表
             paginationLoop: true,             //是否无限循环
-          //  detailFormatter: 'detailFormatter', //子表方法
+            //  detailFormatter: 'detailFormatter', //子表方法
             columns: [
                 // {    //复选框
                 //   filed:'',
@@ -56,17 +56,18 @@ var TableInit = function () {
                 //   align:'center'
                 // },
                 {
-                    field:'assetsType',
-                    title:'资产类型'
+                    field: 'deviceID',
+                    title: '设备号'
+                },
+                {
+                    field: 'assetsType',
+                    title: '资产类型'
                 },
                 {
                     field: 'assetsCategory',
                     title: '资产类别'
                 },
-                {
-                  field: 'deviceID',
-                  title: '设备号'
-                },
+
                 {
                     field: 'assetsID',
                     title: '资产号'
@@ -104,7 +105,7 @@ var TableInit = function () {
                     formatter: operateFormatter //自定义方法，添加操作按钮
                 },
             ],
-            onExpandRow: function(index, row, $detail) {
+            onExpandRow: function (index, row, $detail) {
                 //这一步就是相当于在当前点击列下新创建一个table
                 var html = "";
                 console.log(row)
@@ -112,10 +113,10 @@ var TableInit = function () {
                 $.ajax({
                     type: "get",
                     url: "/itams/datas/getThisData",       //子表请求的地址
-                    data: {"AssetsID":assetsID},//我这里是点击父表后，传递父表列id和nama到后台查询子表数据
+                    data: {"AssetsID": assetsID},//我这里是点击父表后，传递父表列id和nama到后台查询子表数据
                     async: false,           //很重要，这里要使用同步请求
-                    dataType:"html",
-                    success: function(data) {
+                    dataType: "html",
+                    success: function (data) {
                         $detail.html(data); // 关键地方
                     }
                 });
@@ -138,9 +139,9 @@ var TableInit = function () {
     oTableInit.queryParams = function (params) {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.pageSize,   //页面大小
-            offset:params.pageNumber,    //页码
-            content:content,  //最上面全局变量,用以搜索初始值为""
-            type:type   //初始值为null
+            offset: params.pageNumber,    //页码
+            content: content,  //最上面全局变量,用以搜索初始值为""
+            type: type   //初始值为null
         };
         return temp;
     };
@@ -150,10 +151,11 @@ var TableInit = function () {
 
 function operateFormatter(value, row, index) {//赋予的参数
     return [
-        '<a class="btn  " href="/itams/operate?AssetsID='+row.assetsID+'">编辑</a>',
+        '<a class="btn  " href="/itams/operate?AssetsID=' + row.assetsID + '">编辑</a>',
         '<a class="btn " href="#">删除</a>'
     ].join('');
 }
+
 //注册加载子表的事件。你可以理解为点击父表中+号时触发的事件
 /*
 function detailFormatter(index, row) {
@@ -184,12 +186,12 @@ function detailFormatter(index, row) {
 }*/
 
 //资产ID查询
-$('#searchAssets').click(function(){
+$('#searchAssets').click(function () {
     var Type = "1"
     chaxun(Type)
 });
 //工号查询
-$('#searchUserID').click(function(){
+$('#searchUserID').click(function () {
     var Type = "2";
     chaxun(Type)
 });
@@ -198,28 +200,28 @@ $('#searchDevice').click(function () {
     var Type = "3"
     chaxun(Type)
 })
+
 /*查询方法*/
 function chaxun(Type) {
-    if($("#searchValue").val().length==0)
-    {
+    if ($("#searchValue").val().length == 0) {
         //初始化全局变量
-        content="";
-        type=null;
-        $("#AssetsTabel").bootstrapTable("refresh", { pageNumber: 1 });
-    } else
-    {
+        content = "";
+        type = null;
+        $("#AssetsTabel").bootstrapTable("refresh", {pageNumber: 1});
+    } else {
         //查询之后重新从第一页算起
-        content=$("#searchValue").val();
+        content = $("#searchValue").val();
         type = Type;//1为搜索AssetsID 2为搜索工号
-        $('#AssetsTabel').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
+        $('#AssetsTabel').bootstrapTable('refreshOptions', {pageNumber: 1, pageSize: 10});
     }
 }
+
 /*下载选择的资产*/
-$('#exportSearch').click(function(){
+$('#exportSearch').click(function () {
     console.log("开始导出数据")
-    if(content==""||type==null){
+    if (content == "" || type == null) {
         toastr.warning("请先进行搜索再导出")
-    }else {
-        window.location.href= "/itams/download/AssetsData?content=" + content + "&type=" + type;
+    } else {
+        window.location.href = "/itams/download/AssetsData?content=" + content + "&type=" + type;
     }
 });
