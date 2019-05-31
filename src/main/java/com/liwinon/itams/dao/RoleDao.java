@@ -24,6 +24,15 @@ public interface RoleDao extends JpaRepository<Role,Integer> {
             "GROUP BY t1.uid,t1.uname",nativeQuery = true)
     Page<String[]> getAllUserRole(Pageable pageable);
 
+
+    @Query(value = "SELECT STUFF((SELECT ',' + workshop FROM view_roles " +
+            "WHERE t1.uid=uid " +
+            "FOR XML PATH('')),1, 1, '') AS roles " +
+            "FROM view_roles as t1 " +
+            "where uname = :username ",nativeQuery = true)
+    String getMyRole(String username);
+
+
     @Query(value = "SELECT DISTINCT workshop FROM ITAMS_Role",nativeQuery = true)
     List<String> findWorkshops();
 }

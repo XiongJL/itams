@@ -16,8 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
     <style>
-        .infoline{
-            border-bottom:1px solid black;
+       .allinfo{
+            background: #e5e7ea;
+       }
+        .title{
+            background: #c9cbcd;
         }
     </style>
 </head>
@@ -36,21 +39,21 @@
                                                   data-toggle="tab">使用人员</a></li>
     </ul>
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" style="background-color: #9d9d9d">
         <span id="ss"></span>
-        <div role="tabpanel" class="tab-pane active" th:each="as,asStat : ${assets}" th:id="'assets'+${as.getAssetsID()}">
+        <div role="tabpanel" class="tab-pane active allinfo" th:each="as,asStat : ${assets}" th:id="'assets'+${as.getAssetsID()}">
 
-            <h4 class="list-group-item ">设备编号: <span th:text="${as.getDeviceID()}?: 'None'"></span>
+            <h4 class="list-group-item title" >设备编号: <span th:text="${as.getDeviceID()}?: 'None'"></span>
                 &nbsp;&nbsp;  资产编号: <span th:text="${as.getAssetsID()}?: 'None'"></span>
             </h4>
             <ul class="list-group">
-                <li class="list-group-item ">
+                <li class="list-group-item allinfo">
                     类型: <span th:text="${as.getAssetsType()}?: 'None'"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     类别: <span th:text="${as.getAssetsCategory()}?: 'None'"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     所属部门: <span th:text="${as.getDepartment()}?: 'None'"></span>
                 </li>
-                <li class="list-group-item ">
-                    <fieldset>
+                <li class="list-group-item allinfo">
+                    <fieldset class="allinfo">
                     <div class="form-group">
                         <div class="col-sm-2 infoline"> 性能状态: <span class="state" th:text="${as.getPState()}"></span></div>
                         <div class="col-sm-2 infoline">资产状态: <span class="state" th:text="${as.getAState()}"></span></div>
@@ -80,10 +83,10 @@
             </ul>
         </div>
         <!-- 使用人员-->
-        <div role="tabpanel" class="tab-pane " th:each="as,asStat : ${assets}" th:id="'user'+${as.getAssetsID()}">
+        <div role="tabpanel" class="tab-pane allinfo" th:each="as,asStat : ${assets}" th:id="'user'+${as.getAssetsID()}">
             <h4 class="list-group-item ">使用人员: <span th:text="${users[0].getUserName()}?: '无'"></span></h4>
 
-            <div class="list-group">
+            <div class="list-group allinfo">
                 <a href="#" class="list-group-item ">工号: <span th:text="${users[0].getUserID()}?: 'None'"></span></a>
                 <p href="#" class="list-group-item ">部门: <span
                         th:text="${users[0].getUserDepartment()}?: 'None'"></span></p>

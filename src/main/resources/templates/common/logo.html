@@ -64,8 +64,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span th:text="${session.username}">用户</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">查看权限</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><a href="#"   onclick="getMyRole()" type="button" data-toggle="modal"data-target="#queryRole">查看权限</a></li>
                             <li><a href="#">申请临时权限</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/itams/logout">退出登录</a></li>
@@ -75,46 +74,43 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <!-- Modal copy -->
+    <div class="modal fade" id="queryRole" tabindex="-1" role="dialog" aria-labelledby="update">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 >您好: <span th:text="${session.username}"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <h5>您具有以下权限</h5>
+                    <p th:if="${session.username == null || session.username ==''}">浏览数据</p>
+                    <p th:if="${session.username!=null}"  id="content" style="text-align: center; font-size: 20px">
 
-
+                    </p>
+                </div>
+<!--                <div class="modal-footer">-->
+<!--                    -->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+    <script>
+        function getMyRole(){  //获取自己的权限
+            $.ajax({
+                url: "/itams/role/getMyRole",
+                success:function (res) {
+                    console.log(res)
+                    $("#content").html(res);
+                }
+            })
+        }
+    </script>
 </div>
-<script>
-    $(function () {
-        $(".collapse").find("li").each(function () {
-            var a = $(this).find("a:first")[0];
-            debugger
-            var strs = $(a).attr("href").split("/")
-            var path = location.pathname.split("/")
-            if (strs[strs.length-1] === path[path.length-1]) {
-                $(this).addClass("active");
-            } else {
-                $(this).removeClass("active");
-            }
-        });
 
-    })
-
-</script>
 </body>
 <script th:src="@{../js/jquery-3.4.0.min.js}" src="../js/jquery-3.4.0.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script th:src="@{../js/bootstrap.min.js}" src="../js/bootstrap.min.js"></script>
-<script>
-    $(function () {
-        debugger
-        $(".collapse").find("li").each(function () {
-            var a = $(this).find("a:first")[0];
-            debugger
-            var strs = $(a).attr("href").split("/")
-            var path = location.pathname.split("/")
-            if (strs[strs.length-1] === path[path.length-1]) {
-                $(this).addClass("active");
-            } else {
-                $(this).removeClass("active");
-            }
-        });
 
-    })
-
-</script>
 </html>

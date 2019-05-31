@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,6 +99,21 @@ public class permissionController {
         result.put("rows",datas);
         return result;
     }
+
+    @GetMapping(value = "/itams/role/getMyRole")
+    @ResponseBody
+    public String getMyrole(HttpServletRequest request){
+        HttpSession session =  request.getSession();
+        String username =  (String) session.getAttribute("username");
+        if(username==null){
+            return null;
+        }
+        String  arr =   roleDao.getMyRole(username);
+
+        return arr;
+    }
+
+
 
     /**
      * 获取所有的workshop
