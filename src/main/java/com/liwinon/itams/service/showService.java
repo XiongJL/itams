@@ -9,5 +9,5 @@ import java.util.Map;
 public interface showService {
      Map<String ,Object> tablesData(Pageable pageable);
 
-     List<DatasShowModel>  searchData(String content,String type);
+     Map<String ,Object>  searchData(String content,String type,Pageable pageable);
 }

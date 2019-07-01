@@ -71,7 +71,7 @@ public class showDataController {
             //   System.out.println("datas:" + datas);
             json.accumulate("total", total);
             json.accumulate("rows", datas);
-            JSONObject test = new JSONObject();
+            //JSONObject test = new JSONObject();
            // System.out.println("json:" + json);
             //      test.accumulate("total", 1);
             //    test.accumulate("rows", "[{AssetsID:\"1\",Model:\"ssss\",UserName:\"ssssss\",UserID:\"123\",getTime:\"1920-001\"}]");
@@ -81,8 +81,9 @@ public class showDataController {
         if (content != null && content != "") {
             //
                 System.out.println("开始搜索资产");
-                List<DatasShowModel> datas = showService.searchData(content,type);
-                json.accumulate("total", datas.size());
+                Map<String ,Object> res = showService.searchData(content,type,pageable);
+                List<DatasShowModel> datas = (List<DatasShowModel>)res.get("data");
+                json.accumulate("total", res.get("total"));
                 json.accumulate("rows", datas);
                 return json;
         }

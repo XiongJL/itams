@@ -166,11 +166,14 @@ function operateFormatter(value, row, index) {//赋予的参数
 //点击setting按钮 ,获取当前人员的角色
 function getThisRole(param,uid){
     if(!checkPermission()){
+       // $('#close').click();// 关闭弹出层
+
         toastr.warning("您没有权限操作!")
         toastr.warning("您可以在个人菜单中申请相应权限")
         setTimeout(function () {
-            $('#close').click();// 关闭弹出层
-        },1)
+            $('#settingmod').modal('hide');//用js来控制模板弹窗。
+            $('#settingmod').modal('toogle');
+        },10)
 
     }else{
     //在更改按钮上赋值value

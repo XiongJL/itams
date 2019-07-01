@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,49 +57,160 @@ public class showServiceImpl implements showService {
      * @param type
      * @return
      */
-    public List<DatasShowModel>  searchData(String content,String type){
+    public Map<String ,Object>  searchData(String content,String type,Pageable pageable){
+        System.out.println("进入搜索");
+        Map<String ,Object> result = new HashMap<>();
         List<DatasShowModel> datas = new ArrayList<>();
         DatasShowModel model =null;
         UserInfo user =null;
         String[] strs = content.split(",");
-        for (String s : strs){ //搜索内容
-            s = s.trim();
-            Assets as =null ;
-            if("1".equals(type)){  //通过资产ID搜索
-                as  = asDao.findByAssetsID(s);
-                System.out.println(as);
-                if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
-                    continue;
+        if("4".equals(type)){ //通过日期搜索
+            String[] dates = content.split("/");
+            Date date1 = Date.valueOf(dates[0]);
+            Date date2 = Date.valueOf(dates[1]);
+            Page<Assets> page = asDao.findBetweenDate(date1,date2,pageable);
+            List<Assets> list = page.getContent();
+            System.out.println(list);
+            System.out.println(list.size());
+            for(Assets as : list){
                 user = userDao.findByAssetsID(as.getAssetsID());
                 model = setmodel(as,user);
                 datas.add(model);
             }
-            if("2".equals(type)){  //通过工号搜索
-                List<UserInfo> users = userDao.findByUserID(s);
-                System.out.println(users.size());
-                for (UserInfo u:users){
-                    if(u==null)  //没有找到
+            result.put("total",page.getTotalElements());
+        }else if ("5".equals(type)){
+             //通过详细位置查询
+            Page<Assets> page = getAssets(pageable, strs,type);
+            List<Assets> list = page.getContent();
+            System.out.println(list);
+            System.out.println(list.size());
+            for(Assets as : list){
+                user = userDao.findByAssetsID(as.getAssetsID());
+                model = setmodel(as,user);
+                datas.add(model);
+            }
+            result.put("total",page.getTotalElements());
+
+        }else if ("6".equals(type)){
+            //通过资产类别查询
+            Page<Assets> page = getAssets(pageable, strs,type);
+            List<Assets> list = page.getContent();
+            System.out.println(list);
+            System.out.println(list.size());
+            for(Assets as : list){
+                user = userDao.findByAssetsID(as.getAssetsID());
+                model = setmodel(as,user);
+                datas.add(model);
+            }
+            result.put("total",page.getTotalElements());
+        }else if ("7".equals(type)){
+            //通过责任人查询
+            Page<Assets> page = getAssets(pageable, strs,type);
+            List<Assets> list = page.getContent();
+            System.out.println(list);
+            System.out.println(list.size());
+            for(Assets as : list){
+                user = userDao.findByAssetsID(as.getAssetsID());
+                model = setmodel(as,user);
+                datas.add(model);
+            }
+            result.put("total",page.getTotalElements());
+        }else if ("8".equals(type)){
+            //通过资产状态查询
+            String l1= "###",l2= "###",l3= "###",l4= "###";
+            int i  = 1;
+            for (String s : strs){
+                s = s.trim();
+                if(i ==1)
+                    l1 = s;
+                if(i==2)
+                    l2 = s;
+                if (i==3)
+                    l3 = s;
+                if (i==4)
+                    l4 = s;
+                i++;
+            }
+            Page<Assets> page = asDao.findBtAState(l1,l2,l3,l4,pageable);
+            List<Assets> list = page.getContent();
+            for(Assets as : list){
+                user = userDao.findByAssetsID(as.getAssetsID());
+                model = setmodel(as,user);
+                datas.add(model);
+            }
+            result.put("total",page.getTotalElements());
+        }
+        else{
+            for (String s : strs){ //搜索内容
+                s = s.trim();
+                Assets as =null ;
+                if("1".equals(type)){  //通过资产ID搜索
+                    as  = asDao.findByAssetsID(s);
+                    System.out.println(as);
+                    if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
                         continue;
-                    as = asDao.findByAssetsID(u.getAssetsID());
-                    if (as==null)
-                        continue;
-                    model = setmodel(as,u);
-                    System.out.println("model:"+model);
+                    user = userDao.findByAssetsID(as.getAssetsID());
+                    model = setmodel(as,user);
                     datas.add(model);
                 }
-            }
-            if ("3".equals(type)){ //通过设备号查询
-                as  = asDao.findByDeviceID(s);
-                System.out.println(as);
-                if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
-                    continue;
-                user = userDao.findByAssetsID(as.getAssetsID());
-                model = setmodel(as,user);
-                datas.add(model);
-            }
-        }
+                if("2".equals(type)){  //通过工号搜索
+                    List<UserInfo> users = userDao.findByUserID(s);
+                    System.out.println(users.size());
+                    for (UserInfo u:users){
+                        if(u==null)  //没有找到
+                            continue;
+                        as = asDao.findByAssetsID(u.getAssetsID());
+                        if (as==null)
+                            continue;
+                        model = setmodel(as,u);
+                        System.out.println("model:"+model);
+                        datas.add(model);
+                    }
+                }
+                if ("3".equals(type)){ //通过设备号查询
+                    as  = asDao.findByDeviceID(s);
+                    System.out.println(as);
+                    if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
+                        continue;
+                    user = userDao.findByAssetsID(as.getAssetsID());
+                    model = setmodel(as,user);
+                    datas.add(model);
+                }
 
-        return datas;
+            }
+            result.put("total",datas.size());
+        }
+        result.put("data",datas);
+        return result;
+    }
+
+    private Page<Assets> getAssets(Pageable pageable, String[] strs,String type) {
+        String l1= "###",l2= "###",l3= "###",l4= "###",l5 = "###"; //默认### 在搜索时则搜不到任何内容
+        int i  = 1;
+        for (String s : strs){
+            s = s.trim();
+            if(i ==1)
+                l1 = s;
+            if(i==2)
+                l2 = s;
+            if (i==3)
+                l3 = s;
+            if (i==4)
+                l4 = s;
+            if(i==5)
+                l5 = s;
+            i++;
+        }
+        if ("5".equals(type)){
+            return asDao.findByLocation(l1,l2,l3,l4,l5,pageable);
+        }
+        if ("6".equals(type)){
+            return asDao.findByCategory(l1,l2,l3,l4,l5,pageable);
+        }
+        if ("7".equals(type)){
+            return asDao.findByPerson(l1,l2,l3,l4,l5,pageable);
+        }
+        return  null;
     }
 
     /**
@@ -109,7 +221,6 @@ public class showServiceImpl implements showService {
      */
     private DatasShowModel setmodel(Assets as,UserInfo user){
         DatasShowModel model = new DatasShowModel();
-        model = new DatasShowModel();
         if (as!=null){
             model.setAssetsType(as.getAssetsType());
             model.setAssetsCategory(as.getAssetsCategory());
@@ -119,12 +230,17 @@ public class showServiceImpl implements showService {
             model.setAssetsName(as.getAssetsName());
             model.setModel(as.getModels());
             model.setSupplier(as.getSupplier());
+            if (user != null) { //该资产有使用者
+                if (user.getGetTime()==null){
+                    model.setGetTime(Date.valueOf("0001-01-01").toString());
+                }else {
+                    model.setGetTime(user.getGetTime().toString());
+                }
+                model.setUserID(user.getUserID());
+                model.setUserName(user.getUserName());
+            }
         }
-        if (user != null) { //该资产有使用者
-            model.setGetTime(user.getGetTime());
-            model.setUserID(user.getUserID());
-            model.setUserName(user.getUserName());
-        }
+
         return model;
     }
 }

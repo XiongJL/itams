@@ -12,6 +12,7 @@
     <link href="../css/bootstrap-table.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/toastr.min.css">
     <link rel="stylesheet" href="../css/tagsinput.css">
+    <link href="../css/time.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/show.css">
 
     <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
@@ -26,7 +27,7 @@
 <!--    $("select").val()	"Amsterdam,Washington,Sydney,Beijing,Cairo"-->
 <!--    $("select").tagsinput('items')	["Amsterdam","Washington","Sydney","Beijing"]-->
 <div class="input-group" style="margin: 0 auto">
-    <input id="searchValue" type="text" placeholder="输入一个设备号后,敲回车"class="form-control col-md-2" value="" data-role="tagsinput" >
+    <input id="searchValue" type="text" placeholder="输入设备号,敲回车再点击搜索!或者点击两次搜索" class="form-control" value="" data-role="tagsinput" >
     <div class="btn-group">
         <button id="searchDevice" type="button" class="btn btn-default">搜索</button>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,12 +38,45 @@
             <li><a id="searchAssets" href="#">搜索资产编号</a></li>
             <li><a id="searchUserID" href="#">搜索工号</a></li>
 <!--            <li><a href="#">搜索姓名</a></li>-->
-            <li><a href="#">全局搜索</a></li>
+            <li><a id="searchByDate" href="#">根据日期搜索</a></li>
+            <li><a id="searchByLocation" href="#">根据位置搜索</a></li>
+            <li><a id="searchByAssetsCategory" href="#">根据资产类别搜索</a></li>
+            <li><a id="searchByPerson" href="#">根据责任人搜索</a></li>
+            <li><a  href="#" data-toggle="modal" data-target="#myModal">根据资产状态搜索</a></li>
             <li role="separator" class="divider"></li>
             <li><a id="exportSearch" href="#">导出搜索的资产</a></li>
         </ul>
+
     </div>
 </div>
+    <div id="datesearch" class="form-group" hidden="hidden" >
+        <div class="col-xs-4 col-xs-offset-1">
+            <label for="Tdate1" class="col-xs-3 control-label">日期从</label>
+            <div class="input-group date form_date col-xs-9" data-date=""  data-link-field="Tdate1" data-link-format="yyyy-mm-dd">
+                <input class="form-control" size="16" name="Tdate1" type="text" value="" readonly>
+                <span  class="input-group-addon"><span id="cancel1"class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon" ><span class="glyphicon glyphicon-calendar"></span></span>
+
+            </div>
+            <input type="hidden" id="Tdate1" value="" /><br/>
+            </div>
+        <div class="col-xs-4">
+            <label for="Tdate1" class="col-xs-3 control-label">到</label>
+            <div class="input-group date form_date col-xs-9" data-date=""  data-link-field="Tdate2" data-link-format="yyyy-mm-dd">
+                <input class="form-control" size="16" name="Tdate2" type="text" value="" readonly>
+                <span  class="input-group-addon"><span id="cancel2" class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon" ><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <input type="hidden" id="Tdate2" value="" /><br/>
+        </div>
+        <div class="col-xs-2">
+            <div class="input-group">
+                <button id="serachDate" type="button" class="btn btn-default">搜索</button>
+                <button id="closeSearch" type="button" class="btn btn-default">X</button>
+            </div>
+
+        </div>
+    </div>
 <!-- Split button -->
 
 <div class="content">
@@ -50,21 +84,83 @@
     </table>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择要搜索的状态</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div  data-max-options="1" style="width: auto">
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="yanshou" name="AState" value="已验收">
+                                <label for="yanshou">已验收</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="zaijian" name="AState" value="在建">
+                                <label for="zaijian">在建</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="tuihuo" name="AState" value="退货">
+                                <label for="tuihuo">退货</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="other"name="AState" value="其他">
+                                <label for="other">其他</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="searchByAState" type="button" class="btn btn-primary">搜索</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 
 
-<script src="../js/jquery-3.4.0.min.js"></script>
+<script src="../js/jquery-3.4.0.min.js" type="text/javascript"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap-table.min.js"></script>
 <script src="../js/locale/bootstrap-table-zh-CN.js"></script>
 <script src="../js/toastr.min.js"></script>
 <script src="../js/tagsinput.min.js"></script>
+<script type="text/javascript" src="../js/time.js" charset="UTF-8"></script>
 <script src="../js/show/show.js"></script>
 <script src="../js/show/table-jumpto.js"></script>
 <script>
     $(document).ready(function(){
         //添加导航栏选中样式
         $("#modify").addClass("active")
+        //初始化时间选择器
+
+        $('.form_date').datetimepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
     })
 </script>
 </html>

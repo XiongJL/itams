@@ -187,7 +187,7 @@ function detailFormatter(index, row) {
 
 //资产ID查询
 $('#searchAssets').click(function () {
-    var Type = "1"
+    var Type = "1";
     chaxun(Type)
 });
 //工号查询
@@ -197,13 +197,61 @@ $('#searchUserID').click(function () {
 });
 //设备ID查询
 $('#searchDevice').click(function () {
-    var Type = "3"
+    var Type = "3";
     chaxun(Type)
+})
+//准备根据日期查询
+$('#searchByDate').click(function () {
+    $("#datesearch").prop("hidden",false);
+    $(".datetimepicker-dropdown-bottom-right").removeClass("hidden");
+})
+//关闭根据日期查询
+$('#closeSearch').click(function () {
+
+    //清空值
+    $('#cancel1').trigger("click");
+    $('#cancel2').trigger("click");
+    $(".datetimepicker-dropdown-bottom-right").addClass("hidden");
+    $("#datesearch").prop("hidden",true);
+
+
+})
+//根据日期查询
+$('#serachDate').click(function () {
+    var Type = "4";
+    chaxun(Type)
+})
+//根据位置搜索
+$('#searchByLocation').click(function () {
+    toastr.warning("注意,位置最多同时搜索五个.")
+    var Type = "5"
+    chaxun(Type)
+})
+//根据资产类别搜索
+$('#searchByAssetsCategory').click(function () {
+    toastr.warning("注意,资产类别最多同时搜索五个.")
+    var Type = "6"
+    chaxun(Type)
+})
+//根据责任人搜索
+$('#searchByPerson').click(function () {
+    toastr.warning("注意,责任人最多同时搜索五个.")
+    var Type = "7"
+    chaxun(Type)
+})
+//根据资产状态搜索
+$('#searchByAState').click(function () {
+        var Type = "8"
+        chaxun(Type)
+        setTimeout(function () {
+            $('#myModal').modal('hide');//用js来控制模板弹窗。
+            $('#myModal').modal('toogle');
+        },10)
 })
 
 /*查询方法*/
 function chaxun(Type) {
-    if ($("#searchValue").val().length == 0) {
+    if ($("#searchValue").val().length == 0 && Type!="4" && Type!="8") {
         //初始化全局变量
         content = "";
         type = null;
@@ -211,7 +259,22 @@ function chaxun(Type) {
     } else {
         //查询之后重新从第一页算起
         content = $("#searchValue").val();
-        type = Type;//1为搜索AssetsID 2为搜索工号
+        if(Type=="4"){  //content需要拼接两个值   例如2019-06-13/2019-06-02
+            content = $('#Tdate1').val()+"/"+$('#Tdate2').val();
+            console.log("值为:"+content)
+        }
+        if (Type=="8"){
+            var chk_value ="";
+            $('input[name="AState"]:checked').each(function(){
+                chk_value += ","+$(this).val()
+            });
+            if (chk_value.length==0){
+                alert('你还没有选择任何内容！')
+            }else {
+                content = chk_value.substr(1);
+            }
+        }
+        type = Type;//1为搜索AssetsID 2为搜索工号 3 为搜索设备ID 4为根据日期搜索 5为模糊搜索位置
         $('#AssetsTabel').bootstrapTable('refreshOptions', {pageNumber: 1, pageSize: 10});
     }
 }

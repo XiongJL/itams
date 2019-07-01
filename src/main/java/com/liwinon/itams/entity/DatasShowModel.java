@@ -1,5 +1,9 @@
 package com.liwinon.itams.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.sql.Date;
+
 /**
  * 部分数据
  */
@@ -14,7 +18,7 @@ public class DatasShowModel {
     private String Supplier;
     private String UserName;
     private String UserID;
-    private String GetTime;
+    private String GetTime;  //模型类主要用于传输,还是使用String 类型
 
     public String getAssetsType() {
         return AssetsType;

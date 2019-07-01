@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -111,9 +113,14 @@ public class hardwareServiceImpl implements hardwareService {
         String ContractID = request.getParameter("ContractID");
         if (ContractID != null)
             as.setContractID(ContractID);
-        String EntryDate = request.getParameter("EntryDate");
-        if (EntryDate != null)
-            as.setEntryDate(EntryDate);
+        String date = request.getParameter("EntryDate");
+        Date EntryDate = null ;
+        if(date!= null){
+            EntryDate = Date.valueOf(date);
+            if (EntryDate != null){
+                as.setEntryDate(EntryDate);
+            }
+        }
         String ReceiptID = request.getParameter("ReceiptID");
         if (ReceiptID != null)
             as.setReceiptID(ReceiptID);
@@ -321,14 +328,14 @@ public class hardwareServiceImpl implements hardwareService {
                     }
 
                     if (columns[15].equals(key)) {
-                        hd.setPurchaseDate(value);
-                        user.setGetTime(value); //领取时间= 购买时间
+                        hd.setPurchaseDate(Date.valueOf(value));
+                        user.setGetTime(Date.valueOf(value)); //领取时间= 购买时间
                     }
 
                     if (columns[16].equals(key))
                         hd.setStaff(value);
                     if (columns[17].equals(key))
-                        hd.setEntryDate(value);
+                        hd.setEntryDate(Date.valueOf(value));
                     if (columns[18].equals(key))
                         hd.setDepartment(value);
                 }
@@ -352,7 +359,7 @@ public class hardwareServiceImpl implements hardwareService {
             for (Map<String, String> map : list) {
                 Assets as = new Assets();
                 for (Map.Entry<String, String> entry : map.entrySet()) {
-                //    System.out.println(entry.getKey() + ":" + entry.getValue() + ",");
+                    //    System.out.println(entry.getKey() + ":" + entry.getValue() + ",");
                     key = entry.getKey().trim();
                     value = entry.getValue().trim();
 
@@ -410,8 +417,14 @@ public class hardwareServiceImpl implements hardwareService {
                         as.setAgreementID(value);
                     if (columns[19].equals(key)) //合同号
                         as.setContractID(value);
-                    if (columns[20].equals(key)) //入厂时间
-                        as.setEntryDate(value);
+                    if (columns[20].equals(key)){ //入厂时间
+                        if (value==null || value==""){
+                            as.setEntryDate(Date.valueOf("0001-01-01"));
+                        }else {
+                            System.out.println("value是:"+value);
+                            as.setEntryDate(Date.valueOf(value));
+                        }
+                     }
                     if (columns[21].equals(key)) //收货单号
                         as.setReceiptID(value);
                     if (columns[22].equals(key)) //验收单号

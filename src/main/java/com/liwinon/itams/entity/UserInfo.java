@@ -2,6 +2,7 @@ package com.liwinon.itams.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
 @Table(name = "ITAMS_UserInfo")
@@ -15,13 +16,13 @@ public class UserInfo implements Serializable {
     private String UserDepartment;
     private String telephone;
     private String Lphone;
-    private String GetTime;
+    private Date GetTime;
 
-    public String getGetTime() {
+    public Date getGetTime() {
         return GetTime;
     }
 
-    public void setGetTime(String getTime) {
+    public void setGetTime(Date getTime) {
         GetTime = getTime;
     }
 

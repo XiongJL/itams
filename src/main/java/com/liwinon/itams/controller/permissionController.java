@@ -57,18 +57,15 @@ public class permissionController {
         if(type==null||type==""){   //没有查询类型,也就是第一次进入,或者刷新,查询全部数据
             Map<String ,Object> res  = tablesRole(pageable);// 部分数据模型
             json = JSONObject.fromObject(res);
-            // System.out.println("json:" + json);
-            //      test.accumulate("total", 1);
-            //    test.accumulate("rows", "[{AssetsID:\"1\",Model:\"ssss\",UserName:\"ssssss\",UserID:\"123\",getTime:\"1920-001\"}]");
-            //       System.out.println("test:" + test);
             System.out.println(json);
             return json;
         }
         if (content != null && content != "") {
             //
             System.out.println("开始搜索资产");
-            List<DatasShowModel> datas = showService.searchData(content,type);
-            json.accumulate("total", datas.size());
+            Map<String ,Object> res = showService.searchData(content,type,pageable);
+            List<DatasShowModel> datas = (List<DatasShowModel>)res.get("data");
+            json.accumulate("total", (long)res.get("total"));
             json.accumulate("rows", datas);
             return json;
         }

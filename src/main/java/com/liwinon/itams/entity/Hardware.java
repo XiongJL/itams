@@ -2,6 +2,7 @@ package com.liwinon.itams.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
 @Table(name = "ITAMS_Hardware")
@@ -22,9 +23,9 @@ public class Hardware implements Serializable {
     private String WirelessMAC;
     private String Location;
     private int State;
-    private String PurchaseDate;
+    private Date PurchaseDate;
     private String Staff;
-    private String EntryDate;
+    private Date EntryDate;
     private String Department;
     private String Remark;
 
@@ -148,11 +149,11 @@ public class Hardware implements Serializable {
         State = state;
     }
 
-    public String getPurchaseDate() {
+    public Date getPurchaseDate() {
         return PurchaseDate;
     }
 
-    public void setPurchaseDate(String purchaseDate) {
+    public void setPurchaseDate(Date purchaseDate) {
         PurchaseDate = purchaseDate;
     }
 
@@ -164,11 +165,11 @@ public class Hardware implements Serializable {
         Staff = staff;
     }
 
-    public String getEntryDate() {
+    public Date getEntryDate() {
         return EntryDate;
     }
 
-    public void setEntryDate(String entryDate) {
+    public void setEntryDate(Date entryDate) {
         EntryDate = entryDate;
     }
 

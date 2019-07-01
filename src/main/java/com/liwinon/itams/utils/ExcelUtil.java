@@ -66,7 +66,13 @@ public class ExcelUtil {
                         cellValue = sdf.format(cell.getDateCellValue());
                     }else{
                         //数字
-                        cellValue = String.valueOf(cell.getNumericCellValue());
+                        String value =String.valueOf(cell.getNumericCellValue());
+                        if (value.indexOf(".")!=-1){
+                            cellValue = value.split("\\.")[0];
+                        }else {
+                            cellValue = value;
+                        }
+
                     }
                     break;
                 }

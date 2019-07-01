@@ -4,6 +4,7 @@ spring:
 #    url: jdbc:sqlserver://172.60.6.27;DatabaseName=HRM
 #    username: sa
 #    password: sa@!admin1
+    #测试环境
     url: jdbc:sqlserver://172.60.45.198;DatabaseName=HRM
     username: sa
     password: Lw123456

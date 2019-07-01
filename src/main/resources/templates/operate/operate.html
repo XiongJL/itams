@@ -258,7 +258,7 @@
                     <input th:if="${Assets==null}" class="form-control" id="CheckID" name="CheckID" type="text" placeholder="">
                 </div>
                 <label for="Entrydate" class="col-sm-1 control-label">入厂日期</label>
-                <div class="input-group date form_datetime col-sm-2"  data-date-format="dd MM yyyy" data-link-field="Entrydate" >
+                <div class="input-group date form_date col-sm-2"   data-link-field="Entrydate" >
                     <input th:if="${Assets!=null}"th:value="${Assets.getEntryDate()}" id="endate" class="form-control" size="16" name="EntryDate" type="text" value="" readonly>
                     <input th:if="${Assets==null}" id="endate" class="form-control" size="16" name="EntryDate" type="text" value="" readonly>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -374,8 +374,6 @@
 
             <div class="form-group">
                 <label class="col-sm-1 control-label">HDD</label>
-
-
                 <div  data-max-options="1" style="width: auto">
                     <div class="col-sm-1">
                         <div class="checkbox-custom checkbox-default">
@@ -628,16 +626,16 @@
         }
     }
    // $("#Staff").hide();   // 隐藏 Staff
-   $("#PCModel").hide();
-    $('.form_datetime').datetimepicker({
+    $("#PCModel").hide();
+    $('.form_date').datetimepicker({
         format: 'yyyy-mm-dd',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,
-        forceParse: 0,
-        showMeridian: 1
+        minView: 2,
+        forceParse: 0
     });
     document.getElementById("uploadBtn").onchange = function () { //上传按钮合一
         document.getElementById("uploadFile").value = this.value;

@@ -1,9 +1,12 @@
 package com.liwinon.itams.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 
 @Entity
 @Table(name = "ITAMS_Assets")
@@ -29,7 +32,7 @@ public class Assets {
     private String RequireID;
     private String AgreementID;
     private String ContractID;
-    private String EntryDate;
+    private Date EntryDate;
     private String ReceiptID;
     private String CheckID;
     private String OutID;
@@ -195,11 +198,11 @@ public class Assets {
         ContractID = contractID;
     }
 
-    public String getEntryDate() {
+    public Date getEntryDate() {
         return EntryDate;
     }
 
-    public void setEntryDate(String entryDate) {
+    public void setEntryDate(Date entryDate) {
         EntryDate = entryDate;
     }
 

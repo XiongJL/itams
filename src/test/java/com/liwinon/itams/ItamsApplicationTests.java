@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,5 +33,10 @@ public class ItamsApplicationTests {
     @Test
     public void export(){
        List<UserRoleModel> ms  = userDao.findByUname("xiong");
+    }
+    @Test
+    public void ss(){
+        Date date = Date.valueOf("0001-01-01");
+        System.out.println(date.toString());
     }
 }
