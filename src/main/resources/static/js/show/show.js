@@ -151,10 +151,50 @@ var TableInit = function () {
 
 function operateFormatter(value, row, index) {//赋予的参数
     return [
-        '<a class="btn  " href="/itams/operate?AssetsID=' + row.assetsID + '">编辑</a>',
-        '<a class="btn " href="#">删除</a>'
+        '<a style="margin-right: 4px;" href="/itams/operate?DeviceID=' + row.deviceID + '">编辑</a>',
+        '<a style="margin-right: 4px;"  onclick="zhuanshou(this)" data-deviceid="' + row.deviceID + '" href="#">转售</a>',
+        '<a class=""  onclick="baofei(this) " data-deviceid="' + row.deviceID + '"  href="#">报废</a>'
+        // , '<a class="btn " href="#">删除</a>'
     ].join('');
 }
+//转售
+function zhuanshou(a){
+    //请求接口,将当前设备,存入请求事件,保存用户工号,操作类型,发起时间
+    var event="转售";
+    reqOption(event,a.dataset.deviceid);
+}
+//报废
+function baofei(a){
+    var event = "报废";
+    reqOption(event,a.dataset.deviceid);
+}
+//请求后台并保存用户操作
+function reqOption(event,deviceID){
+    $.ajax({
+        url:"/itams/operate/event",
+        data:{Deviceid:deviceID,event:event},
+        success:function (res) {
+            if (res.indexOf("<!DOC")!=-1){
+                window.location.href="/itams/login";
+            }
+            console.log(res)
+            if (res=="ok"){
+                toastr.success("请求成功,跳转中...")
+                setTimeout(window.open('http://192.168.6.163/ekp/km/review/km_review_main/kmReviewMain.do?method=add&fdTemplateId=16416b486c61a8db9d6e927402495999',
+                    "_blank"), 100);
+
+            }else {
+                toastr.warning(res+",可根据单号到OA查询")
+            }
+
+
+        },
+        error: function (err) {
+
+        }
+    })
+}
+
 
 //注册加载子表的事件。你可以理解为点击父表中+号时触发的事件
 /*

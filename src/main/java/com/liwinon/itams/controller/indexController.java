@@ -1,16 +1,17 @@
 package com.liwinon.itams.controller;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.HardwareDao;
-import com.liwinon.itams.dao.UserDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.*;
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
+import com.liwinon.itams.dao.primaryRepo.UserDao;
+import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
+import com.liwinon.itams.entity.model.UserRoleModel;
+import com.liwinon.itams.entity.primay.Assets;
+import com.liwinon.itams.entity.primay.User;
+import com.liwinon.itams.entity.primay.UserInfo;
+import com.liwinon.itams.service.userService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresGuest;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,6 @@ import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @CrossOrigin
@@ -33,11 +33,11 @@ public class indexController {
     @Autowired
     AssetsDao asDao;
     @Autowired
-    HardwareDao hdDao;
-    @Autowired
     UserInfoDao infoDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    userService userService;
 
     @GetMapping(value = "/itams/login")
     public String index(String error,Model model){
@@ -46,6 +46,58 @@ public class indexController {
             model.addAttribute("err","0");
         }
         return "login";
+    }
+    /**
+     * 登录验证
+     * @return
+     */
+    @PostMapping(value = "/itams/login")
+    @ResponseBody
+    public String login(String userid, String password, HttpServletRequest request){
+        UsernamePasswordToken token = new UsernamePasswordToken(userid, password);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            HttpSession session = request.getSession();
+            List<UserRoleModel> urms = userDao.findByUserid(userid);
+            /** 超级管理员只能有超级管理员权限!!!
+             * **/
+            String permission = userDao.getPermissionByRole((String) urms.get(0).getName());
+            session.setAttribute("userid",userid);
+            User user = userDao.findByPERSONID(userid);
+            session.setAttribute("username",user.getUname());
+            System.out.println("permission is  : " + permission);
+            session.setAttribute("permission",permission);
+        } catch (UnknownAccountException e) {
+            System.out.println("账户或密码错误");
+            e.printStackTrace();
+            return "0";
+        } catch (ExcessiveAttemptsException e) {
+            System.out.println("登录失败次数过多");
+            return "1";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "0";
+        }
+        return "ok";
+    }
+
+    @GetMapping(value = "/itams/register")
+    public String register(){
+        return "register";
+    }
+
+    /**
+     * 注册
+     * @param userid
+     * @param username
+     * @param password
+     * @return
+     */
+    @PostMapping(value = "/itams/register")
+    @ResponseBody
+    public String register(String userid,String username,String password){
+        return userService.register(userid,username,password);
     }
 
     /**
@@ -56,7 +108,7 @@ public class indexController {
     @ResponseBody
     public List<String> getPermission(HttpServletRequest request){
         HttpSession session =  request.getSession();
-        List<UserRoleModel> urms = userDao.findByUname((String) session.getAttribute("username"));
+        List<UserRoleModel> urms = userDao.findByUserid((String) session.getAttribute("userid"));
         List<String> list = new ArrayList<>();
         for (UserRoleModel urm : urms){
             list.add(urm.getWorkshop());
@@ -66,53 +118,23 @@ public class indexController {
         return list;
     }
 
-    /**
-     * 登录验证
-     * @return
-     */
-    @PostMapping(value = "/itams/login")
-    @ResponseBody
-    public String login(String username, String password, HttpServletRequest request){
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        Subject subject = SecurityUtils.getSubject();
-        try {
-            subject.login(token);
-            HttpSession session = request.getSession();
-            List<UserRoleModel> urms = userDao.findByUname(username);
-            /** 超级管理员只能有超级管理员权限!!!
-             * **/
-            String permission = userDao.getPermissionByRole((String) urms.get(0).getName());
-            session.setAttribute("username",username);
-            System.out.println("permission is  : " + permission);
-            session.setAttribute("permission",permission);
-        } catch (UnknownAccountException e) {
-            System.out.println("账户或密码错误");
-           // e.printStackTrace();
-           return "0";
-        } catch (ExcessiveAttemptsException e) {
-            System.out.println("登录失败次数过多");
-            return "1";
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return "ok";
-    }
+
 
 
 
     @GetMapping(value = "/itams/operate")
-    public String operate(String AssetsID, Model model){
-        if(AssetsID!=null && AssetsID!=""){
-            System.out.println("修改"+AssetsID);
-            Assets as = asDao.findByAssetsID(AssetsID);
+    public String operate(String DeviceID, Model model){
+        if(DeviceID!=null && DeviceID!=""){
+            System.out.println("修改"+DeviceID);
+            Assets as = asDao.findByDeviceID(DeviceID);
             if(as!=null){
-                if("IT".equals(as.getAssetsCategory())){
-                    Hardware hd =  hdDao.findByAssetsID(as.getAssetsID());
-                    if(hd!=null){
-                        model.addAttribute("HD",hd);
-                    }
-                }
-                UserInfo user = infoDao.findByAssetsID(AssetsID);
+//                if("IT".equals(as.getAssetsCategory())){
+//                    Hardware hd =  hdDao.findByAssetsID(as.getAssetsID());
+//                    if(hd!=null){
+//                        model.addAttribute("HD",hd);
+//                    }
+//                }
+                UserInfo user = infoDao.findByAssetsID(as.getAssetsID());
                 if(user!=null){
                     model.addAttribute("user",user);
                 }

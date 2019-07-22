@@ -1,19 +1,15 @@
 package com.liwinon.itams.shiro;
 
-import com.liwinon.itams.dao.UserDao;
-import com.liwinon.itams.entity.User;
-import com.liwinon.itams.entity.UserRoleModel;
+import com.liwinon.itams.dao.primaryRepo.UserDao;
+import com.liwinon.itams.entity.model.UserRoleModel;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,9 +36,9 @@ public class CustomRealm extends AuthorizingRealm {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
         }
         //从凭证中获得用户名
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        String userid = (String) SecurityUtils.getSubject().getPrincipal();
         //根据用户名查询用户对象
-        List<UserRoleModel> models = userDao.findByUname(username);
+        List<UserRoleModel> models = userDao.findByUserid(userid);
         Set<String> set = new HashSet<>();
         for (UserRoleModel model : models){
             set.add((String)model.getName());
@@ -70,11 +66,11 @@ public class CustomRealm extends AuthorizingRealm {
         }
        // UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //获得当前用户的用户名
-        String username = (String) authenticationToken.getPrincipal();
+        String userid = (String) authenticationToken.getPrincipal();
 
         //
         //从数据库中根据用户名查找用户
-        List<UserRoleModel> urms = userDao.findByUname(username);
+        List<UserRoleModel> urms = userDao.findByUserid(userid);
         if (urms == null  || urms.size()<=0) {
             throw new UnknownAccountException(
                     "没有在本系统中找到对应的用户信息。");

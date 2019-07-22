@@ -50,7 +50,10 @@ function uploadfile() {
                                     $("#loading").hide();//隐藏加载
                                     $("#uploadButton").prop("disabled",false)//启用button按钮
                                     $('#close').click();// 关闭弹出层
-
+                                    setTimeout(function () {
+                                        $('#update').modal('hide');//用js来控制模板弹窗。
+                                        $('#update').modal('toogle');
+                                    },10)
                                 }else{
                                     toastr.warning("上传成功,但解析失败!!")
                                     $("#uploadButton").prop("disabled",false)//启用button按钮

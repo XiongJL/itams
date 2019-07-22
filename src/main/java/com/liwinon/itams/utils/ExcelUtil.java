@@ -83,6 +83,10 @@ public class ExcelUtil {
                 }
                 case STRING:{
                     cellValue = cell.getRichStringCellValue().getString();
+                    //测试
+                    if (cell.getRichStringCellValue().getString()=="1"){
+                        System.out.println(1);
+                    }
                     break;
                 }
                 default:

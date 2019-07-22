@@ -26,17 +26,17 @@ $(document).ready(function() {
 
 
 
-    //获取维护工作人员
-    $.ajax({
-        url:"/itams/operate/Staff",
-        success:function (res) {
-            var option ="";
-            for(var x in res){
-                option += "<option>"+res[x]+"</option>>"
-            }
-            $("#Staff").append(option)
-        }
-    });
+    // //获取维护工作人员
+    // $.ajax({
+    //     url:"/itams/operate/Staff",
+    //     success:function (res) {
+    //         var option ="";
+    //         for(var x in res){
+    //             option += "<option>"+res[x]+"</option>>"
+    //         }
+    //         $("#Staff").append(option)
+    //     }
+    // });
 
     //设置购买时间和入系统时间默认值为今天
     var mydate = new Date();
@@ -45,80 +45,80 @@ $(document).ready(function() {
     $("#pdvalue").datetimepicker("setDate", new Date())
     $("#envalue").datetimepicker("setDate", new Date())
 })
-//公共方法,根据类别改变品牌的值
-function changeBrand(type){
-    //清空原有内容
-    $("#Brand").empty();
-    $.ajax({
-        url:"/itams/operate/Brands",
-        data:{type:type},
-        success:function (res) {
-            console.log(res)
-            var option ="";
-            if(res!=null &&res!=""){
-                for(var x in res){
-                    option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
-                }
-                $("#Brand").append(option)
-                //品牌更改完毕后,修改型号
-                changeModel()
-            }
+// //公共方法,根据类别改变品牌的值
+// // function changeBrand(type){
+// //     //清空原有内容
+// //     $("#Brand").empty();
+// //     $.ajax({
+// //         url:"/itams/operate/Brands",
+// //         data:{type:type},
+// //         success:function (res) {
+// //             console.log(res)
+// //             var option ="";
+// //             if(res!=null &&res!=""){
+// //                 for(var x in res){
+// //                     option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
+// //                 }
+// //                 $("#Brand").append(option)
+// //                 //品牌更改完毕后,修改型号
+// //                 changeModel()
+// //             }
+// //
+// //         }
+// //     })
+// // }
+// //公共方法,根据类别,品牌改变型号
+// function changeModel(){
+//     //清空原有内容
+//     $("#Model").empty();
+//     var type = $("#ITtype").val()
+//     var brand = $("#Brand").val()
+//     $.ajax({
+//         url:"/itams/operate/Models",
+//         data:{type:type,brand:brand},
+//        // async: false,//使用同步的方式,true为异步方式
+//         success:function (res) {
+//             console.log(res)
+//             var option ="";
+//             if(res!=null || res!=""){
+//                 for(var x in res){
+//                     option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
+//                 }
+//                 $("#Model").append(option)
+//             }
+//         }
+//     })
+// }
 
-        }
-    })
-}
-//公共方法,根据类别,品牌改变型号
-function changeModel(){
-    //清空原有内容
-    $("#Model").empty();
-    var type = $("#ITtype").val()
-    var brand = $("#Brand").val()
-    $.ajax({
-        url:"/itams/operate/Models",
-        data:{type:type,brand:brand},
-       // async: false,//使用同步的方式,true为异步方式
-        success:function (res) {
-            console.log(res)
-            var option ="";
-            if(res!=null || res!=""){
-                for(var x in res){
-                    option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
-                }
-                $("#Model").append(option)
-            }
-        }
-    })
-}
-
-// 获取类别
-function getITtype(){
-    $.ajax({
-        url:"/itams/operate/type",
-        success:function (res) {
-            var option ="";
-            for(var x in res){
-                option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
-            }
-            $("#ITtype").append(option);
-            var type = $("#ITtype").val();
-            changeBrand(type)
-        }
-    });
-}
-//当IT具体类别改变时,查询对应的品牌,以及品牌对应的型号
-$("#ITtype").change(function () {
-    var type = $("#ITtype").val();
-    changeBrand(type)
-    if (type!="台式机"&&type!="笔记本"){
-        $("#hardinfo").hide()
-    }else{
-        $("#hardinfo").show()
-    }
-})
-//当品牌改变时,查询对应的型号
-$("#Brand").change(function(){
-    changeModel()
-})
+// // 获取类别
+// function getITtype(){
+//     $.ajax({
+//         url:"/itams/operate/type",
+//         success:function (res) {
+//             var option ="";
+//             for(var x in res){
+//                 option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
+//             }
+//             $("#ITtype").append(option);
+//             var type = $("#ITtype").val();
+//             changeBrand(type)
+//         }
+//     });
+// }
+// //当IT具体类别改变时,查询对应的品牌,以及品牌对应的型号
+// $("#ITtype").change(function () {
+//     var type = $("#ITtype").val();
+//     changeBrand(type)
+//     if (type!="台式机"&&type!="笔记本"){
+//         $("#hardinfo").hide()
+//     }else{
+//         $("#hardinfo").show()
+//     }
+// })
+// //当品牌改变时,查询对应的型号
+// $("#Brand").change(function(){
+//     changeModel()
+// })
 
 //资产ID是否存在查询
 $('#AssetsID').on('focus',function () {
@@ -137,6 +137,27 @@ $('#AssetsID').on('blur',function () {
             if(res=="exist"){
                 //追加错误信息
                 $("#AssetsID").after('<p class="help-block" id="err1" style="color: red">资产已存在</p>')
+            }
+        }
+    });
+})
+//设备ID是否存在查询
+$('#DeviceID').on('focus',function () {
+    $("#err2").remove()
+})
+$('#DeviceID').on('blur',function () {
+    //console.log('移出输入框')
+    var data = $('#DeviceID').val()
+    $.ajax({
+        url:"/itams/operate/deviceExist",
+        type:'get',
+        data: {deviceId:data},
+        success:function (res) {
+            console.log(res)
+            $("#err2").remove()
+            if(res=="exist"){
+                //追加错误信息
+                $("#DeviceID").after('<p class="help-block" id="err2" style="color: red">设备号已存在</p>')
             }
         }
     });
@@ -228,6 +249,8 @@ $("#commit").bind("click",function(){
                     toastr.warning('资产编号已存在!');
                 }else if (res=="assetsidEmpty"){
                     toastr.warning('资产编号不能为空!');
+                }else if(res=="DeviceIDEmpty"){
+                    toastr.warning('设备编号不能为空!');
                 }
                 else{  //未知异常
                     toastr.warning("操作失败,未知错误!")

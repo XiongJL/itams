@@ -1,11 +1,10 @@
 package com.liwinon.itams.service;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.HardwareDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.Assets;
-import com.liwinon.itams.entity.DatasShowModel;
-import com.liwinon.itams.entity.UserInfo;
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
+import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
+import com.liwinon.itams.entity.primay.Assets;
+import com.liwinon.itams.entity.model.DatasShowModel;
+import com.liwinon.itams.entity.primay.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +18,6 @@ import java.util.Map;
 
 @Service
 public class showServiceImpl implements showService {
-    @Autowired
-    HardwareDao hdDao;
     @Autowired
     UserInfoDao userDao;
     @Autowired

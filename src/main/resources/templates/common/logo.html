@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/itams/datas">
                     <img class="img-top" th:src="@{../img/logo.png}"src="../img/logo.png" alt="Liwinon 锂威" style="height: 120%;">
                 </a>
             </div>
@@ -35,15 +35,13 @@
 <!--                    <li id="show"><a href="/itams/showData">数据图表</a></li>-->
                     <li th:if="${session.permission=='sadmin'|| session.permission=='admin'}" id="permission"><a href="/itams/role">权限管理</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多操作 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他系统 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="http://192.168.6.163/ekp/km/review/km_review_main/kmReviewMain.do?method=add&fdTemplateId=16416b486c61a8db9d6e927402495999" target="_blank">转售\报废</a></li>
+                            <li><a href="http://192.168.6.163/ekp/login.jsp;jsessionid=30762723C43312B490E9E0CC5C32EC20" target="_blank">OA(内网入口)</a></li>
+                            <li><a href="http://ekp.sunwoda.com/ekp/login.jsp" target="_blank">OA(外网入口)</a></li>
+<!--                            <li role="separator" class="divider"></li>-->
+<!--                            <li><a href="#">Separated link</a></li>-->
                         </ul>
                     </li>
                 </ul>
@@ -53,19 +51,20 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">导出数据<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/itams/download/AssetsData">导出全部资产数据</a></li>
-                            <li><a href="/itams/download/ITData" class="btn " type="button" style="width: auto;">导出IT资产数据</a></li>
+<!--                            <li><a href="/itams/download/ITData" class="btn " type="button" style="width: auto;">导出IT资产数据</a></li>-->
                         </ul>
                     </li>
-                    <li th:if="${session.username == null || session.username ==''}">
+                    <li th:if="${session.userid == null || session.userid ==''}">
                     <a  href="/itams/login" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="" aria-expanded="false">
                     登录</a>
                     </li>
-                    <li th:if="${session.username!=null}" class="dropdown">
+                    <li th:if="${session.userid!=null}" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span th:text="${session.username}">用户</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#"   onclick="getMyRole()" type="button" data-toggle="modal"data-target="#queryRole">查看权限</a></li>
-                            <li><a href="/itams/user">申请临时权限</a></li>
+                            <!--暂时禁止申请的接口-->
+                            <!--                            <li><a href="/itams/user">申请临时权限</a></li>-->
                             <li role="separator" class="divider"></li>
                             <li><a href="/itams/logout">退出登录</a></li>
                         </ul>
@@ -84,8 +83,8 @@
                 </div>
                 <div class="modal-body">
                     <h5>您具有以下权限</h5>
-                    <p th:if="${session.username == null || session.username ==''}">浏览数据</p>
-                    <p th:if="${session.username!=null}"  id="content" style="text-align: center; font-size: 20px">
+                    <p th:if="${session.userid == null || session.userid ==''}">浏览数据</p>
+                    <p th:if="${session.userid!=null}"  id="content" style="text-align: center; font-size: 20px">
 
                     </p>
                 </div>
@@ -107,6 +106,8 @@
         }
     </script>
 </div>
+
+
 
 </body>
 <script th:src="@{../js/jquery-3.4.0.min.js}" src="../js/jquery-3.4.0.min.js"></script>

@@ -1,21 +1,15 @@
 package com.liwinon.itams;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.UserDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.Role;
-import com.liwinon.itams.entity.User;
-import com.liwinon.itams.entity.UserRoleModel;
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
+import com.liwinon.itams.dao.primaryRepo.UserDao;
+import com.liwinon.itams.service.apiService;
 import com.liwinon.itams.service.searchService;
+import com.liwinon.itams.utils.ReqWebservice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.sql.Date;
-import java.util.List;
-import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,17 +20,18 @@ public class ItamsApplicationTests {
     searchService search;
     @Autowired
     UserDao userDao;
+    @Autowired
+    apiService api;
+    @Autowired
+    ReqWebservice req;
+
     @Test
     public void contextLoads() {
-        System.out.println(Utils.isContainChinese("熊健了 15646546"));
+//        try {
+//      //      req.postData("123","DL-P-00159");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
-    @Test
-    public void export(){
-       List<UserRoleModel> ms  = userDao.findByUname("xiong");
-    }
-    @Test
-    public void ss(){
-        Date date = Date.valueOf("0001-01-01");
-        System.out.println(date.toString());
-    }
+
 }

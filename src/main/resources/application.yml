@@ -1,15 +1,22 @@
 spring:
   datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver  #sqlserver
-#    url: jdbc:sqlserver://172.60.6.27;DatabaseName=HRM
+    primary:  #ITMS
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver  #sqlserver
+      jdbc-url: jdbc:sqlserver://172.60.6.115;DatabaseName=ITMS   #双数据源更改为jdbc-url
+      username: sa
+      password: lw2019.
+    second:   #SAP_USERS
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver  #sqlserver
+      jdbc-url: jdbc:sqlserver://172.60.6.27;DatabaseName=HRM
+      username: sa
+      password: sa@!admin1
+    #测试环境  2012
+#    url: jdbc:sqlserver://172.60.45.198;DatabaseName=HRM
 #    username: sa
-#    password: sa@!admin1
-    #测试环境
-    url: jdbc:sqlserver://172.60.45.198;DatabaseName=HRM
-    username: sa
-    password: Lw123456
+#    password: Lw123456
   jpa:
     hibernate:
+      dialect: org.hibernate.dialect.SQLServer2008Dialect
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

@@ -1,10 +1,9 @@
 package com.liwinon.itams.controller;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.Assets;
-import com.liwinon.itams.entity.UserInfo;
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
+import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
 import com.liwinon.itams.service.hardwareService;
+import com.liwinon.itams.service.searchService;
 import com.liwinon.itams.utils.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -31,6 +30,8 @@ import org.apache.commons.lang.StringUtils;
 public class uploadController {
     @Autowired
     hardwareService hdService;
+    @Autowired
+    searchService search;
     @Autowired
     UserInfoDao userDao;
     @Autowired
@@ -175,42 +176,9 @@ public class uploadController {
     @GetMapping(value = "/itams/download/AssetsData")
     public ResponseEntity<InputStreamResource> exportAsExcel(String content,String type){
         System.out.println("开始导出搜索的资产");
-        List<String[]> data = new ArrayList<>(); //初始化数据
-        data.add(new String[]{"资产类型", "资产类别", "资产编号", "设备编号", "出厂编号", "资产名称", "规格型号", "供应商",
-                "厂区", "区域", "详细位置", "部门", "工序", "责任人", "责任人工号", "性能状态", "资产状态",
-                "需求报告编号", "技术协议号", "合同号", "入厂日期", "收货单号", "验收单号", "报废/转售单号","备注"}); //第一行
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmm");
         String filepath = "D:\\ITAMS\\file\\export\\资产文档" + sdf.format(new Date()) + ".xlsx";
-        if(content==null && type ==null){ //导出的是全部数据
-            List<String> values =  asDao.expotAll();
-            for(String value : values){
-                String[] val = value.split(",");
-                data.add(val);
-            }
-        }else{  //导出的是搜索的数据
-            String[] strs = content.split(",");
-                if("1".equals(type)){  //通过资产ID搜索
-                    String value = null;
-                    for (String s : strs) { //搜索内容
-                        s = s.trim();
-                        value = asDao.exportSelectByAsID(s);
-                        String[] values = value.split(",");
-                        data.add(values);
-                    }
-                    System.out.println(data);
-                }
-                if("2".equals(type)){  //通过工号搜索
-                    List<String> value = null;
-                    for (String s : strs){ //搜索内容
-                        s = s.trim();
-                        value = userDao.exportSelectByUserID(s);
-                        for(String val : value){
-                            String[] values = val.split(",");
-                            data.add(values);
-                        }
-                    }
-                }
-        }
+        List<String[]> data = search.getdata(content,type);
         try {
             ExcelUtil.writeExcel(filepath, data);
         } catch (Exception e) {

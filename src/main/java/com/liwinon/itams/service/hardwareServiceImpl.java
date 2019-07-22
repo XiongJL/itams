@@ -1,11 +1,9 @@
 package com.liwinon.itams.service;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.HardwareDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.Assets;
-import com.liwinon.itams.entity.Hardware;
-import com.liwinon.itams.entity.UserInfo;
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
+import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
+import com.liwinon.itams.entity.primay.Assets;
+import com.liwinon.itams.entity.primay.UserInfo;
 import com.liwinon.itams.utils.ExcelUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -16,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,8 +21,6 @@ import java.util.Map;
 
 @Service
 public class hardwareServiceImpl implements hardwareService {
-    @Autowired
-    HardwareDao hdDao;
     @Autowired
     UserInfoDao userDao;
     @Autowired
@@ -39,21 +34,22 @@ public class hardwareServiceImpl implements hardwareService {
      */
     @Transactional
     public String saveHardware(HttpServletRequest request) {
-        Hardware hd = new Hardware();
+        //Hardware hd = new Hardware();
         Assets as = new Assets();
         System.out.println("开始保存");
         String assetsid = request.getParameter("AssetsID");
         if (assetsid != null) {
-            if (hdDao.findByAssetsID(assetsid) != null) {  //是更新操作
-                hd = hdDao.findByAssetsID(assetsid);
-            }
+//            if (hdDao.findByAssetsID(assetsid) != null) {  //是更新操作
+//                hd = hdDao.findByAssetsID(assetsid);
+//            }
             if (assetsDao.findByAssetsID(assetsid) != null) { //是更新操作
                 as = assetsDao.findByAssetsID(assetsid);
             }
 
             if (assetsid == "")
                 return "assetsidEmpty";
-            hd.setAssetsID(assetsid);
+
+//            hd.setAssetsID(assetsid);
         }
         as.setAssetsID(assetsid);
         String type = request.getParameter("AssetsType");
@@ -63,6 +59,8 @@ public class hardwareServiceImpl implements hardwareService {
         if (AssetsCategory != null)
             as.setAssetsCategory(AssetsCategory);
         String DeviceID = request.getParameter("DeviceID");
+        if (DeviceID == null || DeviceID=="")
+            return "DeviceIDEmpty";
         if (DeviceID != null)
             as.setDeviceID(DeviceID);
         String FactoryID = request.getParameter("FactoryID");
@@ -115,7 +113,7 @@ public class hardwareServiceImpl implements hardwareService {
             as.setContractID(ContractID);
         String date = request.getParameter("EntryDate");
         Date EntryDate = null ;
-        if(date!= null){
+        if(date!= null &&date!=""){
             EntryDate = Date.valueOf(date);
             if (EntryDate != null){
                 as.setEntryDate(EntryDate);
@@ -135,66 +133,66 @@ public class hardwareServiceImpl implements hardwareService {
             as.setRemark(Remark);
 
 
-        if ("IT".equals(AssetsCategory)) {  //如果是IT资产
-            if (Personliable != null)
-                hd.setStaff(Personliable);
-            String ITtype = request.getParameter("ITtype");
-            if (ITtype != null)
-                hd.setITtype(ITtype);
-            String brand = request.getParameter("Brand");
-            if (brand != null)
-                hd.setBrand(brand);
-            String model = request.getParameter("Model");
-            if (model != null)
-                hd.setModel(model);
-            String cpu = request.getParameter("CPU");
-            if (cpu != null)
-                hd.setCPU(cpu);
-            String ram = request.getParameter("RAM");
-            if (ram != null)
-                hd.setRAM(ram);
-            String wiredMAC1 = request.getParameter("WiredMAC1");
-            if (wiredMAC1 != null)
-                hd.setWiredMAC1(wiredMAC1);
-            String wiredMAC2 = request.getParameter("WiredMAC2");
-            if (wiredMAC2 != null)
-                hd.setWiredMAC2(wiredMAC2);
-            String wirelessMac = request.getParameter("WirelessMac");
-            if (wirelessMac != null)
-                hd.setWirelessMAC(wirelessMac);
-            if (EntryDate != null)
-                hd.setEntryDate(EntryDate);
-            String[] HDDS = request.getParameterValues("HDD");
-            if (HDDS != null) {
-                if (HDDS.length == 2) {
-                    hd.setHDD1(HDDS[0]);
-                    hd.setHDD2(HDDS[1]);
-                } else {
-                    hd.setHDD1(HDDS[0]);
-                }
-            }
-            if (Department != null)
-                hd.setDepartment(Department);
-            if (EntryDate != null) {
-                hd.setEntryDate(EntryDate);
-                hd.setPurchaseDate(EntryDate);
-            }
-            if (Location != null)
-                hd.setLocation(Location);
-            if(brand!=null&&model!=null){
-                String modelss = brand + "_" + model;
-                as.setModels(modelss);
-            }
-            if(brand!=null&&model==null){
-                String modelss = brand;
-                as.setModels(modelss);
-            }
-            if(brand==null&&model!=null){
-                String modelss = model;
-                as.setModels(modelss);
-            }//若都为空,什么也不做
-            hdDao.save(hd);
-        }
+//        if ("IT".equals(AssetsCategory)) {  //如果是IT资产
+//            if (Personliable != null)
+//                hd.setStaff(Personliable);
+//            String ITtype = request.getParameter("ITtype");
+//            if (ITtype != null)
+//                hd.setITtype(ITtype);
+//            String brand = request.getParameter("Brand");
+//            if (brand != null)
+//                hd.setBrand(brand);
+//            String model = request.getParameter("Model");
+//            if (model != null)
+//                hd.setModel(model);
+//            String cpu = request.getParameter("CPU");
+//            if (cpu != null)
+//                hd.setCPU(cpu);
+//            String ram = request.getParameter("RAM");
+//            if (ram != null)
+//                hd.setRAM(ram);
+//            String wiredMAC1 = request.getParameter("WiredMAC1");
+//            if (wiredMAC1 != null)
+//                hd.setWiredMAC1(wiredMAC1);
+//            String wiredMAC2 = request.getParameter("WiredMAC2");
+//            if (wiredMAC2 != null)
+//                hd.setWiredMAC2(wiredMAC2);
+//            String wirelessMac = request.getParameter("WirelessMac");
+//            if (wirelessMac != null)
+//                hd.setWirelessMAC(wirelessMac);
+//            if (EntryDate != null)
+//                hd.setEntryDate(EntryDate);
+//            String[] HDDS = request.getParameterValues("HDD");
+//            if (HDDS != null) {
+//                if (HDDS.length == 2) {
+//                    hd.setHDD1(HDDS[0]);
+//                    hd.setHDD2(HDDS[1]);
+//                } else {
+//                    hd.setHDD1(HDDS[0]);
+//                }
+//            }
+//            if (Department != null)
+//                hd.setDepartment(Department);
+//            if (EntryDate != null) {
+//                hd.setEntryDate(EntryDate);
+//                hd.setPurchaseDate(EntryDate);
+//            }
+//            if (Location != null)
+//                hd.setLocation(Location);
+//            if(brand!=null&&model!=null){
+//                String modelss = brand + "_" + model;
+//                as.setModels(modelss);
+//            }
+//            if(brand!=null&&model==null){
+//                String modelss = brand;
+//                as.setModels(modelss);
+//            }
+//            if(brand==null&&model!=null){
+//                String modelss = model;
+//                as.setModels(modelss);
+//            }//若都为空,什么也不做
+//            hdDao.save(hd);
+//        }
        // System.out.println(hd);
         //System.out.println(as);
         assetsDao.save(as);
@@ -216,10 +214,10 @@ public class hardwareServiceImpl implements hardwareService {
             if (UserDepartment != null)
                 user.setUserDepartment(UserDepartment);
             userDao.save(user);
-            //说明有人使用,更改资产状态
-            hd.setState(1);
+//            //说明有人使用,更改资产状态
+//            hd.setState(1);
             //重新保存State
-            hdDao.save(hd);
+//            hdDao.save(hd);
             System.out.println("保存用户成功");
 
         }
@@ -269,90 +267,90 @@ public class hardwareServiceImpl implements hardwareService {
         //遍历解析出来的list
         String key = null;
         String value = null;
-        if (type == 1) {
-            for (Map<String, String> map : list) {
-                Hardware hd = new Hardware();
-                UserInfo user = new UserInfo();
-                for (Map.Entry<String, String> entry : map.entrySet()) {
-                //    System.out.println(entry.getKey() + ":" + entry.getValue() + ",");
-                    key = entry.getKey();
-                    value = entry.getValue();
-                    if (columns[0].equals(key)) {
-                        System.out.println("解析的资产号:" + value);
-                        //hd  = hdDao.findByAssetsID(value);
-                        if (userDao.findByAssetsID(value) == null) {  //如果用户表没有此资产号,即没人使用
-                            user.setAssetsID(value);
-                        } else { //存在, 那么更新使用人
-                            user = userDao.findByAssetsID(value);
-                        }
-                        if (hdDao.findByAssetsID(value) == null) {//资产表不存在此资产号
-                            hd.setAssetsID(value);
-                        } else {  //存在此资产号,更新
-                            hd = hdDao.findByAssetsID(value);
-                        }
-                    }
-                    if (columns[1].equals(key)) { //解析使用人
-                        user.setUserName(value);
-                    }
-                    if (columns[2].equals(key)) { //解析工号
-                        user.setUserID(value);
-                        //说明有人使用,更改资产状态
-                        hd.setState(1);
-                    }
-                    if (columns[3].equals(key))  //解析类别
-                        hd.setITtype(value);
-                    if (columns[4].equals(key))
-                        hd.setBrand(value);
-                    if (columns[5].equals(key))
-                        hd.setModel(value);
-                    if (columns[6].equals(key))
-                        hd.setCPU(value);
-                    if (columns[7].equals(key))
-                        hd.setRAM(value);
-                    if (columns[8].equals(key))
-                        hd.setHDD1(value);
-                    if (columns[9].equals(key))
-                        hd.setHDD2(value);
-                    if (columns[10].equals(key))
-                        hd.setWiredMAC1(value);
-                    if (columns[11].equals(key))
-                        hd.setWiredMAC2(value);
-                    if (columns[12].equals(key))
-                        hd.setWirelessMAC(value);
-                    if (columns[13].equals(key))
-                        hd.setLocation(value);
-                    if (columns[14].equals(key)) {
-                        if ("使用中".equals(value)) {
-                            hd.setState(1);
-                        }
-                    }
-
-                    if (columns[15].equals(key)) {
-                        hd.setPurchaseDate(Date.valueOf(value));
-                        user.setGetTime(Date.valueOf(value)); //领取时间= 购买时间
-                    }
-
-                    if (columns[16].equals(key))
-                        hd.setStaff(value);
-                    if (columns[17].equals(key))
-                        hd.setEntryDate(Date.valueOf(value));
-                    if (columns[18].equals(key))
-                        hd.setDepartment(value);
-                }
-            //    System.out.println(hd);
-            //    System.out.println(user);
-                //保存
-                if (hd != null && hd.getAssetsID() != null) {
-                    hdDao.save(hd);
-                    System.out.println("保存资产成功");
-                    if (user != null && user.getAssetsID() != null && user.getUserID() != null) {
-                        userDao.save(user);
-                        System.out.println("保存使用者成功!");
-                    }
-                }
-
-            }
-        }
+//        if (type == 1) {   //IT资产
+//            for (Map<String, String> map : list) {
+//                Hardware hd = new Hardware();
+//                UserInfo user = new UserInfo();
+//                for (Map.Entry<String, String> entry : map.entrySet()) {
+//                //    System.out.println(entry.getKey() + ":" + entry.getValue() + ",");
+//                    key = entry.getKey();
+//                    value = entry.getValue();
+//                    if (columns[0].equals(key)) {
+//                        System.out.println("解析的资产号:" + value);
+//                        //hd  = hdDao.findByAssetsID(value);
+//                        if (userDao.findByAssetsID(value) == null) {  //如果用户表没有此资产号,即没人使用
+//                            user.setAssetsID(value);
+//                        } else { //存在, 那么更新使用人
+//                            user = userDao.findByAssetsID(value);
+//                        }
+//                        if (hdDao.findByAssetsID(value) == null) {//资产表不存在此资产号
+//                            hd.setAssetsID(value);
+//                        } else {  //存在此资产号,更新
+//                            hd = hdDao.findByAssetsID(value);
+//                        }
+//                    }
+//                    if (columns[1].equals(key)) { //解析使用人
+//                        user.setUserName(value);
+//                    }
+//                    if (columns[2].equals(key)) { //解析工号
+//                        user.setUserID(value);
+//                        //说明有人使用,更改资产状态
+//                        hd.setState(1);
+//                    }
+//                    if (columns[3].equals(key))  //解析类别
+//                        hd.setITtype(value);
+//                    if (columns[4].equals(key))
+//                        hd.setBrand(value);
+//                    if (columns[5].equals(key))
+//                        hd.setModel(value);
+//                    if (columns[6].equals(key))
+//                        hd.setCPU(value);
+//                    if (columns[7].equals(key))
+//                        hd.setRAM(value);
+//                    if (columns[8].equals(key))
+//                        hd.setHDD1(value);
+//                    if (columns[9].equals(key))
+//                        hd.setHDD2(value);
+//                    if (columns[10].equals(key))
+//                        hd.setWiredMAC1(value);
+//                    if (columns[11].equals(key))
+//                        hd.setWiredMAC2(value);
+//                    if (columns[12].equals(key))
+//                        hd.setWirelessMAC(value);
+//                    if (columns[13].equals(key))
+//                        hd.setLocation(value);
+//                    if (columns[14].equals(key)) {
+//                        if ("使用中".equals(value)) {
+//                            hd.setState(1);
+//                        }
+//                    }
+//
+//                    if (columns[15].equals(key)) {
+//                        hd.setPurchaseDate(Date.valueOf(value));
+//                        user.setGetTime(Date.valueOf(value)); //领取时间= 购买时间
+//                    }
+//
+//                    if (columns[16].equals(key))
+//                        hd.setStaff(value);
+//                    if (columns[17].equals(key))
+//                        hd.setEntryDate(Date.valueOf(value));
+//                    if (columns[18].equals(key))
+//                        hd.setDepartment(value);
+//                }
+//            //    System.out.println(hd);
+//            //    System.out.println(user);
+//                //保存
+//                if (hd != null && hd.getAssetsID() != null) {
+//                    hdDao.save(hd);
+//                    System.out.println("保存资产成功");
+//                    if (user != null && user.getAssetsID() != null && user.getUserID() != null) {
+//                        userDao.save(user);
+//                        System.out.println("保存使用者成功!");
+//                    }
+//                }
+//
+//            }
+//        }
         if (type == 0) {
             String assetsType = "";
             String assetsCategory = "";
@@ -380,6 +378,7 @@ public class hardwareServiceImpl implements hardwareService {
                             as.setAssetsCategory(assetsCategory);
                         }
                     }
+
                     if (columns[3].equals(key)) { //解析设备编号
                         as.setDeviceID(value);
                     }

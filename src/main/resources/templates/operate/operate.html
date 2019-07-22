@@ -37,15 +37,15 @@
                 </div>
                 <label class="col-sm-1 control-label" for="AssetsCategory">资产类别</label>
                 <div class="col-sm-1" style="width: auto">
-                    <select id="AssetsCategory" name="AssetsCategory" class=" select-inline">
+                    <select id="AssetsCategory" name="AssetsCategory" class="form-control select-inline">
                         <!--必须设定value值,用以修改时设置默认值 -->
-                        <option value="生产">生产</option>
-                        <option value="厂房">厂房</option>
-                        <option value="IT" >IT</option>
-                        <option value="行政">行政</option>
-                        <option value="计量">计量</option>
-                        <option value="实验">实验</option>
-                        <option value="自行输入">自行输入</option>
+                        <option value="生产设备">生产</option>
+                        <option value="实验设备">实验</option>
+                        <option value="厂房设备">厂房</option>
+                        <option value="行政设备">行政</option>
+                        <option value="计量设备">计量</option>
+                        <option value="通讯设备">通讯</option>
+                        <option value="IT设备" >IT</option>
                     </select>
                 </div>
                 <label for="Department" class="col-sm-1 control-label">所属部门</label>
@@ -74,12 +74,12 @@
 
             </div>
             <div class="form-group">
-                <label class="col-sm-1 control-label" for="AssetsID">资产号</label>
+                <label class="col-sm-1 control-label" for="AssetsID"><span style="color: red">* </span>资产号</label>
                 <div class="col-sm-2">
                     <input th:if="${Assets!=null}" th:value="${Assets.getAssetsID()}" th:attr="readonly='readonly'" class="form-control" id="AssetsID" name="AssetsID" type="text" placeholder="格式为:  xxx-xx-xxx" />
                     <input th:if="${Assets==null}"  class="form-control" id="AssetsID" name="AssetsID" type="text" placeholder="格式为:  xxx-xx-xxx" />
                 </div>
-                <label class="col-sm-1 control-label" for="DeviceID">设备号</label>
+                <label class="col-sm-1 control-label" for="DeviceID"><span style="color: red">* </span>设备号</label>
                 <div class="col-sm-2">
                     <input th:if="${Assets!=null}"th:value="${Assets.getDeviceID()}"class="form-control" id="DeviceID" name="DeviceID" type="text" placeholder=""/>
                     <input th:if="${Assets==null}"class="form-control" id="DeviceID" name="DeviceID" type="text" placeholder=""/>
@@ -227,6 +227,8 @@
                         <option value="已验收">已验收</option>
                         <option value="在建">在建</option>
                         <option value="退货">退货</option>
+                        <option value="已报废">已报废</option>
+                        <option value="已转售">已转售</option>
                         <option value="其他">其他</option>
                     </select>
                 </div>
@@ -275,8 +277,7 @@
                 </div>
                 <label class="col-sm-1 control-label" for="Remark">备注 </label>
                 <div class="col-sm-5">
-                    <textarea  class="form-control" id="Remark" name="Remark" rows="1" placeholder="没有则不填">
-                    </textarea>
+                    <textarea  class="form-control" id="Remark" name="Remark" rows="1" placeholder="没有则不填"></textarea>
                 </div>
 
             </div>
@@ -508,9 +509,9 @@
                 <div class="modal-body">
                     <div style="text-align: center">
                         <a type="button" href="/itams/download/Example?name=Assets" class="btn btn-primary" style="width: auto;">下载资产示例</a>
-                        <br>
-                        <br>
-                        <a type="button" href="/itams/download/Example?name=IT" class="btn btn-primary" style="width: auto;">下载IT资产信息示例</a>
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <a type="button" href="/itams/download/Example?name=IT" class="btn btn-primary" style="width: auto;">下载IT资产信息示例</a>-->
                     </div>
                 </div>
             </div>
@@ -535,7 +536,7 @@
         var user = [[${user}]];
         //设置selected属性,需要在初始化控件前完成
         if(assets!=null){
-            setSelectedOption("#AssetsCategory", assets.assetsCategory);
+           // setSelectedOption("#AssetsCategory", assets.assetsCategory);
             setSelectedOption("#Department", assets.department);
             setSelectedOption("#FaArea", assets.faArea);
             setSelectedOption("#Area", assets.area);
@@ -588,22 +589,22 @@
             }
         }
 
-
-        $('#AssetsCategory').editableSelect({  //带输入的下拉框
-            filter:false,
-            effects: 'slide',
-            //当资产类别改变时,为IT
-            onSelect:function () {
-                var Category = $("#AssetsCategory").val();
-                if(Category=="IT"){
-                    $("#PCModel").show();
-                    //获取类别
-                    getITtype()
-                }else{
-                    $("#PCModel").hide();
-                }
-            }
-        });
+            //  开启AssetsCategory的几个注释,可以扩展IT设备的信息选取
+        // $('#AssetsCategory').editableSelect({  //带输入的下拉框
+        //     filter:false,
+        //     effects: 'slide',
+        //     //当资产类别改变时,为IT
+        //     onSelect:function () {
+        //         var Category = $("#AssetsCategory").val();
+        //         if(Category=="IT"){
+        //             $("#PCModel").show();
+        //             //获取类别
+        //             getITtype()
+        //         }else{
+        //             $("#PCModel").hide();
+        //         }
+        //     }
+        // });
         $('#Department').editableSelect({  //带输入的下拉框
             filter:false,  effects: 'slide'
         });

@@ -36,6 +36,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/img/**", "anon");//
         filterChainDefinitionMap.put("/fonts/**", "anon");//
         filterChainDefinitionMap.put("/itams/datas/**", "anon");//
+        filterChainDefinitionMap.put("/itams/api/**", "anon");//
+        filterChainDefinitionMap.put("/itams/register", "anon");//注册
+        filterChainDefinitionMap.put("/itams/operate/getName", "anon");//获取姓名接口
         filterChainDefinitionMap.put("/itams/logout", "logout");//
         filterChainDefinitionMap.put("/itams/login", "anon");//开放登陆接口
     //    filterChainDefinitionMap.put("/itams/login", "anon");//开放登陆接口

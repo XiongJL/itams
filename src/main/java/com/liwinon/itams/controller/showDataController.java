@@ -1,20 +1,17 @@
 package com.liwinon.itams.controller;
 
-import com.liwinon.itams.dao.AssetsDao;
-import com.liwinon.itams.dao.HardwareDao;
-import com.liwinon.itams.dao.UserInfoDao;
-import com.liwinon.itams.entity.*;
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
+import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
+import com.liwinon.itams.entity.model.DatasShowModel;
+import com.liwinon.itams.entity.primay.Assets;
+import com.liwinon.itams.entity.primay.UserInfo;
 import com.liwinon.itams.service.showService;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,12 +19,9 @@ import org.springframework.data.domain.Sort;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 @Controller
 public class showDataController {
-    @Autowired
-    HardwareDao hdDao;
     @Autowired
     UserInfoDao userDao;
     @Autowired
@@ -60,7 +54,7 @@ public class showDataController {
         System.out.println("搜索内容,search:" + content);
         System.out.println("搜索类别,type:"+type);
         //不能以有空的字段来排序
-        Sort sort = new Sort(Sort.Direction.ASC, "AssetsID");
+        Sort sort = new Sort(Sort.Direction.ASC, "DeviceID");
         //页码从0开始
         Pageable pageable = PageRequest.of(offset-1, limit, sort);
         JSONObject json = new JSONObject();
@@ -184,18 +178,18 @@ public class showDataController {
     }
 
 
-    /**
-     * 数据图表
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/itams/showData")
-    public String show(Model model) {
-        double total = hdDao.count();
-        double useNum = hdDao.countUse();
-        model.addAttribute("use", useNum);
-        model.addAttribute("notUse", total - useNum);
-        return "showData/dataChart";
-    }
+//    /**
+//     * 数据图表
+//     *
+//     * @param model
+//     * @return
+//     */
+//    @GetMapping(value = "/itams/showData")
+//    public String show(Model model) {
+//        double total = hdDao.count();
+//        double useNum = hdDao.countUse();
+//        model.addAttribute("use", useNum);
+//        model.addAttribute("notUse", total - useNum);
+//        return "showData/dataChart";
+//    }
 }

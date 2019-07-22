@@ -93,7 +93,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">请选择要搜索的状态</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 9rem;">
                 <div class="form-group">
                     <div  data-max-options="1" style="width: auto">
                         <div class="col-xs-3">
@@ -116,12 +116,29 @@
                         </div>
                         <div class="col-xs-3">
                             <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="out" name="AState" value="已转售">
+                                <label for="out">已转售</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="waste" name="AState" value="已报废">
+                                <label for="waste">已报废</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="reform" name="AState" value="报废改造">
+                                <label for="reform">报废改造</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox-custom checkbox-default">
                                 <input type="checkbox" id="other"name="AState" value="其他">
                                 <label for="other">其他</label>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>
