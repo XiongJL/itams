@@ -59,7 +59,7 @@ public class PrimaryConfig {
         return properties;
     }
     @Primary
-    @Bean(name = "transactionManagerSecondary")
+    @Bean(name = "transactionManagerPrimary")
     PlatformTransactionManager transactionManagerSecondary(EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
     }
