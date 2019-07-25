@@ -125,24 +125,27 @@ public class indexController {
     @GetMapping(value = "/itams/operate")
     public String operate(String DeviceID, Model model){
         if(DeviceID!=null && DeviceID!=""){
-            System.out.println("修改"+DeviceID);
-            Assets as = asDao.findByDeviceID(DeviceID);
-            if(as!=null){
-//                if("IT".equals(as.getAssetsCategory())){
-//                    Hardware hd =  hdDao.findByAssetsID(as.getAssetsID());
-//                    if(hd!=null){
-//                        model.addAttribute("HD",hd);
-//                    }
-//                }
-                UserInfo user = infoDao.findByAssetsID(as.getAssetsID());
-                if(user!=null){
-                    model.addAttribute("user",user);
+            //验证IE管理员及其以上身份才能修改
+            Subject subject = SecurityUtils.getSubject();
+            if(subject.hasRole("ROLE_admin")){
+            //有权限
+                System.out.println("拥有权限");
+                System.out.println("修改"+DeviceID);
+                Assets as = asDao.findByDeviceID(DeviceID);
+                if(as!=null){
+                    UserInfo user = infoDao.findByAssetsID(as.getAssetsID());
+                    if(user!=null){
+                        model.addAttribute("user",user);
+                    }
+                    model.addAttribute("Assets",as);
                 }
-                model.addAttribute("Assets",as);
+            }else{
+            //没有权限
+                System.out.println("无权限");
+                return "showData/showData";
             }
+
         }
-
-
         return "operate/operate";
     }
 }

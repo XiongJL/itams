@@ -55,16 +55,41 @@ public class userServiceImpl implements userService{
             return json;
         }
         if (content != null && content != "") {
-            //
-            System.out.println("开始搜索资产");
-            Map<String ,Object> res = showService.searchData(content,type,pageable);
-            List<DatasShowModel> datas = (List<DatasShowModel>)res.get("data");
-            json.accumulate("total", (long)res.get("total"));
-            json.accumulate("rows", datas);
+            Map<String ,Object> res  = searchtablesRole(content,type,pageable);// 部分数据模型
+            json = JSONObject.fromObject(res);
             return json;
         }
         return null;
     }
+
+    /**
+     * 返回搜索用户名和工号的Map数据
+     * @param content
+     * @param type
+     * @param pageable
+     * @return
+     */
+    private Map<String, Object> searchtablesRole(String content, String type, Pageable pageable) {
+        Map<String ,Object> result = new HashMap<>();
+        Page<String[]> page = roleDao.getSearchUserRole(content,pageable);
+        System.out.println("总数total:"+page.getTotalElements());
+        result.put("total",page.getTotalElements());
+        List<String []> list = page.getContent();
+        List<RoleModel> datas = new ArrayList<>();
+        RoleModel data;
+        for(Object[] strs : list){
+            data = new RoleModel();
+            data.setUid((int)(strs[0]));
+            data.setUname((String) strs[1]);
+            data.setUserid((String) strs[2]);
+            data.setRoles((String)strs[3]);
+            datas.add(data);
+        }
+        System.out.println(list.size());
+        result.put("rows",datas);
+        return result;
+    }
+
     /**
      * 获取分页的用户角色  方法
      * @param pageable
@@ -82,13 +107,16 @@ public class userServiceImpl implements userService{
             data = new RoleModel();
             data.setUid((int)(strs[0]));
             data.setUname((String) strs[1]);
-            data.setRoles((String)strs[2]);
+            data.setUserid((String) strs[2]);
+            data.setRoles((String)strs[3]);
             datas.add(data);
         }
         System.out.println(list.size());
         result.put("rows",datas);
         return result;
     }
+
+
     public String getMyrole(HttpServletRequest request){
         HttpSession session =  request.getSession();
         String userid =  (String) session.getAttribute("userid");

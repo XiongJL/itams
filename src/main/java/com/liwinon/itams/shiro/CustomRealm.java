@@ -24,7 +24,7 @@ public class CustomRealm extends AuthorizingRealm {
 
     /**
      * 获取授权信息
-     *
+     *为当限前登录的用户授予角色和权限
      * @param principals
      * @return
      */
@@ -51,7 +51,7 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
     /**
-     * 获取身份验证信息
+     * 验证当前登录的用户
      * Shiro中，最终是通过 Realm 来获取应用程序中的用户、角色及权限信息的。
      *
      * @param authenticationToken 用户身份信息 token
@@ -77,6 +77,7 @@ public class CustomRealm extends AuthorizingRealm {
         }
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(urms.get(0).getUname(), urms.get(0).getPwd(),getName());
+
         return info;
 
         //查询用户的角色和权限存到SimpleAuthenticationInfo中，这样在其它地方

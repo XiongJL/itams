@@ -6,6 +6,7 @@ import com.liwinon.itams.entity.primay.Assets;
 import com.liwinon.itams.service.hardwareService;
 import com.liwinon.itams.service.operateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -121,4 +122,11 @@ public class OperateInfoController {
 
     }
 
+    /**
+     * 删除资产
+     */
+    @GetMapping(value = "/itams/operate/del")
+    public String del(String Deviceid){
+        return operateService.delAssets(Deviceid);
+    }
 }

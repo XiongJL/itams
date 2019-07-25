@@ -31,9 +31,9 @@
                 <ul  class="nav navbar-nav">
 <!--                <li id="index"><a href="/itams/search">首 页<span class="sr-only">(current)</span></a></li>-->
                     <li id="modify"><a href="/itams/datas">数据浏览</a></li>
-                    <li id="operate"><a href="/itams/operate">数据录入</a></li>
+                    <li th:if="${session.permission=='sadmin'}" id="operate"><a href="/itams/operate">数据录入</a></li>
 <!--                    <li id="show"><a href="/itams/showData">数据图表</a></li>-->
-                    <li th:if="${session.permission=='sadmin'|| session.permission=='admin'}" id="permission"><a href="/itams/role">权限管理</a></li>
+                    <li th:if="${session.permission=='sadmin'}" id="permission"><a href="/itams/role">权限管理</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他系统 <span class="caret"></span></a>
                         <ul class="dropdown-menu">

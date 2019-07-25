@@ -1,6 +1,8 @@
 package com.liwinon.itams.service;
 
+import com.liwinon.itams.dao.primaryRepo.AssetsDao;
 import com.liwinon.itams.dao.primaryRepo.EventDao;
+import com.liwinon.itams.entity.primay.Assets;
 import com.liwinon.itams.entity.primay.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import java.util.List;
 public class operateServiceImpl implements operateService {
     @Autowired
     EventDao eventDao;
+    @Autowired
+    AssetsDao assetsDao;
 
     /**
      *      暂时不使用该方法推送OA单
@@ -50,5 +54,21 @@ public class operateServiceImpl implements operateService {
             return "ok";
         }
         return "操作失败!请尝试重新登录";
+    }
+
+    /**
+     * 根据设备ID删除资产
+     * @param deviceid
+     * @return
+     */
+    @Override
+    @Transactional
+    public String delAssets(String deviceid) {
+        Assets assets =  assetsDao.findByDeviceID(deviceid);
+        if (assets==null){
+            return "资产已经不存在!";
+        }
+        assetsDao.delete(assets);
+        return "ok";
     }
 }

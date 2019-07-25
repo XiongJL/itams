@@ -266,9 +266,9 @@ $("#commit").bind("click",function(){
 
 //提交表单,更新资产
 $("#update2").bind("click",function(){
-    if(!checkRole()){ //无权修改
-        toastr.warning("您没有权限修改此资产!")
-    }else{
+    // if(!checkRole()){ //无权修改
+    //     toastr.warning("您没有权限修改此资产!")
+    // }else{
     console.log($('#hardware').serialize())
         $.ajax({
             url:"/itams/operate/saveHardware",
@@ -277,27 +277,30 @@ $("#update2").bind("click",function(){
             success:function (res) {
                 console.log(res)
                 if(res=="ok") { // 保存成功
-                    toastr.success('更新成功');
+                    toastr.success('更新成功,即将刷新');
+                    setTimeout(function () {
+                        location.reload()
+                    },2000)
                 } else{  //未知异常
                     console.log(res)
                     toastr.warning("更新失败!")
                 }
             }
         })
-    }
+    // }
 
 })
 
 //根据全局变量值判断是否能够操作该资产,以显示或者禁用按钮
-function checkRole() {
-    //获取当前资产ID的车间
-    var workshop = $("#Area").val();
-    var boolean = false;
-    for(key in roles){
-        if(roles[key]==workshop){
-            console.log("拥有权限!")
-            boolean = true
-        }
-    }
-    return boolean
-}
+// function checkRole() {
+//     //获取当前资产ID的车间
+//     var workshop = $("#Area").val();
+//     var boolean = false;
+//     for(key in roles){
+//         if(roles[key]==workshop){
+//             console.log("拥有权限!")
+//             boolean = true
+//         }
+//     }
+//     return boolean
+// }

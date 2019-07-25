@@ -81,7 +81,7 @@
                 </div>
                 <label class="col-sm-1 control-label" for="DeviceID"><span style="color: red">* </span>设备号</label>
                 <div class="col-sm-2">
-                    <input th:if="${Assets!=null}"th:value="${Assets.getDeviceID()}"class="form-control" id="DeviceID" name="DeviceID" type="text" placeholder=""/>
+                    <input th:if="${Assets!=null}"th:value="${Assets.getDeviceID()} " th:attr="readonly='readonly'" class="form-control" id="DeviceID" name="DeviceID" type="text" placeholder=""/>
                     <input th:if="${Assets==null}"class="form-control" id="DeviceID" name="DeviceID" type="text" placeholder=""/>
                 </div>
                 <label class="col-sm-1 control-label" for="FactoryID">出厂编号</label>

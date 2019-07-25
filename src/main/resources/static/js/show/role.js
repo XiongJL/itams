@@ -100,8 +100,8 @@ var TableInit = function () {
                     title:'用户'
                 },
                 {
-                    field: 'Name',
-                    title: '姓名'
+                    field: 'userid',
+                    title: '工号'
                 },
                 {
                     field: 'roles',
@@ -157,8 +157,8 @@ function operateFormatter(value, row, index) {//赋予的参数
 
 
     return [
-        '<a  value="'+row.roles+'"  onclick="getThisRole(\''+row.roles+'\',\''+row.uid+'\')"  type="button" href="" id="'+id+'" data-toggle="modal"data-target="#settingmod"><i class="glyphicon glyphicon-wrench"></i></a> ',
-        '<a style="margin-left: 1rem;" type="button" id="'+delID+'" data-toggle="modal"data-target=""><i class="glyphicon glyphicon-remove"></i></a>'
+        '<a  value="'+row.roles+'"  onclick="getThisRole(\''+row.roles+'\',\''+row.uid+'\')"  type="button" href="" id="'+id+'" data-toggle="modal"data-target="#settingmod">设置</a> ',
+        '<a style="margin-left: 1rem;" type="button" id="'+delID+'" data-toggle="modal"data-target="">删除</a>'
     ].join('');
 }
 
@@ -227,3 +227,16 @@ function uploadRole() {
 
 }
 
+//搜索工号或者用户名
+$('#search').on('click',function () {
+    if ($("#searchValue").val().length == 0){
+        //初始化全局变量
+        content = "";
+        type = null;
+        $("#RoleTable").bootstrapTable("refresh",{pageNumber: 1});
+    }else{
+        content = $("#searchValue").val();
+        type = 1 ; //随意定义一个非空非null
+        $('#RoleTable').bootstrapTable('refreshOptions', {pageNumber: 1, pageSize: 10});
+    }
+})

@@ -22,7 +22,12 @@
 </head>
 <body>
 <div th:include="common/logo :: logo"></div>
-
+<div class="input-group col-xs-3" style="margin: 0 auto">
+        <input id="searchValue" type="text" class="form-control" placeholder="搜索工号或用户名">
+        <span class="input-group-btn">
+            <button id="search" class="btn btn-default" type="button">搜索</button>
+        </span>
+</div>
 <div>
     <table id="RoleTable" data-show-jumpto="true"></table>
 </div>

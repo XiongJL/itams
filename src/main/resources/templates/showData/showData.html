@@ -160,9 +160,9 @@
 <script src="../js/toastr.min.js"></script>
 <script src="../js/tagsinput.min.js"></script>
 <script type="text/javascript" src="../js/time.js" charset="UTF-8"></script>
-<script src="../js/show/show.js"></script>
 <script src="../js/show/table-jumpto.js"></script>
-<script>
+<script src="../js/show/show.js"></script>
+<script  th:inline="javascript">
     $(document).ready(function(){
         //添加导航栏选中样式
         $("#modify").addClass("active")
@@ -179,5 +179,10 @@
             forceParse: 0
         });
     })
+
+    var permission = [[${session.permission}]]
+    console.log("权限是"+permission)
+    setPermission(permission);
 </script>
+
 </html>

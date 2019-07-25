@@ -5,6 +5,8 @@ import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
 import com.liwinon.itams.service.hardwareService;
 import com.liwinon.itams.service.searchService;
 import com.liwinon.itams.utils.ExcelUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
@@ -45,6 +47,11 @@ public class uploadController {
      */
     @PostMapping(value = "/itams/upload/excel")
     public String upload(@RequestParam("file") MultipartFile file) {
+        Subject subject = SecurityUtils.getSubject();
+        if(!subject.hasRole("ROLE_admin")){
+            System.out.println("无权限上传!");
+            return null;
+        }
         System.out.println("开始上传文件");
         if (file.isEmpty()) {
             return "empty";
