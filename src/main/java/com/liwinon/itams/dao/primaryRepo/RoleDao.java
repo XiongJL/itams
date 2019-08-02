@@ -37,6 +37,7 @@ public interface RoleDao extends JpaRepository<Role,Integer> {
             "GROUP BY t1.uid,t1.uname,t1.PERSONID ",nativeQuery = true)
     Page<String[]> getSearchUserRole(String content, Pageable pageable);
 
+
     @Query(value = "SELECT DISTINCT STUFF((SELECT ',' + workshop FROM view_roles " +
             "WHERE t1.uid=uid " +
             "FOR XML PATH('')),1, 1, '') AS roles " +

@@ -16,7 +16,15 @@ public class Event {
     private String State;
     private String Uname;
     private String FormID;
+    private String Description;
 
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
 
     public String getFormID() {
         return FormID;

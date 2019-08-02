@@ -45,81 +45,6 @@ $(document).ready(function() {
     $("#pdvalue").datetimepicker("setDate", new Date())
     $("#envalue").datetimepicker("setDate", new Date())
 })
-// //公共方法,根据类别改变品牌的值
-// // function changeBrand(type){
-// //     //清空原有内容
-// //     $("#Brand").empty();
-// //     $.ajax({
-// //         url:"/itams/operate/Brands",
-// //         data:{type:type},
-// //         success:function (res) {
-// //             console.log(res)
-// //             var option ="";
-// //             if(res!=null &&res!=""){
-// //                 for(var x in res){
-// //                     option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
-// //                 }
-// //                 $("#Brand").append(option)
-// //                 //品牌更改完毕后,修改型号
-// //                 changeModel()
-// //             }
-// //
-// //         }
-// //     })
-// // }
-// //公共方法,根据类别,品牌改变型号
-// function changeModel(){
-//     //清空原有内容
-//     $("#Model").empty();
-//     var type = $("#ITtype").val()
-//     var brand = $("#Brand").val()
-//     $.ajax({
-//         url:"/itams/operate/Models",
-//         data:{type:type,brand:brand},
-//        // async: false,//使用同步的方式,true为异步方式
-//         success:function (res) {
-//             console.log(res)
-//             var option ="";
-//             if(res!=null || res!=""){
-//                 for(var x in res){
-//                     option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
-//                 }
-//                 $("#Model").append(option)
-//             }
-//         }
-//     })
-// }
-
-// // 获取类别
-// function getITtype(){
-//     $.ajax({
-//         url:"/itams/operate/type",
-//         success:function (res) {
-//             var option ="";
-//             for(var x in res){
-//                 option += "<option value='"+res[x]+"'>"+res[x]+"</option>"
-//             }
-//             $("#ITtype").append(option);
-//             var type = $("#ITtype").val();
-//             changeBrand(type)
-//         }
-//     });
-// }
-// //当IT具体类别改变时,查询对应的品牌,以及品牌对应的型号
-// $("#ITtype").change(function () {
-//     var type = $("#ITtype").val();
-//     changeBrand(type)
-//     if (type!="台式机"&&type!="笔记本"){
-//         $("#hardinfo").hide()
-//     }else{
-//         $("#hardinfo").show()
-//     }
-// })
-// //当品牌改变时,查询对应的型号
-// $("#Brand").change(function(){
-//     changeModel()
-// })
-
 //资产ID是否存在查询
 $('#AssetsID').on('focus',function () {
     $("#err1").remove()
@@ -217,14 +142,14 @@ $('#UserID').on('blur',function () {
 })
 
 
-//点击有线MAC2----有
-$("#WireMAC2On").bind("click",function(){
-    $("#WiredMAC2").removeAttr("disabled")
-})
-//点击无线MAC----无
-$("#wirelessOn").bind("click",function(){
-    $("#WirelessMac").removeAttr("disabled")
-})
+// //点击有线MAC2----有
+// $("#WireMAC2On").bind("click",function(){
+//     $("#WiredMAC2").removeAttr("disabled")
+// })
+// //点击无线MAC----无
+// $("#wirelessOn").bind("click",function(){
+//     $("#WirelessMac").removeAttr("disabled")
+// })
 
 
 
@@ -290,6 +215,51 @@ $("#update2").bind("click",function(){
     // }
 
 })
+
+//设置下拉框的值
+function setSelectValue() {
+    $.ajax({ //获取所有资产状态
+        url:"/itams/select/Astate",
+        success:function (res) {
+            var option = ""
+            for (var x in res){
+                option += "<option value='"+res[x].value+"'>"+res[x].value+"</option>"
+            }
+            $('#AState').append(option)
+        }
+    })
+    $.ajax({  //获取所有区域
+        url:"/itams/select/Area",
+        success:function (res) {
+            var option = ""
+            for (var x in res){
+                option += "<option value='"+res[x].value+"'>"+res[x].value+"</option>"
+            }
+            $('#Area').append(option)
+        }
+    })
+    $.ajax({  //获取所有部门
+        url:"/itams/select/Department",
+        success:function (res) {
+            var option = ""
+            for (var x in res){
+                option += "<option value='"+res[x].value+"'>"+res[x].value+"</option>"
+            }
+            $('#UserDepartment').append(option)
+            $('#Department').append(option)
+        }
+    })
+    $.ajax({  //获取所有工序
+        url:"/itams/select/Step",
+        success:function (res) {
+            var option = ""
+            for (var x in res){
+                option += "<option value='"+res[x].value+"'>"+res[x].value+"</option>"
+            }
+            $('#ProductionSetp').append(option)
+        }
+    })
+}
 
 //根据全局变量值判断是否能够操作该资产,以显示或者禁用按钮
 // function checkRole() {

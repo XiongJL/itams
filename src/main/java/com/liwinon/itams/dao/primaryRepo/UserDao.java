@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserDao extends JpaRepository<User,Integer>, JpaSpecificationExecutor<User> {
-    @Query(value = "select new com.liwinon.itams.entity.model.UserRoleModel(u.uid,u.uname,u.pwd,r.rid,r.name,r.workshop)" +
+    @Query(value = "select new com.liwinon.itams.entity.model.UserRoleModel(u.uid,u.uname,u.PERSONID,u.pwd,r.rid,r.name,r.workshop)" +
             "        from UserRole ur " +
             "        LEFT JOIN User u on u.uid= ur.uid" +
             "        LEFT JOIN Role r on ur.rid= r.rid" +

@@ -25,6 +25,8 @@ public class User {
 //        this.roles = roles;
 //    }
 
+
+
     public String getPERSONID() {
         return PERSONID;
     }

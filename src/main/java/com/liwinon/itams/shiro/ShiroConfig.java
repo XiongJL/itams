@@ -35,7 +35,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/js/**", "anon");//
         filterChainDefinitionMap.put("/img/**", "anon");//
         filterChainDefinitionMap.put("/fonts/**", "anon");//
-        filterChainDefinitionMap.put("/itams/datas/**", "anon");//
         filterChainDefinitionMap.put("/itams/api/**", "anon");//
         filterChainDefinitionMap.put("/itams/register", "anon");//注册
         filterChainDefinitionMap.put("/itams/operate/getName", "anon");//获取姓名接口

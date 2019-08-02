@@ -20,7 +20,7 @@ spring:
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: false #\u663E\u793A\u67E5\u8BE2\u8BED\u53E5
+    show-sql: true #\u663E\u793A\u67E5\u8BE2\u8BED\u53E5
   devtools:
     restart:
       enabled: true

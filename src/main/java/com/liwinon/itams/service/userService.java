@@ -1,5 +1,6 @@
 package com.liwinon.itams.service;
 
+import com.liwinon.itams.entity.model.RoleModel;
 import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,4 +16,6 @@ public interface userService {
     String whatIApply(HttpServletRequest request);
 
     String register(String userid, String username, String password);
+
+    RoleModel getRoleByIdAndUser(String content);
 }

@@ -7,5 +7,5 @@ public interface hardwareService {
     String saveHardware(HttpServletRequest request);
 
     //解析HardwareExcel文件
-    public void resolveExcel(String[] columns,String filePath,int type);
+    String resolveExcel(String[] columns,String filePath,int type);
 }

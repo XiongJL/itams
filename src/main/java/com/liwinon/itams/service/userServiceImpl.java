@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,7 +48,7 @@ public class userServiceImpl implements userService{
         Sort sort = new Sort(Sort.Direction.ASC, "uid");
         //页码从0开始
         Pageable pageable = PageRequest.of(offset-1, limit, sort);
-        JSONObject json = new JSONObject();
+        JSONObject json ;
         if(type==null||type==""){   //没有查询类型,也就是第一次进入,或者刷新,查询全部数据
             Map<String ,Object> res  = tablesRole(pageable);// 部分数据模型
             json = JSONObject.fromObject(res);
@@ -116,7 +117,29 @@ public class userServiceImpl implements userService{
         return result;
     }
 
-
+    /**
+     * 根据 工号或用户名搜索权限
+     * @param content
+     * @return
+     */
+    @Override
+    public RoleModel getRoleByIdAndUser(String content) {
+        Sort sort = new Sort(Sort.Direction.ASC, "uid");
+        Pageable pageable = PageRequest.of(0, 10, sort);
+        Page<String[]> page = roleDao.getSearchUserRole(content,pageable);
+        List<String []> list = page.getContent();
+        List<RoleModel> datas = new ArrayList<>();
+        RoleModel data;
+        for(Object[] strs : list){
+            data = new RoleModel();
+            data.setUid((int)(strs[0]));
+            data.setUname((String) strs[1]);
+            data.setUserid((String) strs[2]);
+            data.setRoles((String)strs[3]);
+            datas.add(data);
+        }
+        return datas.get(0);
+    }
     public String getMyrole(HttpServletRequest request){
         HttpSession session =  request.getSession();
         String userid =  (String) session.getAttribute("userid");
@@ -131,11 +154,27 @@ public class userServiceImpl implements userService{
         List<String> list =  roleDao.findWorkshops();
         return list;
     }
+    //更新权限
     public String updateRole(HttpServletRequest request){
         //获取数组用  getParameterValues
         String[] roles=request.getParameterValues("roles[]");
-        int uid = Integer.valueOf(request.getParameter("uid"));
-        System.out.println(uid);
+        int uid = 0;
+        if (!StringUtils.isEmpty(request.getParameter("uid"))){
+            uid = Integer.valueOf(request.getParameter("uid"));
+        }else{
+            String userid = request.getParameter("userid");
+            User user = userDao.findByPERSONID(userid);
+            if (user==null){  //若无此用户保存新账号 ,权限根据传递的角色设定
+                user = new User();
+                user.setPERSONID(userid);
+                user.setPwd("123456");
+                user.setUname(userid);
+                userDao.save(user);
+                uid = user.getUid();
+            }else{
+                uid = user.getUid();
+            }
+        }
         //查找关联表
         List<UserRole> list = urDao.findByUid(uid);
         //全部删除
@@ -166,7 +205,6 @@ public class userServiceImpl implements userService{
                 oldrid  += ","+ id;
             }
             oldrid = oldrid.substring(1);
-            System.out.println(oldrid);
             apply.setOldrid(oldrid);
             apply.setUid(urms.get(0).getUid());
             apply.setAdate(new Date());
@@ -216,7 +254,7 @@ public class userServiceImpl implements userService{
     @Override
     @Transactional
     public String register(String userid, String username, String password) {
-        System.out.println(userid+","+username+","+password);
+        System.out.println("注册:"+userid+","+username+","+password);
         User user =  userDao.findByPERSONID(userid);
         if (user!=null){
             return "exist";
@@ -234,10 +272,11 @@ public class userServiceImpl implements userService{
         }
     }
 
+
+
     private List<UserRoleModel> getURMs(HttpServletRequest request){
         HttpSession session = request.getSession();
         String userid = (String) session.getAttribute("userid");
-        System.out.println(userid);
         List<UserRoleModel> urms = userDao.findByUserid(userid);
         return urms;
     }

@@ -34,7 +34,6 @@ public class OperateInfoController {
      */
     @GetMapping(value = "/itams/operate/asidExist")
     public String AsIdExist(String asid){
-        System.out.println(asid);
         Assets as = assetsDao.findByAssetsID(asid);
         if (as!=null){
             return "exist";

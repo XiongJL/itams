@@ -115,24 +115,8 @@ var TableInit = function () {
                     field: 'operate',
                     title: '操作',
                     formatter: operateFormatter //自定义方法，添加操作按钮
-                },
-            ],
-            onExpandRow: function(index, row, $detail) {
-                //这一步就是相当于在当前点击列下新创建一个table
-                var html = "";
-                console.log(row)
-                var assetsID = row.assetsID
-                $.ajax({
-                    type: "get",
-                    url: "/itams/datas/getThisData",       //子表请求的地址
-                    data: {"AssetsID":assetsID},//我这里是点击父表后，传递父表列id和nama到后台查询子表数据
-                    async: false,           //很重要，这里要使用同步请求
-                    dataType:"html",
-                    success: function(data) {
-                        $detail.html(data); // 关键地方
-                    }
-                });
-            }
+                }
+            ]
         });
     };
     //得到查询的参数
@@ -157,8 +141,8 @@ function operateFormatter(value, row, index) {//赋予的参数
 
 
     return [
-        '<a  value="'+row.roles+'"  onclick="getThisRole(\''+row.roles+'\',\''+row.uid+'\')"  type="button" href="" id="'+id+'" data-toggle="modal"data-target="#settingmod">设置</a> ',
-        '<a style="margin-left: 1rem;" type="button" id="'+delID+'" data-toggle="modal"data-target="">删除</a>'
+        '<a  value="'+row.roles+'"  onclick="getThisRole(\''+row.roles+'\',\''+row.uid+'\')"  type="button" href="" id="'+id+'" data-toggle="modal"data-target="#settingmod">设置</a> '
+        // , '<a style="margin-left: 1rem;" type="button" id="'+delID+'" data-toggle="modal"data-target="">删除</a>'
     ].join('');
 }
 

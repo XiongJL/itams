@@ -8,6 +8,7 @@ package com.liwinon.itams.entity.model;
 public class UserRoleModel {
     private int uid;
     private String uname;
+    private String PERSONID;
     private String pwd;
     private int rid;
     private Object name; //角色名
@@ -16,13 +17,23 @@ public class UserRoleModel {
 
     public UserRoleModel(){}
 
-    public UserRoleModel(int uid, String uname, String pwd,int rid, Object name,String workshop) {
+
+    public UserRoleModel(int uid, String uname, String PERSONID, String pwd, int rid, Object name, String workshop) {
         this.uid = uid;
         this.uname = uname;
+        this.PERSONID = PERSONID;
         this.pwd = pwd;
         this.rid = rid;
         this.name = name;
         this.workshop = workshop;
+    }
+
+    public String getPERSONID() {
+        return PERSONID;
+    }
+
+    public void setPERSONID(String PERSONID) {
+        this.PERSONID = PERSONID;
     }
 
     public int getRid() {

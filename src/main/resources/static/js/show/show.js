@@ -158,8 +158,8 @@ function operateFormatter(value, row, index) {//赋予的参数
         return [
             '<a style="margin-right: 4px;" href="/itams/operate?DeviceID=' + row.deviceID + '">编辑</a>',
             '<a style="margin-right: 4px;"  onclick="zhuanshou(this)" data-deviceid="' + row.deviceID + '" href="#">转售</a>',
-            '<a style="margin-right: 4px;"class=""  onclick="baofei(this) " data-deviceid="' + row.deviceID + '"  href="#">报废</a>',
-            '<a class=""  onclick="del(this) " data-deviceid="' + row.deviceID + '"  href="#">删除</a>'
+            '<a style="margin-right: 4px;"class=""  onclick="baofei(this) " data-deviceid="' + row.deviceID + '"  href="#">报废</a>'
+           // , '<a class=""  onclick="del(this) " data-deviceid="' + row.deviceID + '"  href="#">删除</a>'
             // , '<a class="btn " href="#">删除</a>'
         ].join('');
     }else if(permission=='admin'){
@@ -185,24 +185,24 @@ function baofei(a){
     var event = "报废";
     reqOption(event,a.dataset.deviceid);
 }
-//删除
-function del(a) {
-    $.ajax({
-        url:"/itams/operate/del",
-        data:{Deviceid:a.dataset.deviceid},
-        success:function (res) {
-            if (res=="ok"){
-                toastr.success("删除成功")
-                $("#AssetsTabel").bootstrapTable("refresh", {pageNumber: 1});
-            }
-            else{
-                toastr.warning(res)
-                $("#AssetsTabel").bootstrapTable("refresh", {pageNumber: 1});
-            }
-        }
-
-    })
-}
+//删除  禁用
+// function del(a) {
+//     $.ajax({
+//         url:"/itams/operate/del",
+//         data:{Deviceid:a.dataset.deviceid},
+//         success:function (res) {
+//             if (res=="ok"){
+//                 toastr.success("删除成功")
+//                 $("#AssetsTabel").bootstrapTable("refresh", {pageNumber: 1});
+//             }
+//             else{
+//                 toastr.warning(res)
+//                 $("#AssetsTabel").bootstrapTable("refresh", {pageNumber: 1});
+//             }
+//         }
+//
+//     })
+// }
 
 //请求后台并保存用户操作
 function reqOption(event,deviceID){

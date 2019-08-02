@@ -40,6 +40,9 @@ public class showServiceImpl implements showService {
         DatasShowModel data;
         for (Assets as : list) {    //
             user = userDao.findByAssetsID(as.getAssetsID());
+            if (user==null){
+                user = new UserInfo();
+            }
             data = setmodel(as,user);  //保存数据
             //   System.out.println("data:" + data);
             datas.add(data); //添加数据
@@ -67,8 +70,6 @@ public class showServiceImpl implements showService {
             Date date2 = Date.valueOf(dates[1]);
             Page<Assets> page = asDao.findBetweenDate(date1,date2,pageable);
             List<Assets> list = page.getContent();
-            System.out.println(list);
-            System.out.println(list.size());
             for(Assets as : list){
                 user = userDao.findByAssetsID(as.getAssetsID());
                 model = setmodel(as,user);
@@ -79,8 +80,6 @@ public class showServiceImpl implements showService {
              //通过详细位置查询
             Page<Assets> page = getAssets(pageable, strs,type);
             List<Assets> list = page.getContent();
-            System.out.println(list);
-            System.out.println(list.size());
             for(Assets as : list){
                 user = userDao.findByAssetsID(as.getAssetsID());
                 model = setmodel(as,user);
@@ -92,8 +91,6 @@ public class showServiceImpl implements showService {
             //通过资产类别查询
             Page<Assets> page = getAssets(pageable, strs,type);
             List<Assets> list = page.getContent();
-            System.out.println(list);
-            System.out.println(list.size());
             for(Assets as : list){
                 user = userDao.findByAssetsID(as.getAssetsID());
                 model = setmodel(as,user);
@@ -104,8 +101,6 @@ public class showServiceImpl implements showService {
             //通过责任人查询
             Page<Assets> page = getAssets(pageable, strs,type);
             List<Assets> list = page.getContent();
-            System.out.println(list);
-            System.out.println(list.size());
             for(Assets as : list){
                 user = userDao.findByAssetsID(as.getAssetsID());
                 model = setmodel(as,user);
@@ -143,7 +138,6 @@ public class showServiceImpl implements showService {
                 Assets as =null ;
                 if("1".equals(type)){  //通过资产ID搜索
                     as  = asDao.findByAssetsID(s);
-                    System.out.println(as);
                     if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
                         continue;
                     user = userDao.findByAssetsID(as.getAssetsID());
@@ -151,22 +145,19 @@ public class showServiceImpl implements showService {
                     datas.add(model);
                 }
                 if("2".equals(type)){  //通过工号搜索
-                    List<UserInfo> users = userDao.findByUserID(s);
-                    System.out.println(users.size());
-                    for (UserInfo u:users){
+                    List<UserInfo> userss = userDao.findByUserID(s);
+                    for (UserInfo u:userss){
                         if(u==null)  //没有找到
                             continue;
                         as = asDao.findByAssetsID(u.getAssetsID());
                         if (as==null)
                             continue;
                         model = setmodel(as,u);
-                        System.out.println("model:"+model);
                         datas.add(model);
                     }
                 }
                 if ("3".equals(type)){ //通过设备号查询
                     as  = asDao.findByDeviceID(s);
-                    System.out.println(as);
                     if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
                         continue;
                     user = userDao.findByAssetsID(as.getAssetsID());

@@ -76,7 +76,7 @@ public class CustomRealm extends AuthorizingRealm {
                     "没有在本系统中找到对应的用户信息。");
         }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(urms.get(0).getUname(), urms.get(0).getPwd(),getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(urms.get(0).getPERSONID(), urms.get(0).getPwd(),getName());
 
         return info;
 

@@ -134,9 +134,7 @@ public class indexController {
                 Assets as = asDao.findByDeviceID(DeviceID);
                 if(as!=null){
                     UserInfo user = infoDao.findByAssetsID(as.getAssetsID());
-                    if(user!=null){
-                        model.addAttribute("user",user);
-                    }
+                    model.addAttribute("user",user);
                     model.addAttribute("Assets",as);
                 }
             }else{

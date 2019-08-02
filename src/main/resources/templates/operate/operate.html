@@ -11,7 +11,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/operate.css" rel="stylesheet">
     <link href="../css/time.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/jquery.select.css">
+<!--    <link rel="stylesheet" href="../css/jquery.select.css">-->
     <link rel="stylesheet" href="../css/toastr.min.css">
     <link rel="stylesheet" href="../css/loadStyle.css">
 
@@ -50,20 +50,7 @@
                 </div>
                 <label for="Department" class="col-sm-1 control-label">所属部门</label>
                 <div class="col-sm-10 " STYLE="width: auto; ">
-                    <select id="Department"name="Department" class=" select-inline">
-                        <option value="IT">IT</option>
-                        <option value="IE">IE</option>
-                        <option value="MPF">MPF</option>
-                        <option value="MRD">MRD</option>
-                        <option value="TE">TE</option>
-                        <option value="HR">HR</option>
-                        <option value="ADM">ADM</option>
-                        <option value="SEC">SEC</option>
-                        <option value="SRC">SRC</option>
-                        <option value="PMC">PMC</option>
-                        <option value="PRD">PRD</option>
-                        <option value="QA">QA</option>
-                        <option value="FE">FE</option>
+                    <select id="Department"name="Department" class="form-control select-inline">
                     </select>
                 </div>
                 <label class="col-sm-2"></label>
@@ -127,57 +114,7 @@
                 </div>
                 <label for="Area" class="col-sm-1 control-label">区域</label>
                 <div class="col-sm-2 " >
-                    <select  id="Area" name="Area" class="select-inline" value="">
-                        <option value="阴极备料车间">阴极备料车间</option>
-                        <option value="阳极备料车间">阳极备料车间</option>
-                        <option value="装配一车间">装配一车间</option>
-                        <option value="装配二车间">装配二车间</option>
-                        <option value="干燥一车间">干燥一车间</option>
-                        <option value="干燥二车间">干燥二车间</option>
-                        <option value="注液一车间">注液一车间</option>
-                        <option value="注液二车间">注液二车间</option>
-                        <option value="老化车间">老化车间</option>
-                        <option value="化成车间">化成车间</option>
-                        <option value="二封一车间">二封一车间</option>
-                        <option value="二封二车间">二封二车间</option>
-                        <option value="二封三车间">二封三车间</option>
-                        <option value="分容一车间">分容一车间</option>
-                        <option value="分容二车间">分容二车间</option>
-                        <option value="分容三车间">分容三车间</option>
-                        <option value="检测一车间">检测一车间</option>
-                        <option value="检测二车间">检测二车间</option>
-                        <option value="外观车间">外观车间</option>
-                        <option value="终检车间">终检车间</option>
-                        <option value="成品仓">成品仓</option>
-                        <option value="机加工房">机加工房</option>
-                        <option value="维修仓">维修仓</option>
-                        <option value="ME配件仓">ME配件仓</option>
-                        <option value="ME工夹仓">ME工夹仓</option>
-                        <option value="ME模具仓">ME模具仓</option>
-                        <option value="原材料仓">原材料仓</option>
-                        <option value="包材仓">包材仓</option>
-                        <option value="闲置设备仓">闲置设备仓</option>
-                        <option value="待报废仓">待报废仓</option>
-                        <option value="待转售仓">待转售仓</option>
-                        <option value="计量室">计量室</option>
-                        <option value="化学分析中心">化学分析中心</option>
-                        <option value="安全测试中心">安全测试中心</option>
-                        <option value="常温循环中心">常温循环中心</option>
-                        <option value="可靠性测试中心">可靠性测试中心</option>
-                        <option value="铝塑膜分切房">铝塑膜分切房</option>
-                        <option value="保安室">保安室</option>
-                        <option value="消防控制室">消防控制室</option>
-                        <option value="微型消防站">微型消防站</option>
-                        <option value="招聘室">招聘室</option>
-                        <option value="危险品仓">危险品仓</option>
-                        <option value="电解液仓">电解液仓</option>
-                        <option value="培训室">培训室</option>
-                        <option value="电房">电房</option>
-                        <option value="行政办公楼">行政办公楼</option>
-                        <option value="员工宿舍楼">员工宿舍楼</option>
-                        <option value="职员宿舍楼">职员宿舍楼</option>
-                        <option value="经理宿舍楼">经理宿舍楼</option>
-                        <option value="供应商">供应商</option>
+                    <select  id="Area" name="Area" class="form-control select-inline" value="">
                     </select>
                 </div>
                 <label for="Location" class="col-sm-1 control-label">详细位置</label>
@@ -189,26 +126,8 @@
 
                 <label for="ProductionSetp" class="col-sm-1 control-label">工序</label>
                 <div class="col-sm-2 " >
-                  <select id="ProductionSetp" name="ProductionSetp" class="select-inline" value="">
-                    <option value="阴极涂布">阴极涂布</option>
-                    <option value="阴极分条">阴极分条</option>
-                    <option value="阴极制片">阴极制片</option>
-                    <option value="阳极涂布">阳极涂布</option>
-                    <option value="阳极分条">阳极分条</option>
-                    <option value="阳极制片">阳极制片</option>
-                    <option value="卷绕">卷绕</option>
-                    <option value="顶封">顶封</option>
-                    <option value="注液">注液</option>
-                    <option value="化成">化成</option>
-                    <option value="成型">成型</option>
-                    <option value="分容">分容</option>
-                    <option value="检测">检测</option>
-                    <option value="包装">包装</option>
-                    <option value="实验">实验</option>
-                    <option value="闲置">闲置</option>
-                    <option value="厂房">厂房</option>
-                    <option value="行政">行政</option>
-                    <option value="其他">其他</option>
+                  <select id="ProductionSetp" name="ProductionSetp" class="form-control select-inline" value="">
+
                 </select>
                 </div>
             </div>
@@ -224,12 +143,6 @@
                 <label class="col-sm-1 control-label" for="AState">资产状态</label>
                 <div class="col-sm-2">
                     <select id="AState" name="AState" class="form-control select-inline" value="">
-                        <option value="已验收">已验收</option>
-                        <option value="在建">在建</option>
-                        <option value="退货">退货</option>
-                        <option value="已报废">已报废</option>
-                        <option value="已转售">已转售</option>
-                        <option value="其他">其他</option>
                     </select>
                 </div>
                 <label class="col-sm-1 control-label" for="RequireID">需求报告编号</label>
@@ -294,162 +207,10 @@
                 </div>
                 <label class="col-sm-2 control-label" for="UserDepartment">使用人部门</label>
                 <div class="col-sm-2">
-                    <select id="UserDepartment" name="UserDepartment" class=" select-inline">
-                        <option value="IT">IT</option>
-                        <option value="IT">IE</option>
-                        <option value="IT">MPF</option>
-                        <option value="IT">MRD</option>
-                        <option value="IT">TE</option>
-                        <option value="IT">HR</option>
-                        <option value="IT">ADM</option>
-                        <option value="IT">SEC</option>
-                        <option value="IT">SRC</option>
-                        <option value="IT">PMC</option>
-                        <option value="IT">PRD</option>
-                        <option value="IT">QA</option>
-                        <option value="IT">FE</option>
+                    <select id="UserDepartment" name="UserDepartment" class="form-control select-inline">
                     </select>
                 </div>
             </div>
-        </fieldset>
-        <fieldset  id="PCModel">
-            <div class="form-group">
-                <label for="ITtype" class="col-sm-1 control-label">具体类别</label>
-                <div class="col-sm-10 " STYLE="width: auto; ">
-                    <select id="ITtype" name="ITtype" class="form-control select-inline">
-                    </select>
-                </div>
-            <label for="Brand" class="col-sm-1 control-label">品牌</label>
-            <div class="col-sm-10 " STYLE="width: auto; ">
-                <select id="Brand" name="Brand" class="form-control select-inline">
-                </select>
-            </div>
-            <label for="Model" class="col-sm-1 control-label">型号</label>
-            <div class="col-sm-10 " STYLE="width: auto; ">
-                <select id="Model"name="Model" class="form-control select-inline">
-
-                </select>
-            </div>
-            </div>
-        <div id="hardinfo">
-            <div class="form-group" >
-                <label class="radio-custom radio-primary col-sm-1 control-label">CPU</label>
-                <div class="radio-custom radio-primary radio-inline" style="float:left;">
-                    <input type="radio" id="cpu1" value="I3-7100" name="CPU" checked="">
-                    <label class="radio " for="cpu1">I3-7100 </label>
-                </div>
-                <div class="radio-custom radio-primary radio-inline">
-                    <input type="radio" id="cpu2" value="I5-7500" name="CPU">
-                    <label class="radio" for="cpu2">I5-7500 </label>
-                </div>
-                <div class="radio-custom radio-primary radio-inline">
-                    <input type="radio" id="cpu3" value="Intel G456" name="CPU">
-                    <label class="radio" for="cpu3">Intel G456 </label>
-                </div>
-                <div class="radio-custom radio-primary radio-inline">
-                    <input type="radio" id="cpu4" value="I5-7100" name="CPU">
-                    <label class="radio" for="cpu4">I5-7100 </label>
-                </div>
-                <div class="radio-custom radio-primary radio-inline">
-                    <input type="radio" id="cpu5" value="I7-8700" name="CPU">
-                    <label class="radio" for="cpu5">I7-8700 </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="radio-custom radio-primary col-sm-1 control-label">RAM</label>
-                <div class="radio-custom radio-primary radio-inline" style="float:left;">
-                    <input type="radio" id="RAM1" value="4G" name="RAM" checked="">
-                    <label class="radio " for="RAM1">4G </label>
-                </div>
-                <div class="radio-custom radio-primary radio-inline">
-                    <input type="radio" id="RAM2" value="8G" name="RAM">
-                    <label class="radio" for="RAM2">8G </label>
-                </div>
-                <div class="radio-custom radio-primary radio-inline">
-                    <input type="radio" id="RAM3" value="16G" name="RAM">
-                    <label class="radio" for="RAM3">16G </label>
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-1 control-label">HDD</label>
-                <div  data-max-options="1" style="width: auto">
-                    <div class="col-sm-1">
-                        <div class="checkbox-custom checkbox-default">
-                            <input type="checkbox" id="256GSSD" name="HDD" value="256GSSD">
-                            <label for="256GSSD">256G SSD</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <div class="checkbox-custom checkbox-default">
-                            <input type="checkbox" id="128GSSD" name="HDD" value="128GSSD">
-                            <label for="128GSSD">128G SSD</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                    <div class="checkbox-custom checkbox-default">
-                        <input type="checkbox" id="256G" name="HDD" value="256G">
-                        <label for="256G">256G HDD</label>
-                    </div>
-                </div>
-                    <div class="col-sm-1">
-                    <div class="checkbox-custom checkbox-default">
-                        <input type="checkbox" id="500G"name="HDD" value="500G">
-                        <label for="500G">500G HDD</label>
-                    </div>
-                </div>
-                    <div class="col-sm-1">
-                    <div class="checkbox-custom checkbox-default">
-                        <input type="checkbox" id="1T"name="HDD" value="1T">
-                        <label for="1T">1T HDD</label>
-                    </div>
-                </div>
-                    <div class="col-sm-1">
-                    <div class="checkbox-custom checkbox-default">
-                        <input type="checkbox" id="2T"name="HDD" value="2T">
-                        <label for="2T">2T HDD</label>
-                    </div>
-                </div>
-
-
-
-                </div>
-
-
-            </div>
-            <div class="form-group">
-                <label class="col-sm-1 control-label" for="WiredMAC1">有线MAC</label>
-                <div class="col-sm-2">
-                    <input th:if="${HD!=null}"th:value="${HD.getWiredMAC1()}" class="form-control" id="WiredMAC1" name="WiredMAC1" type="text" placeholder="" />
-                    <input th:if="${HD==null}" class="form-control" id="WiredMAC1" name="WiredMAC1" type="text" placeholder="" />
-                </div>
-                <label class="col-sm-1 control-label" >有线MAC2</label>
-                <div class="col-sm-2">
-                    <input th:if="${HD!=null}"th:value="${HD.getWiredMAC2()}" class="form-control" id="WiredMAC2" name="WiredMAC2" type="text" placeholder="" />
-                    <input th:if="${HD==null}" class="form-control" id="WiredMAC2" name="WiredMAC2" type="text" placeholder="" />
-                </div>
-
-                <label class="col-sm-1 control-label">无线MAC</label>
-                <div class="col-sm-2">
-                    <input th:if="${HD!=null}"th:value="${HD.getWirelessMAC()}"class="form-control" id="WirelessMac" name="WirelessMac" type="text" placeholder="" />
-                    <input th:if="${HD==null}" class="form-control" id="WirelessMac" name="WirelessMac" type="text" placeholder="" />
-                </div>
-            </div>
-        </div>
-        </fieldset>
-        <fieldset>
-<!--            <div class="form-group">-->
-<!--                <label for="PurchaseDate" class="col-sm-1 control-label">购买时间</label>-->
-<!--                <div class="col-sm-3 input-group date form_datetime " data-date="2019-05-6T09:00:00Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="PurchaseDate" style="float:left;">-->
-<!--                    <input id="pdvalue" class="form-control" size="16" type="text" name="PurchaseDate" value="" readonly>-->
-<!--                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
-<!--                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>-->
-<!--                </div>-->
-<!--                <input type="hidden" id="PurchaseDate" value="" />-->
-<!--            </div>-->
-
         </fieldset>
         <div class="form-group" style="text-align: center">
             <input th:if="${Assets==null}" id="commit" type="button" class="btn btn-primary" value="保存" style="width: 30%">
@@ -521,7 +282,7 @@
 
 </body>
 <script src="../js/jquery-3.4.0.min.js"></script>
-<script src="../js/jquery.select.js"></script>
+<!--<script src="../js/jquery.select.js"></script>-->
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/operate/op.js"></script>
 <script type="text/javascript" src="../js/time.js" charset="UTF-8"></script>
@@ -534,89 +295,41 @@
         //修改时,将值赋到HTML中.
         var assets = [[${Assets}]];
         var user = [[${user}]];
+        //获取下拉菜单的值
+        setSelectValue();
+
+
         //设置selected属性,需要在初始化控件前完成
         if(assets!=null){
            // setSelectedOption("#AssetsCategory", assets.assetsCategory);
-            setSelectedOption("#Department", assets.department);
-            setSelectedOption("#FaArea", assets.faArea);
-            setSelectedOption("#Area", assets.area);
-            setSelectedOption("#ProductionSetp", assets.productionSetp);
-            setSelectedOption("#PState", assets.pstate);
-            setSelectedOption("#AState", assets.astate);
-            if(user!=null){
-                setSelectedOption("#UserDepartment", user.userDepartment);
-            }
-            $('#Remark').val(assets.remark) //设置备注的值
+            setTimeout(function () {
+                setSelectedOption("#Department", assets.department);
+                setSelectedOption("#FaArea", assets.faArea);
+                setSelectedOption("#Area", assets.area);
+                setSelectedOption("#ProductionSetp", assets.productionSetp);
+                setSelectedOption("#PState", assets.pstate);
+                setSelectedOption("#AState", assets.astate);
+                if(user!=null){
+                    setSelectedOption("#UserDepartment", user.userDepartment);
+                }
+                $('#Remark').val(assets.remark) //设置备注的值
+            },200)
 
-            if(assets.assetsCategory=="IT"){   //如果是IT类型,展开IT填写框
-                var hd = [[${HD}]];
-                $("#PCModel").show();
-                //设置cpu等
-                $('input:radio').prop("checked", false); //取消所有选中
-                $('input:checkbox').prop("checked", false); //取消所有选中
-                $("input[type=radio][name=CPU][value='"+hd.cpu+"']").prop("checked",true);
-                $("input[type=radio][name=RAM][value='"+hd.ram+"']").prop("checked",true);
-                $("input[type=checkbox][name=HDD][value='"+hd.hdd1+"']").prop("checked",true);
-                $("input[type=checkbox][name=HDD][value='"+hd.hdd2+"']").prop("checked",true);
-                if(hd.hdd1!=null && hd.hdd1!="" && hd.hdd2!=null && hd.hdd2!=""){
-                    $("input[name='HDD']").attr('disabled', true);
-                    if ($("input[name='HDD']:checked").length >= 2) {
-                        $("input[name='HDD']:checked").attr('disabled', false);
-                    } else {
-                        $("input[name='HDD']").attr('disabled', false);
-                    }
-                }
-                if(hd.wiredmac2!=null && hd.wiredmac2!=""){
-                    $("input[type=radio][name=Mac2][value='1']").prop("checked",true);
-                    $("#WiredMAC2").removeAttr("disabled")
-                }if(hd.wirelessmac!=null && hd.wirelessmac!=""){
-                    $("input[type=radio][name=Mac2][value='1']").prop("checked",true);
-                    $("#WirelessMac").removeAttr("disabled")
-                }
-                //获取类别
-                getITtype()
-                //此时有了内容,设置初始值
-                if(hd!=null){
-                    setTimeout(function () {  //延时等待ajax返回结果
-                        setSelectedOption("#ITtype", hd.ittype);
-                        setSelectedOption("#Brand", hd.brand);
-                        setSelectedOption("#Model", hd.model);
-                        //根据类别品牌获取型号
-                        changeModel()
-                    },1000)
-                }
-
-            }
         }
 
-            //  开启AssetsCategory的几个注释,可以扩展IT设备的信息选取
-        // $('#AssetsCategory').editableSelect({  //带输入的下拉框
-        //     filter:false,
-        //     effects: 'slide',
-        //     //当资产类别改变时,为IT
-        //     onSelect:function () {
-        //         var Category = $("#AssetsCategory").val();
-        //         if(Category=="IT"){
-        //             $("#PCModel").show();
-        //             //获取类别
-        //             getITtype()
-        //         }else{
-        //             $("#PCModel").hide();
-        //         }
-        //     }
+
+        // $('#Department').editableSelect({  //带输入的下拉框
+        //     filter:false,  effects: 'slide'
         // });
-        $('#Department').editableSelect({  //带输入的下拉框
-            filter:false,  effects: 'slide'
-        });
-        $('#Area').editableSelect({  //带输入的下拉框
-            filter:false,effects: 'slide'
-        });
-        $('#ProductionSetp').editableSelect({  //带输入的下拉框
-            filter:false, effects: 'slide'
-        });
-        $('#UserDepartment').editableSelect({  //带输入的下拉框
-            filter:false, effects: 'slide'
-        });
+        // $('#Area').editableSelect({  //带输入的下拉框
+        //     filter:false,effects: 'slide'
+        // });
+        // $('#ProductionSetp').editableSelect({  //带输入的下拉框
+        //     filter:false, effects: 'slide'
+        // });
+        // $('#UserDepartment').editableSelect({  //带输入的下拉框
+        //     filter:false, effects: 'slide'
+        // });
 
 
     })
@@ -626,8 +339,6 @@
             $(selector +" > option[value='"+value+"']").attr("selected",true);
         }
     }
-   // $("#Staff").hide();   // 隐藏 Staff
-    $("#PCModel").hide();
     $('.form_date').datetimepicker({
         format: 'yyyy-mm-dd',
         weekStart: 1,

@@ -1,6 +1,7 @@
 package com.liwinon.itams.controller;
 
 import com.liwinon.itams.dao.primaryRepo.*;
+import com.liwinon.itams.entity.model.RoleModel;
 import com.liwinon.itams.service.showService;
 import com.liwinon.itams.service.userService;
 import net.sf.json.JSONObject;
@@ -34,6 +35,11 @@ public class permissionController {
     public String role(){
         return "common/role";
     }
+    //新版权限管理
+    @GetMapping(value = "/itams/newrole")
+    public String newrole(){
+        return "role/role";
+    }
 
     @GetMapping(value = "/itams/role/getData")
     @ResponseBody
@@ -59,6 +65,15 @@ public class permissionController {
     public List<String> getWorkShops(){
         return userService.getWorkShops();
     }
+    /**
+     * 根据 工号或用户名搜索权限
+     */
+    @GetMapping(value = "/itams/role/getRoleByIdAndUser")
+    @ResponseBody
+    public RoleModel getRoleByIdAndUser(String content){
+        return userService.getRoleByIdAndUser(content);
+    }
+
 
     /**
      * 更新用户权限

@@ -2,8 +2,10 @@ package com.liwinon.itams.service;
 
 import com.liwinon.itams.dao.primaryRepo.AssetsDao;
 import com.liwinon.itams.dao.primaryRepo.EventDao;
+import com.liwinon.itams.dao.primaryRepo.UserInfoDao;
 import com.liwinon.itams.entity.primay.Assets;
 import com.liwinon.itams.entity.primay.Event;
+import com.liwinon.itams.entity.primay.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ public class operateServiceImpl implements operateService {
     EventDao eventDao;
     @Autowired
     AssetsDao assetsDao;
+    @Autowired
+    UserInfoDao userInfoDao;
 
     /**
      *      暂时不使用该方法推送OA单
@@ -69,6 +73,8 @@ public class operateServiceImpl implements operateService {
             return "资产已经不存在!";
         }
         assetsDao.delete(assets);
+        UserInfo userInfo = userInfoDao.findByAssetsID(assets.getAssetsID());
+        userInfoDao.delete(userInfo);
         return "ok";
     }
 }

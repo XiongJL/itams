@@ -49,8 +49,6 @@ public class showDataController {
     @GetMapping(value = "/itams/datas/getData")
     @ResponseBody
     public JSONObject getData(int limit, int offset, String content,String type) {
-        System.out.println("页面大小,limit:" + limit);
-        System.out.println("页码,offset:" + offset);
         System.out.println("搜索内容,search:" + content);
         System.out.println("搜索类别,type:"+type);
         //不能以有空的字段来排序
@@ -159,9 +157,10 @@ public class showDataController {
         try{
             objs = new Object[2];
             Assets as = asDao.findByAssetsID(AssetsID);
-            UserInfo user = userDao.findByAssetsID(AssetsID);;
-            if (user==null)
+            UserInfo user = userDao.findByAssetsID(AssetsID);
+            if (user == null){
                 user = new UserInfo();
+            }
             objs[0] = as;
             objs[1] = user;
             List<Assets> list = new ArrayList<>();

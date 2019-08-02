@@ -95,10 +95,10 @@ public class uploadController {
         if(type==0){  //上传的是AssetsExcel
             columns = new String[]{"资产类型", "资产类别", "资产编号", "设备编号", "出厂编号", "资产名称", "规格型号", "供应商",
                     "厂区", "区域", "详细位置", "部门", "工序", "责任人", "责任人工号", "性能状态", "资产状态",
-                    "需求报告编号", "技术协议号", "合同号", "入厂日期", "收货单号", "验收单号", "报废/转售单号","备注"};
+                    "需求报告编号", "技术协议号", "合同号", "入厂日期", "收货单号", "验收单号", "报废/转售单号","备注",
+                    "使用人", "使用人工号","联系电话"};
         }
-        hdService.resolveExcel(columns, path,type);
-        return "ok";
+        return hdService.resolveExcel(columns, path,type);
     }
 
     @GetMapping(value = "/itams/download/Example")
