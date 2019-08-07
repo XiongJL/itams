@@ -1,9 +1,6 @@
 package com.liwinon.itams.controller;
 
-import com.liwinon.itams.entity.primay.Area;
-import com.liwinon.itams.entity.primay.Astate;
-import com.liwinon.itams.entity.primay.Department;
-import com.liwinon.itams.entity.primay.Step;
+import com.liwinon.itams.entity.primay.*;
 import com.liwinon.itams.service.selectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,12 @@ public class selectController {
     public List<Astate> getAllAstate(){
         return selectService.getAllAstate();
     }
+    //获取所有性能状态
+    @GetMapping("/Pstate")
+    @ResponseBody
+    public List<Pstate> getAllPstate(){
+        return selectService.getAllPstate();
+    }
     //获取所有区域
     @GetMapping("/Area")
     @ResponseBody
@@ -49,6 +52,12 @@ public class selectController {
     @ResponseBody
     public List<Step> getAllStep(){
         return selectService.getAllStep();
+    }
+    //获取所有资产类别
+    @GetMapping("/Type")
+    @ResponseBody
+    public List<Type> getAllType(){
+        return selectService.getAllType();
     }
 
     //更改值

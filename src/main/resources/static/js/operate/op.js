@@ -259,6 +259,26 @@ function setSelectValue() {
             $('#ProductionSetp').append(option)
         }
     })
+    $.ajax({  //获取所有资产类别
+        url:"/itams/select/Type",
+        success:function (res) {
+            var option = ""
+            for (var x in res){
+                option += "<option value='"+res[x].value+"'>"+res[x].value+"</option>"
+            }
+            $('#AssetsCategory').append(option)
+        }
+    })
+    $.ajax({  //获取所有性能状态
+        url:"/itams/select/Pstate",
+        success:function (res) {
+            var option = ""
+            for (var x in res){
+                option += "<option value='"+res[x].value+"'>"+res[x].value+"</option>"
+            }
+            $('#PState').append(option)
+        }
+    })
 }
 
 //根据全局变量值判断是否能够操作该资产,以显示或者禁用按钮

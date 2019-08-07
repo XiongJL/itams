@@ -43,7 +43,12 @@ function getValues(select) {
         url = "/itams/select/Step"
     }else if(select == "department"){
         url = "/itams/select/Department"
-    }else{
+    }else if (select == "type"){
+        url = "/itams/select/Type"
+    } else if (select == "Pstate"){
+        url = "/itams/select/Pstate"
+    }
+    else{
         alert("未选择正确!")
         return ;
     }

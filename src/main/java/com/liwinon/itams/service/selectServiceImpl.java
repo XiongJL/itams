@@ -19,6 +19,8 @@ public class selectServiceImpl implements selectService {
     @Autowired
     AstateDao astateDao;
     @Autowired
+    PstateDao pstateDao;
+    @Autowired
     AreaDao areaDao;
     @Autowired
     DepartmentDao departmentDao;
@@ -26,9 +28,16 @@ public class selectServiceImpl implements selectService {
     StepDao stepDao;
     @Autowired
     EventDao eventDao;
+    @Autowired
+    TypeDao typeDao;
     @Override
     public List<Astate> getAllAstate() {
         return astateDao.findAll();
+    }
+
+    @Override
+    public List<Pstate> getAllPstate() {
+        return pstateDao.findAll();
     }
 
     @Override
@@ -44,6 +53,11 @@ public class selectServiceImpl implements selectService {
     @Override
     public List<Step> getAllStep() {
         return stepDao.findAll();
+    }
+
+    @Override
+    public List<Type> getAllType() {
+        return typeDao.findAll();
     }
 
     @Override
@@ -74,6 +88,12 @@ public class selectServiceImpl implements selectService {
             if (type.indexOf("department")!=-1){
                 object = new Department();
             }
+            if (type.indexOf("Pstate")!=-1){
+                object = new Pstate();
+            }
+            if (type.indexOf("type")!=-1){
+                object = new Type();
+            }
             int id = Integer.valueOf(name);
             String value=request.getParameter(name);
             object.setId(id);
@@ -101,7 +121,7 @@ public class selectServiceImpl implements selectService {
                 stepDao.save(area);
             }
         }
-        if (type.indexOf("state")!=-1){
+        if ("state".equals(type)){
             event.setEvent("修改资产状态下拉框");
             for (Select select : objs){
                 Astate area = (Astate) select;
@@ -113,6 +133,20 @@ public class selectServiceImpl implements selectService {
             for (Select select : objs){
                 Department area = (Department) select;
                 departmentDao.save(area);
+            }
+        }
+        if (type.indexOf("type")!=-1){
+            event.setEvent("修改资产类别下拉框");
+            for (Select select : objs){
+                Type area = (Type) select;
+                typeDao.save(area);
+            }
+        }
+        if (type.indexOf("Pstate")!=-1){
+            event.setEvent("修改性能状态下拉框");
+            for (Select select : objs){
+                Pstate area = (Pstate) select;
+                pstateDao.save(area);
             }
         }
         eventDao.save(event);
@@ -145,7 +179,7 @@ public class selectServiceImpl implements selectService {
             return "ok";
 
         }
-        else if (type.indexOf("state")!=-1){
+        else if ("state".equals(type)){
             event.setEvent("删除资产状态下拉框内容");
             event.setDescription("删除内容为"+astateDao.findById(id).getValue());
             astateDao.deleteById(id);
@@ -158,10 +192,25 @@ public class selectServiceImpl implements selectService {
             departmentDao.deleteById(id);
             eventDao.save(event);
             return "ok";
-        }else{
+        }else if (type.indexOf("type")!=-1){
+            event.setEvent("删除资产类别下拉框内容");
+            event.setDescription("删除内容为"+typeDao.findById(id).getValue());
+            typeDao.deleteById(id);
+            eventDao.save(event);
+            return "ok";
+        }else if (type.indexOf("Pstate")!=-1){
+            event.setEvent("删除性能状态下拉框内容");
+            event.setDescription("删除内容为"+pstateDao.findById(id).getValue());
+            pstateDao.deleteById(id);
+            eventDao.save(event);
+            return "ok";
+        }
+        else{
             return "fail";
         }
     }
+
+
 
 
 }

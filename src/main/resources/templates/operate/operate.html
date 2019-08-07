@@ -39,13 +39,7 @@
                 <div class="col-sm-1" style="width: auto">
                     <select id="AssetsCategory" name="AssetsCategory" class="form-control select-inline">
                         <!--必须设定value值,用以修改时设置默认值 -->
-                        <option value="生产设备">生产</option>
-                        <option value="实验设备">实验</option>
-                        <option value="厂房设备">厂房</option>
-                        <option value="行政设备">行政</option>
-                        <option value="计量设备">计量</option>
-                        <option value="通讯设备">通讯</option>
-                        <option value="IT设备" >IT</option>
+
                     </select>
                 </div>
                 <label for="Department" class="col-sm-1 control-label">所属部门</label>
@@ -135,9 +129,6 @@
                 <label class="col-sm-1 control-label" for="PState">性能状态</label>
                 <div class="col-sm-2">
                     <select id="PState" name="PState" class="form-control select-inline" value="">
-                        <option value="正常">正常</option>
-                        <option value="闲置">闲置</option>
-                        <option value="维修中">维修中</option>
                     </select>
                 </div>
                 <label class="col-sm-1 control-label" for="AState">资产状态</label>
@@ -205,7 +196,7 @@
                     <input th:if="${user!=null}"th:value="${user.getUserName()}" class="form-control" id="UserName" name="UserName"  type="text" placeholder=""/>
                     <input th:if="${user==null}"class="form-control" id="UserName" name="UserName"  type="text" placeholder=""/>
                 </div>
-                <label class="col-sm-2 control-label" for="UserDepartment">使用人部门</label>
+                <label class="col-sm-2 control-label" for="UserDepartment">使用部门</label>
                 <div class="col-sm-2">
                     <select id="UserDepartment" name="UserDepartment" class="form-control select-inline">
                     </select>
