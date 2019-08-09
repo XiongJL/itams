@@ -5,9 +5,6 @@
     <title>Title</title>
     <link th:href="@{../css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
-<style>
-
-</style>
 <body>
 <div th:fragment="logo">
     <nav class="navbar navbar-default">
@@ -101,8 +98,45 @@
             </div>
         </div>
     </div>
+<script type="text/javascript">
+</script>
     <script>
+    window.onload=function()//用window的onload事件，窗体加载完毕的时候
+    {
+    	getad();
+    }
+function Adduser(data){
+	if(data.status){
+		console.log(data.status+"------------"+data.resultss);
+	}else{
+		 window.location.href="/itams/Ineligible";
+	 }
+}
+function  getad(){
+	
+        $.ajax({
+            type:"get",
+            url:"http://iis-server.liwinon.com:9090/api/Add/GetClientUser",
+            //url : "http://iis-server.liwinon.com:9090/api/Add/GetClientUser",
+		    //url : "http://hit-00567-n.liwinon.com:8096/api/Add/GetClientUser",
+            dataType:'jsonp',
+            jsonp:"callback",//在一个jsonp请求中重写回调函数的名字
+            jsonpCallback:"Adduser",//为jsonp请求指定一个回调函数名   
+            //后台接口返回格式：return   Adduser("("+json+")")   要用括号把json数据包含住
+            success:function(data) {
+            	console.log(data.status+"------------"+data.resultss);
+            	arr = data.resultss.split("\\");  //截取文件后缀名
+            	typeaa = arr[arr.length - 1];//后去文件后缀名为那种
+    	    	console.log(typeaa);
+    	    	 $("#ry").html("&emsp; 当前访问人员 : "+ typeaa);
+            },
+            error: function(xhr, textStatus, errorThrown){
+            	layer.msg("发生未知错误");
+    		}
+        });
+   };
         function getMyRole(){  //获取自己的权限
+        	 getad();
             $.ajax({
                 url: "/itams/role/getMyRole",
                 success:function (res) {

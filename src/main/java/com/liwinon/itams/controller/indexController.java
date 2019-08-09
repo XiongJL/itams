@@ -47,6 +47,10 @@ public class indexController {
         }
         return "login";
     }
+    @GetMapping(value = "/itams/Ineligible")
+    public String Ineligible(){
+    	return "Ineligible";
+    }
     /**
      * 登录验证
      * @return
