@@ -55,9 +55,9 @@
 
             </div>
             <div class="form-group">
-                <label class="col-sm-1 control-label" for="AssetsID"><span style="color: red">* </span>资产号</label>
+                <label class="col-sm-1 control-label" for="AssetsID">资产号</label>
                 <div class="col-sm-2">
-                    <input th:if="${Assets!=null}" th:value="${Assets.getAssetsID()}" th:attr="readonly='readonly'" class="form-control" id="AssetsID" name="AssetsID" type="text" placeholder="格式为:  xxx-xx-xxx" />
+                    <input th:if="${Assets!=null}" th:value="${Assets.getAssetsID()}"  class="form-control" id="AssetsID" name="AssetsID" type="text" placeholder="格式为:  xxx-xx-xxx" />
                     <input th:if="${Assets==null}"  class="form-control" id="AssetsID" name="AssetsID" type="text" placeholder="格式为:  xxx-xx-xxx" />
                 </div>
                 <label class="col-sm-1 control-label" for="DeviceID"><span style="color: red">* </span>设备号</label>

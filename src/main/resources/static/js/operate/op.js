@@ -52,19 +52,23 @@ $('#AssetsID').on('focus',function () {
 $('#AssetsID').on('blur',function () {
     //console.log('移出输入框')
     var data = $('#AssetsID').val()
-    $.ajax({
-        url:"/itams/operate/asidExist",
-        type:'get',
-        data: {asid:data},
-        success:function (res) {
-            console.log(res)
-            $("#err1").remove()
-            if(res=="exist"){
-                //追加错误信息
-                $("#AssetsID").after('<p class="help-block" id="err1" style="color: red">资产已存在</p>')
+    if (data == ""){
+        return false;
+    }else{
+        $.ajax({
+            url:"/itams/operate/asidExist",
+            type:'get',
+            data: {asid:data},
+            success:function (res) {
+                console.log(res)
+                $("#err1").remove()
+                if(res=="exist"){
+                    //追加错误信息
+                    $("#AssetsID").after('<p class="help-block" id="err1" style="color: red">资产已存在</p>')
+                }
             }
-        }
-    });
+        });
+    }
 })
 //设备ID是否存在查询
 $('#DeviceID').on('focus',function () {
@@ -73,19 +77,26 @@ $('#DeviceID').on('focus',function () {
 $('#DeviceID').on('blur',function () {
     //console.log('移出输入框')
     var data = $('#DeviceID').val()
-    $.ajax({
-        url:"/itams/operate/deviceExist",
-        type:'get',
-        data: {deviceId:data},
-        success:function (res) {
-            console.log(res)
-            $("#err2").remove()
-            if(res=="exist"){
-                //追加错误信息
-                $("#DeviceID").after('<p class="help-block" id="err2" style="color: red">设备号已存在</p>')
+    var attr = $('#DeviceID').attr('readonly');
+    console.log(attr)
+    // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
+    if (typeof attr !== typeof undefined && attr !== false) {
+        // Element has this attribute
+    }else{
+        $.ajax({
+            url:"/itams/operate/deviceExist",
+            type:'get',
+            data: {deviceId:data},
+            success:function (res) {
+                //console.log(res)
+                $("#err2").remove()
+                if(res=="exist"){
+                    //追加错误信息
+                    $("#DeviceID").after('<p class="help-block" id="err2" style="color: red">设备号已存在</p>')
+                }
             }
-        }
-    });
+        });
+    }
 })
 
 
@@ -157,7 +168,7 @@ $('#UserID').on('blur',function () {
 //提交表单,保存资产
 $("#commit").bind("click",function(){
     console.log($('#hardware').serialize())
-    var bro = $("#AssetsID").siblings("p");  //查找是否存在错误提示
+    var bro = $("#DeviceID").siblings("p");  //查找是否存在错误提示
     if(bro.length==0){
         console.log(bro.length)
         $.ajax({
@@ -168,13 +179,11 @@ $("#commit").bind("click",function(){
                 console.log(res)
                 if(res=="ok"){ // 保存成功
                     toastr.success('提交数据成功');
-                    $("#AssetsID").val("")
+                    $("#DeviceID").val("")
 
                 }else if(res=="assetsidExist"){ //已存在,误操作
                     toastr.warning('资产编号已存在!');
-                }else if (res=="assetsidEmpty"){
-                    toastr.warning('资产编号不能为空!');
-                }else if(res=="DeviceIDEmpty"){
+                }else if (res=="deviceIDEmpty"){
                     toastr.warning('设备编号不能为空!');
                 }
                 else{  //未知异常
