@@ -183,12 +183,13 @@ public class userServiceImpl implements userService{
             uid = Integer.valueOf(request.getParameter("uid"));
         }else{
             String userid = request.getParameter("userid");
+            String username = request.getParameter("name");
             User user = userDao.findByPERSONID(userid);
             if (user==null){  //若无此用户保存新账号 ,权限根据传递的角色设定
                 user = new User();
                 user.setPERSONID(userid);
                 user.setPwd("123456");
-                user.setUname(userid);
+                user.setUname(username);
                 userDao.save(user);
                 uid = user.getUid();
             }else{

@@ -39,6 +39,7 @@ $(function () {
             toastr.warning("工号不能为空")
         }else{
             var userid = $("#userid").val()
+            var name = $("#name").val();
             //获取所有已选择的权限
             var roles = new Array()
             $('input[type=checkbox]').each(function () {
@@ -47,24 +48,32 @@ $(function () {
                 }
             })
             console.log(roles);
-            setTimeout(function () {
-                $.ajax({
-                    url: "/itams/role/update",
-                    data: {
-                        userid:userid,
-                        roles:roles
-                    },
-                    success: function (res) {
-                        console.log(res)
-                        //弹出提示
-                        if (res=="ok"){
-                            toastr.success("更改权限成功!")
-                        }else{
+            if (roles.length==0){
+                toastr.warning("权限至少选择一个!")
+            } else if (name==null || name ==""){
+                toastr.warning("姓名不能为空!")
+            }else {
+                setTimeout(function () {
+                    $.ajax({
+                        url: "/itams/role/update",
+                        data: {
+                            userid:userid,
+                            roles:roles,
+                            name:name
+                        },
+                        success: function (res) {
+                            console.log(res)
+                            //弹出提示
+                            if (res=="ok"){
+                                toastr.success("更改权限成功!")
+                            }else{
 
+                            }
                         }
-                    }
-                })
-            },200)
+                    })
+                },200)
+
+            }
         }
     })
 })
