@@ -7,6 +7,7 @@ import com.liwinon.itams.service.userService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -85,6 +86,17 @@ public class permissionController {
     public String updateRole(HttpServletRequest request){
         return userService.updateRole(request);
     }
+
+
+    @GetMapping(value = "/itams/role/del")
+    @ResponseBody
+    public String  delUser(String id){
+       if (StringUtils.isEmpty(id)){
+           return "empty";
+       }
+        return userService.delUser(Integer.valueOf(id));
+    }
+
 
     /**
      * 申请临时权限  ---是在现有基础上增加权限

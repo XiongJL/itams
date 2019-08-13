@@ -18,4 +18,5 @@ public interface userService {
     String register(String userid, String username, String password);
 
     RoleModel getRoleByIdAndUser(String content);
+    String delUser(int id);
 }

@@ -56,7 +56,24 @@
     </div>
 </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="del">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">确认操作</h4>
+            </div>
+            <div class="modal-body" id="delInfo">
+               确认删除吗?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="delUser()">删 除</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="../js/jquery-3.4.0.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

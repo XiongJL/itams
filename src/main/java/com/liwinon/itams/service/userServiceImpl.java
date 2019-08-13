@@ -38,6 +38,8 @@ public class userServiceImpl implements userService{
     UserRoleDao urDao;
     @Autowired
     ApplyDao applyDao;
+    @Autowired
+    UserRoleDao userRoleDao;
 
     public JSONObject getrole(int limit, int offset, String content, String type){
         System.out.println("页面大小,limit:" + limit);
@@ -140,6 +142,24 @@ public class userServiceImpl implements userService{
         }
         return datas.get(0);
     }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @Override
+    @Transactional
+    public String delUser(int id) {
+        User user = userDao.findById(id);
+        if (user ==null)
+            return "userEmpty";
+        List<UserRole> roles = userRoleDao.findByUid(id);
+        userDao.delete(user);
+        userRoleDao.deleteAll(roles);
+        return "ok";
+    }
+
     public String getMyrole(HttpServletRequest request){
         HttpSession session =  request.getSession();
         String userid =  (String) session.getAttribute("userid");
