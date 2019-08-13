@@ -31,11 +31,13 @@ public class ShiroConfig {
         //以下是过滤链，按顺序过滤，所以/**需要放最后
         //开放的静态资源
         filterChainDefinitionMap.put("/favicon.ico", "anon");//网站图标
+        filterChainDefinitionMap.put("/itams/Ineligible", "anon");//
         filterChainDefinitionMap.put("/css/**", "anon");//
         filterChainDefinitionMap.put("/js/**", "anon");//
         filterChainDefinitionMap.put("/img/**", "anon");//
         filterChainDefinitionMap.put("/fonts/**", "anon");//
         filterChainDefinitionMap.put("/itams/api/**", "anon");//
+        filterChainDefinitionMap.put("/itams/datas/**", "anon");//
         filterChainDefinitionMap.put("/itams/register", "anon");//注册
         filterChainDefinitionMap.put("/itams/operate/getName", "anon");//获取姓名接口
         filterChainDefinitionMap.put("/itams/logout", "logout");//
