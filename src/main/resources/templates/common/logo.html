@@ -51,6 +51,9 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                	 <li class="dropdown">
+                    	<a id="itemid"></a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">导出数据<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -128,7 +131,7 @@ function  getad(){
             	arr = data.resultss.split("\\");  //截取文件后缀名
             	typeaa = arr[arr.length - 1];//后去文件后缀名为那种
     	    	console.log(typeaa);
-    	    	 $("#ry").html("&emsp; 当前访问人员 : "+ typeaa);
+    	    	 $("#itemid").html("当前访问员工 :"+ typeaa);
             },
             error: function(xhr, textStatus, errorThrown){
             	layer.msg("发生未知错误");
