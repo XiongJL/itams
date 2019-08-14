@@ -36,118 +36,82 @@
                 <p class="lead">对系统的所有的功能进行描述和解释。</p>
 
                 <h2 id="data"><a class="anchorjs-link " href="#data" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>数据浏览</h2>
-
+                <h3 id="data-page"><a class="anchorjs-link " href="#data-page" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>数据页面</h3>
                 <div class="bs-callout bs-callout-info">
-                    <h3 id="data-page"><a class="anchorjs-link " href="#data-page" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>数据页面</h3>
                     <img  alt="加载图片失败..."  src="../img/help/data-page1.png" >
                     <p>在数据页面中，主体由一个表组成。在页面上方提供搜索入口，下方提供页码信息，在表格右上方提供三个快捷按钮（分别是离线刷新，表格全屏，筛选显示的字段）</p>
-
-                    <h3 id="data-search"><a class="anchorjs-link " href="#data-search" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>搜索功能</h3>
+                </div>
+                <h3 id="data-search"><a class="anchorjs-link " href="#data-search" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>搜索功能</h3>
+                <div class="bs-callout bs-callout-info">
                     <h4>常规搜索</h4>
                     <img  alt="加载图片失败..." src="../img/help/search1.gif" >
                     <p>如同演示的一样，您可以搜索一个或多个，在搜索多个时仅仅需要使用<code>回车键</code>来确认您即将搜索的内容。当然，仅搜索一个结果无需按下回车，直接点击搜索即可</p>
                     <p>需要注意的是，默认搜索的是<code>设备号</code>，下面就会讲解如何搜索其他类型字段。</p>
+                </div>
+                <div class="bs-callout bs-callout-info">
                     <h4>其他字段搜索</h4>
                     <p>很多字段都和常规搜索类似，这里只列举搜索资产编号</p>
+                    <p>与之类似的有：搜索<code>使用人工号</code>、<code>位置</code>、<code>责任人</code>、<code>资产类别</code></p>
                     <img  alt="加载图片失败..." src="../img/help/search2.gif" >
                 </div>
+                <div class="bs-callout bs-callout-info">
+                    <h4>日期搜索</h4>
+                    <img  alt="加载图片失败..." src="../img/help/search-date.gif" >
+                    <p>日期搜索需要在新跳出的按钮上点击搜索。</p>
+                </div>
+                <div class="bs-callout bs-callout-info">
+                    <h4>导出搜索结果</h4>
+                    <p>在任意搜索之后，即可点击<code>导出搜索结果</code>，之后浏览器会自动为您下载一份Excel文件。</p>
+                    <p>在此之前，请确认您已经以<code>管理员身份</code>登录。</p>
+                </div>
                 <div class="try-online"><a class="btn-try btn btn-success btn-lg disabled">大沙发沙发沙发沙发是打发斯蒂芬</a></div>
-                <p>与之类似的有：搜索<code>使用人工号</code>，<code>位置</code>，<code>责任人</code></p>
 
-                <h2 id="dropdowns-alignment"><a class="anchorjs-link " href="#dropdowns-alignment" aria-label="Anchor link for: dropdowns alignment" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>对齐</h2>
-                <p>B默认情况下，下拉菜单自动沿着父元素的上沿和左侧被定位为 100% 宽度。 为 <code>.dropdown-menu</code> 添加 <code>.dropdown-menu-right</code> 类可以让菜单右对齐。</p>
-                <div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
-                    <h4>可能需要额外的定位May require additional positioning</h4>
-                    <p>在正常的文档流中，通过 CSS 为下拉菜单进行定位。这就意味着下拉菜单可能会由于设置了 <code>overflow</code> 属性的父元素而被部分遮挡或超出视口（viewport）的显示范围。如果出现这种问题，请自行解决。</p>
-                </div>
-                <div class="bs-callout bs-callout-warning" id="callout-dropdown-pull-right">
-                    <h4>不建议使用 <code>.pull-right</code></h4>
-                    <p>从 v3.1.0 版本开始，我们不再建议对下拉菜单使用 <code>.pull-right</code> 类。如需将菜单右对齐，请使用 <code>.dropdown-menu-right</code> 类。导航条中如需添加右对齐的导航（nav）组件，请使用 <code>.pull-right</code> 的 mixin 版本，可以自动对齐菜单。如需左对齐，请使用 <code>.dropdown-menu-left</code> 类。</p>
-                </div>
-                <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu dropdown-menu-right"</span> <span class="na">aria-labelledby=</span><span class="s">"dLabel"</span><span class="nt">&gt;</span>
-  ...
-<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
 
-                <h2 id="dropdowns-headers"><a class="anchorjs-link " href="#dropdowns-headers" aria-label="Anchor link for: dropdowns headers" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>标题</h2>
-                <p>在任何下拉菜单中均可通过添加标题来标明一组动作。</p>
-                <div class="bs-example">
-                    <div class="dropdown clearfix">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Dropdown
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                            <li class="dropdown-header">Dropdown header</li>
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="dropdown-header">Dropdown header</li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                </div><!-- /example -->
-                <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span> <span class="na">aria-labelledby=</span><span class="s">"dropdownMenu3"</span><span class="nt">&gt;</span>
-  ...
-  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"dropdown-header"</span><span class="nt">&gt;</span>Dropdown header<span class="nt">&lt;/li&gt;</span>
-  ...
-<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
-                <div class="try-online"><a class="btn-try btn btn-success btn-lg disabled"></a></div>
 
-                <h2 id="dropdowns-divider"><a class="anchorjs-link " href="#dropdowns-divider" aria-label="Anchor link for: dropdowns divider" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>分割线</h2>
-                <p>为下拉菜单添加一条分割线，用于将多个链接分组。</p>
-                <div class="bs-example">
-                    <div class="dropdown clearfix">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Dropdown
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                </div><!-- /example -->
-                <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span> <span class="na">aria-labelledby=</span><span class="s">"dropdownMenuDivider"</span><span class="nt">&gt;</span>
-  ...
-  <span class="nt">&lt;li</span> <span class="na">role=</span><span class="s">"separator"</span> <span class="na">class=</span><span class="s">"divider"</span><span class="nt">&gt;&lt;/li&gt;</span>
-  ...
-<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
+                <figure class="highlight"><pre>测试时四十四号his</pre></figure>
 
-                <h2 id="dropdowns-disabled"><a class="anchorjs-link " href="#dropdowns-disabled" aria-label="Anchor link for: dropdowns disabled" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>禁用的菜单项</h2>
-                <p>为下拉菜单中的 <code>&lt;li&gt;</code> 元素添加 <code>.disabled</code> 类，从而禁用相应的菜单项。</p>
-                <div class="bs-example">
-                    <div class="dropdown clearfix">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Dropdown
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                            <li><a href="#">Regular link</a></li>
-                            <li class="disabled"><a href="#">Disabled link</a></li>
-                            <li><a href="#">Another link</a></li>
-                        </ul>
-                    </div>
-                </div><!-- /example -->
-                <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span> <span class="na">aria-labelledby=</span><span class="s">"dropdownMenu4"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Regular link<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"disabled"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Disabled link<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Another link<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
-                <div class="try-online"><a class="btn-try btn btn-success btn-lg disabled"></a></div>
+                <h2 id="data-baofei"><a class="anchorjs-link " href="#data-baofei" aria-label="Anchor link for: dropdowns headers" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>转售/报废</h2>
+                <p>在次级管理员或车间管理员登录后，可在数据页面点击跳转到转售/报废页面。</p>
             </div>
 
             <div class="bs-docs-section">
-                <h1 id="permission" class="page-header"><a class="anchorjs-link " href="#permission" aria-label="Anchor link for: glyphicons" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>权限相关</h1>
+                <h2 id="data-operation"><a class="anchorjs-link " href="#data" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>数据操作</h2>
+                <p>数据操作都需要<code>IE管理员权限</code>，之后不再说明。</p>
+                <h3 id="data-insert"><a class="anchorjs-link " href="#data-page" aria-label="Anchor link for: dropdowns example" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>数据录入</h3>
+                <div class="bs-callout bs-callout-info">
+                    <img  alt="加载图片失败..."  src="../img/help/data-insert.gif" >
+                </div>
+                <h3 id="data-modify"><a class="anchorjs-link " href="#data-modify" aria-label="Anchor link for: dropdowns alignment" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>数据修改</h3>
+                <p>在IE管理员登录后，即可使用编辑功能。</p>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>在数据浏览页面点击“编辑”即可进入编辑页面</h4>
+                    <img  alt="加载图片失败..."  src="../img/help/data-modify.gif" >
+                    <p>除了设备号和入厂日期，所有数据均可由IE管理员修改。</p>
+                </div>
+                <h3 id="data-import"><a class="anchorjs-link " href="#data-modify" aria-label="Anchor link for: dropdowns alignment" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>导入Excel数据</h3>
+                <p>当有大量资产需要批量录入的时候，即可使用此功能。</p>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>step1:下载示例模板</h4>
+                    <img  alt="加载图片失败..."  src="../img/help/data-downExample.gif" >
+                </div>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>step2:使用模板添加数据</h4>
+                    <img  alt="加载图片失败..."  src="../img/help/data-setExample.gif" >
+                </div>
+                <div class="bs-callout bs-callout-warning">
+                    <h4>step3:导入数据</h4>
+                    <img  alt="加载图片失败..."  src="../img/help/data-import.gif" >
+                </div>
+            </div>
 
-                <h2 id="permission-normal"><a class="anchorjs-link " href="#permission-normal" aria-label="Anchor link for: glyphicons glyphs" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>普通用户</h2>
+            <div class="bs-docs-section">
+                <h2 id="b" class="page-header"><a class="anchorjs-link " href="#b" aria-label="Anchor link for: dropdowns" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>问题帮助</h2>
+                <h3 id="permission-normal"><a class="anchorjs-link " href="#permission-normal" aria-label="Anchor link for: glyphicons glyphs" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>普通用户</h3>
                 <div class="bs-callout bs-callout-info">
                 <p>普通用户无需登录，但需要注意的是，非在公司拥有域账号的电脑，无法进入本系统。</p>
                 </div>
 
-                <h2 id="permission-admin"><a class="anchorjs-link " href="#permission-admin" aria-label="Anchor link for: glyphicons how to use" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>管理员登录</h2>
+                <h3 id="permission-admin"><a class="anchorjs-link " href="#permission-admin" aria-label="Anchor link for: glyphicons how to use" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>管理员登录</h3>
                 <p>管理员是指拥有相应操作权限的用户，例如浏览、导出、上传、修改等的权限</p>
                 <p>由IE工程师指定管理员之后，即可通过页面右上角的登录按钮输入账号密码进行管理员登录。</p>
                 <p>账号默认设置密码为：<code>123456</code> ，请尽快登录修改密码。</p>
@@ -162,9 +126,16 @@
                     <p>权限: 查看、发起资产转移</p>
                 </div>
 
-                <h2 id="permission-apply"><a class="anchorjs-link " href="#permission-apply" aria-label="Anchor link for: glyphicons examples" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>获取不同管理权限</h2>
+                <h3 id="permission-apply"><a class="anchorjs-link " href="#permission-apply" aria-label="Anchor link for: glyphicons examples" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>获取不同管理权限</h3>
                 <div class="bs-callout bs-callout-info">
                     <p>获取不同管理权限，请获得部门经理以上人士许可，已邮件形式知会IE资产管理，由IE超级管理员根据其需求设置。</p>
+                </div>
+
+                <h3 id="permission-select"><a class="anchorjs-link " href="#permission-select" aria-label="Anchor link for: glyphicons examples" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>管理下拉菜单</h3>
+                <div class="bs-callout bs-callout-info">
+                    <h4>修改的下拉菜单对应在数据录入页面。</h4>
+                    <p>注意：每次修改完毕，都需要点击保存编辑。唯有删除例外！</p>
+                    <img  alt="加载图片失败..."  src="../img/help/permission-select-add.gif" >
                 </div>
             </div>
 
@@ -180,16 +151,24 @@
                         <ul class="nav">
                             <li class=""><a href="#data-page">数据页面</a></li>
                             <li class=""><a href="#data-search">搜索功能</a></li>
-                            <li class=""><a href="#data-headers">编辑功能</a></li>
-                            <li class=""><a href="#dropdowns-divider">转售/报废</a></li>
+                            <li class=""><a href="#data-baofei">转售/报废</a></li>
                         </ul>
                     </li>
                     <li class="">
-                        <a href="#permission">问题帮助</a>
+                        <a href="#data-operation">数据操作</a>
+                        <ul class="nav">
+                            <li class=""><a href="#data-insert">数据录入</a></li>
+                            <li class=""><a href="#data-modify">数据修改</a></li>
+                            <li class=""><a href="#data-import">导入Excel数据</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#permission-normal">问题帮助</a>
                         <ul class="nav">
                             <li class=""><a href="#permission-normal">普通用户需要登录吗?</a></li>
                             <li class=""><a href="#permission-admin">管理员登录</a></li>
                             <li class=""><a href="#permission-apply">获取不同管理权限</a></li>
+                            <li class=""><a href="#permission-select">管理下拉菜单</a></li>
                         </ul>
                     </li>
 
