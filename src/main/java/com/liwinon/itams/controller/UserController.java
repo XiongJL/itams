@@ -21,6 +21,7 @@ public class UserController {
     public String approval(){
         return "user/approval";
     }
+    
 
     //获取用户部门
     @GetMapping(value = "/itams/getDep")
