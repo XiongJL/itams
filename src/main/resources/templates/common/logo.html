@@ -70,7 +70,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span th:text="${session.username}">用户</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                        	<li><a onclick="mima()">修改密码</a></li>
+                        	<li><a href="/itams/adminpassword">修改密码</a></li>
                             <li><a href="#"   onclick="getMyRole()" type="button" data-toggle="modal"data-target="#queryRole">查看权限</a></li>
                             <!--暂时禁止申请的接口-->
                             <!--                            <li><a href="/itams/user">申请临时权限</a></li>-->
@@ -150,15 +150,15 @@ function  getad(){
                 }
             })
         }
-        function mima(){  //获取自己的权限
-        	 $.ajax({
-                 url: "/itams/adminpassword",
-                 success:function (data) {
-                     console.log(data)
-        			window.location.href="/itams/adminpassword";
-                 }
-             })
-        }
+        // function mima(){  //获取自己的权限
+        // 	 $.ajax({
+        //          url: "/itams/adminpassword",
+        //          success:function (data) {
+        //              console.log(data)
+        // 			window.location.href="/itams/adminpassword";
+        //          }
+        //      })
+        // }
     </script>
 </div>
 
