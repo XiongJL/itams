@@ -137,12 +137,9 @@ function operateFormatter(value, row, index) {//赋予的参数
     var sele = "#setting"+index
     var delSele = "#del"+index
 
-
-
-
     return [
         '<a  value="'+row.roles+'"  onclick="getThisRole(\''+row.roles+'\',\''+row.uid+'\')"  type="button" href="" id="'+id+'" data-toggle="modal"data-target="#settingmod">设置</a> '
-        // , '<a style="margin-left: 1rem;" type="button" id="'+delID+'" data-toggle="modal"data-target="">删除</a>'
+         , '<a style="margin-left: 1rem;"  onclick="readyDelRole(\''+row.uname+'\',\''+row.uid+'\',\''+row.userid+'\')" type="button" id="'+row.uid+'" data-toggle="modal"data-target="#delModal" type="button">删除</a>'
     ].join('');
 }
 
@@ -182,7 +179,6 @@ function getThisRole(param,uid){
     $('select[name="duallistbox_demo1"]').bootstrapDualListbox('refresh', true)
     }
 }
-
 //更改Role
 function uploadRole() {
     var uid = $("#changeRole").val()
@@ -208,6 +204,45 @@ function uploadRole() {
             $('#close').click();// 关闭弹出层
         }
     })
+
+}
+//点击删除
+var delid = ""
+function readyDelRole(name,id,userid) {
+    //将信息放入模态框中
+    $("#delInfo").empty();
+    var info = "确认要删除 <b>"+name+"</b> 的账号吗";
+    info += "<br>";
+    info += "工号: "+ userid;
+    $("#delInfo").append(info);
+    delid = id;
+}
+//确认删除
+function delUser() {
+    if (delid==""){
+        toastr.warning("删除的用户序号为空,请刷新重试")
+    }else{
+        $.ajax({
+            url: "/itams/role/del",
+            data: {id:delid},
+            success:function (res) {
+                if (res=="empty") {
+                    toastr.warning("删除的用户序号为空,请刷新重试")
+                }else if (res=="userEmpty"){
+                    toastr.warning("删除的用户为空,请刷新重试")
+                } else if (res=="ok"){
+                    toastr.success("删除成功!")
+                }
+                $("#delModal").modal('hide');
+                //刷新表格
+                $("#RoleTable").bootstrapTable("refresh", {pageNumber: 1});
+            },
+            error:function (err) {
+                console.log(err)
+                $("#delModal").modal('hide');
+            }
+        })
+    }
 
 }
 

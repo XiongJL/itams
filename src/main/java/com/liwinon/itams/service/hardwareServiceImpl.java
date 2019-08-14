@@ -28,7 +28,8 @@ public class hardwareServiceImpl implements hardwareService {
     AssetsDao assetsDao;
     /**
      * 保存或者更新资产
-     *
+     *  在更新时,前端限制了DeviceId不能更改,直接设置即可.
+     *  assetsid 是由ERP 系统生成, 故不作限制
      * @param request
      * @return
      */
@@ -37,26 +38,26 @@ public class hardwareServiceImpl implements hardwareService {
         //Hardware hd = new Hardware();
         Assets as = new Assets();
         System.out.println("开始保存");
-        String assetsid = request.getParameter("AssetsID");
-        if (assetsid != null) {
-            if (assetsDao.findByAssetsID(assetsid) != null) { //是更新操作
-                as = assetsDao.findByAssetsID(assetsid);
+        String DeviceID = request.getParameter("DeviceID");
+        boolean update = false;
+        if (DeviceID != null) {
+            if (assetsDao.findByDeviceID(DeviceID) != null) { //是更新操作
+                update = true;
+                as = assetsDao.findByDeviceID(DeviceID);
             }
-            if (assetsid == "")
-                return "assetsidEmpty";
+            if (DeviceID == "")
+                return "deviceIDEmpty";
         }
-        as.setAssetsID(assetsid);
+        as.setDeviceID(DeviceID);
+        String assetsid =  request.getParameter("AssetsID");
+        if (!StringUtils.isEmpty(assetsid))
+            as.setAssetsID(assetsid);
         String type = request.getParameter("AssetsType");
         if (type != null)
             as.setAssetsType(type);
         String AssetsCategory = request.getParameter("AssetsCategory");
         if (AssetsCategory != null)
             as.setAssetsCategory(AssetsCategory);
-        String DeviceID = request.getParameter("DeviceID");
-        if (DeviceID == null || DeviceID=="")
-            return "DeviceIDEmpty";
-        if (DeviceID != null)
-            as.setDeviceID(DeviceID);
         String FactoryID = request.getParameter("FactoryID");
         if (FactoryID != null)
             as.setFactoryID(FactoryID);

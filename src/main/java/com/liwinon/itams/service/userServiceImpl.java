@@ -38,6 +38,8 @@ public class userServiceImpl implements userService{
     UserRoleDao urDao;
     @Autowired
     ApplyDao applyDao;
+    @Autowired
+    UserRoleDao userRoleDao;
 
     public JSONObject getrole(int limit, int offset, String content, String type){
         System.out.println("页面大小,limit:" + limit);
@@ -140,6 +142,24 @@ public class userServiceImpl implements userService{
         }
         return datas.get(0);
     }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @Override
+    @Transactional
+    public String delUser(int id) {
+        User user = userDao.findByUid(id);
+        if (user ==null)
+            return "userEmpty";
+        List<UserRole> roles = userRoleDao.findByUid(id);
+        userDao.delete(user);
+        userRoleDao.deleteAll(roles);
+        return "ok";
+    }
+
     public String getMyrole(HttpServletRequest request){
         HttpSession session =  request.getSession();
         String userid =  (String) session.getAttribute("userid");
@@ -163,12 +183,13 @@ public class userServiceImpl implements userService{
             uid = Integer.valueOf(request.getParameter("uid"));
         }else{
             String userid = request.getParameter("userid");
+            String username = request.getParameter("name");
             User user = userDao.findByPERSONID(userid);
             if (user==null){  //若无此用户保存新账号 ,权限根据传递的角色设定
                 user = new User();
                 user.setPERSONID(userid);
                 user.setPwd("123456");
-                user.setUname(userid);
+                user.setUname(username);
                 userDao.save(user);
                 uid = user.getUid();
             }else{
