@@ -137,7 +137,7 @@ public class indexController {
                 System.out.println("修改"+DeviceID);
                 Assets as = asDao.findByDeviceID(DeviceID);
                 if(as!=null){
-                    UserInfo user = infoDao.findByAssetsID(as.getAssetsID());
+                    UserInfo user = infoDao.findByDeviceID(as.getDeviceID());
                     model.addAttribute("user",user);
                     model.addAttribute("Assets",as);
                 }

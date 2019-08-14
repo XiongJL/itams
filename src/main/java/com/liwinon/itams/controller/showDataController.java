@@ -86,81 +86,21 @@ public class showDataController {
     /**
      * 点击主表的  + 号后,获取该资产的详细信息
      *
-     * @param AssetsID
+     * @param DeviceID
      * @return
      */
-    /*@GetMapping(value = "/itams/datas/getAllData")
-    @ResponseBody
-    public JSONObject getAllData(String AssetsID) {
-        //全部数据模型
-        DatasModel data = new DatasModel();//返回结果数据模型
-        Hardware hd = hdDao.findByAssetsID(AssetsID);
-        if (hd==null)
-            return null;
-        data.setAssetsID(hd.getAssetsID());
-        if(hd.getITtype()!=null)
-            data.setAssetsType(hd.getITtype());
-        if(hd.getBrand()!=null)
-            data.setBrand(hd.getBrand());
-        if(hd.getCPU()!=null)
-            data.setCPU(hd.getCPU());
-        if(hd.getRAM()!=null)
-            data.setRAM(hd.getRAM());
-        if(hd.getHDD1()!=null)
-            data.setHDD1(hd.getHDD1());
-        if(hd.getHDD2()!=null)
-            data.setHDD2(hd.getHDD2());
-        if(hd.getDepartment()!=null)
-            data.setDepartment(hd.getDepartment());
-        if(hd.getWiredMAC1()!=null)
-            data.setWiredMAC1(hd.getWiredMAC1());
-        if(hd.getWiredMAC2()!=null)
-            data.setWiredMAC2(hd.getWiredMAC2());
-        if(hd.getWirelessMAC()!=null)
-            data.setWirelessMAC(hd.getWirelessMAC());
-        if(hd.getLocation()!=null)
-            data.setLocation(hd.getLocation());
-            data.setState(hd.getState());
-        if(hd.getPurchaseDate()!=null)
-            data.setPurchaseDate(hd.getPurchaseDate());
-        if(hd.getStaff()!=null)
-            data.setStaff(hd.getStaff());
-        if(hd.getEntryDate()!=null)
-            data.setEntryDate(hd.getEntryDate());
-        if(hd.getDepartment()!=null)
-            data.setDepartment(hd.getDepartment());
-        if(hd.getRemark()!=null) {
-            System.out.println(hd.getRemark());
-            data.setRemark(hd.getRemark());
-        }
-        UserInfo user = userDao.findByAssetsID(hd.getAssetsID());
-        if (user != null) { //该资产有使用者
-            data.setUserName(user.getUserName());
-            data.setUserID(user.getUserID());
-            data.setTelephone(user.getTelephone());
-            data.setLphone(user.getLphone());
-            data.setGetTime(user.getGetTime());
-            data.setUserDepartment(user.getUserDepartment());
-        }
-//        JSONObject json = new JSONObject();
-//        json.accumulate("data",data);
-        JSONObject json = JSONObject.fromObject(data.toString());
-        System.out.println(json);
-        return json;
-
-    }*/
-
     @GetMapping(value = "/itams/datas/getThisData")
-    public String getAllData(String AssetsID,Model model) {
-        System.out.println("检索子表"+AssetsID);
+    public String getAllData(String DeviceID,Model model) {
+        System.out.println("检索子表"+DeviceID);
         Object[] objs = null;
         try{
             objs = new Object[2];
-            Assets as = asDao.findByAssetsID(AssetsID);
-            UserInfo user = userDao.findByAssetsID(AssetsID);
-            if (user == null){
+            Assets as = asDao.findByDeviceID(DeviceID);
+            UserInfo user = userDao.findByDeviceID(DeviceID);
+            if (user == null)
                 user = new UserInfo();
-            }
+            if (as ==null)
+                as = new Assets();
             objs[0] = as;
             objs[1] = user;
             List<Assets> list = new ArrayList<>();

@@ -113,11 +113,11 @@ var TableInit = function () {
                 //这一步就是相当于在当前点击列下新创建一个table
                 var html = "";
                 console.log(row)
-                var assetsID = row.assetsID
+                var deviceID = row.deviceID
                 $.ajax({
                     type: "get",
                     url: "/itams/datas/getThisData",       //子表请求的地址
-                    data: {"AssetsID": assetsID},//我这里是点击父表后，传递父表列id和nama到后台查询子表数据
+                    data: {"DeviceID": deviceID},//我这里是点击父表后，传递父表列id和nama到后台查询子表数据
                     async: false,           //很重要，这里要使用同步请求
                     dataType: "html",
                     success: function (data) {

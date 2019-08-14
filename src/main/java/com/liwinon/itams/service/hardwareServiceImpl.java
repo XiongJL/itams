@@ -39,10 +39,8 @@ public class hardwareServiceImpl implements hardwareService {
         Assets as = new Assets();
         System.out.println("开始保存");
         String DeviceID = request.getParameter("DeviceID");
-        boolean update = false;
         if (DeviceID != null) {
             if (assetsDao.findByDeviceID(DeviceID) != null) { //是更新操作
-                update = true;
                 as = assetsDao.findByDeviceID(DeviceID);
             }
             if (DeviceID == "")
@@ -128,10 +126,10 @@ public class hardwareServiceImpl implements hardwareService {
             as.setRemark(Remark);
         assetsDao.save(as);
         /* 判断是否有使用人员*/
-        UserInfo user = userDao.findByAssetsID(assetsid);
+        UserInfo user = userDao.findByDeviceID(DeviceID);
         if (user ==null){
             user = new UserInfo();
-            user.setAssetsID(assetsid);
+            user.setDeviceID(DeviceID);
         }
         String userID = request.getParameter("UserID");
         if (userID != null && userID != "") {  //有使用者工号,就保存
@@ -201,6 +199,7 @@ public class hardwareServiceImpl implements hardwareService {
         if (type == 0) {
             String assetsType = "";
             String assetsCategory = "";
+            String assetsId="";
             for (Map<String, String> map : list) {
                 Assets as = new Assets();
                 UserInfo userInfo = new UserInfo();
@@ -216,28 +215,26 @@ public class hardwareServiceImpl implements hardwareService {
                         assetsCategory = value;
                     }
                     if (columns[2].equals(key)) {  //判断资产编号非空
+                        assetsId = value;
+                    }
+                    if (columns[3].equals(key)) { //判断设备编号非空
                         if (StringUtils.isEmpty(value)){
                             continue;
                         }
-                        if (assetsDao.findByAssetsID(value) == null) { //无
-                            as.setAssetsID(value);
+                        if (assetsDao.findByDeviceID(value) == null) { //无
+                            as.setDeviceID(value);
+                            as.setAssetsID(assetsId);
                             as.setAssetsType(assetsType);
                             as.setAssetsCategory(assetsCategory);
                         } else {  //存在,更新
-                            as = assetsDao.findByAssetsID(value);
+                            as = assetsDao.findByDeviceID(value);
+                            as.setAssetsID(assetsId);
                             as.setAssetsType(assetsType);
                             as.setAssetsCategory(assetsCategory);
-                            userInfo = userDao.findByAssetsID(value);
+                            userInfo = userDao.findByDeviceID(value);
                             if (userInfo==null)
                                 userInfo = new UserInfo();
                         }
-                    }
-
-                    if (columns[3].equals(key)) { //解析设备编号
-                        if (StringUtils.isEmpty(value)){
-                            continue;
-                        }
-                        as.setDeviceID(value);
                     }
                     if (columns[4].equals(key))  //解析出厂编号
                         as.setFactoryID(value);
@@ -297,11 +294,11 @@ public class hardwareServiceImpl implements hardwareService {
                 }
              //   System.out.println(as);
                 //保存
-                if (as != null && as.getAssetsID() != null) {
+                if (as != null && as.getDeviceID() != null) {
                     assetsDao.save(as);
-                    userInfo.setAssetsID(as.getAssetsID());
-                    if (!StringUtils.isEmpty(userInfo.getAssetsID())&&!StringUtils.isEmpty(userInfo.getUserName())){
-                        if (userDao.findByAssetsID(as.getAssetsID())==null){
+                    userInfo.setDeviceID(as.getDeviceID());
+                    if (!StringUtils.isEmpty(userInfo.getDeviceID())&&!StringUtils.isEmpty(userInfo.getUserName())){
+                        if (userDao.findByDeviceID(as.getDeviceID())==null){
                             userDao.save(userInfo);
                         }
                     }

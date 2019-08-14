@@ -39,7 +39,7 @@ public class showServiceImpl implements showService {
         List<DatasShowModel> datas = new ArrayList<>();// 部分数据模型
         DatasShowModel data;
         for (Assets as : list) {    //
-            user = userDao.findByAssetsID(as.getAssetsID());
+            user = userDao.findByDeviceID(as.getDeviceID());
             if (user==null){
                 user = new UserInfo();
             }
@@ -71,7 +71,7 @@ public class showServiceImpl implements showService {
             Page<Assets> page = asDao.findBetweenDate(date1,date2,pageable);
             List<Assets> list = page.getContent();
             for(Assets as : list){
-                user = userDao.findByAssetsID(as.getAssetsID());
+                user = userDao.findByDeviceID(as.getDeviceID());
                 model = setmodel(as,user);
                 datas.add(model);
             }
@@ -81,7 +81,7 @@ public class showServiceImpl implements showService {
             Page<Assets> page = getAssets(pageable, strs,type);
             List<Assets> list = page.getContent();
             for(Assets as : list){
-                user = userDao.findByAssetsID(as.getAssetsID());
+                user = userDao.findByDeviceID(as.getDeviceID());
                 model = setmodel(as,user);
                 datas.add(model);
             }
@@ -92,7 +92,7 @@ public class showServiceImpl implements showService {
             Page<Assets> page = getAssets(pageable, strs,type);
             List<Assets> list = page.getContent();
             for(Assets as : list){
-                user = userDao.findByAssetsID(as.getAssetsID());
+                user = userDao.findByDeviceID(as.getDeviceID());
                 model = setmodel(as,user);
                 datas.add(model);
             }
@@ -102,7 +102,7 @@ public class showServiceImpl implements showService {
             Page<Assets> page = getAssets(pageable, strs,type);
             List<Assets> list = page.getContent();
             for(Assets as : list){
-                user = userDao.findByAssetsID(as.getAssetsID());
+                user = userDao.findByDeviceID(as.getDeviceID());
                 model = setmodel(as,user);
                 datas.add(model);
             }
@@ -126,7 +126,7 @@ public class showServiceImpl implements showService {
             Page<Assets> page = asDao.findBtAState(l1,l2,l3,l4,pageable);
             List<Assets> list = page.getContent();
             for(Assets as : list){
-                user = userDao.findByAssetsID(as.getAssetsID());
+                user = userDao.findByDeviceID(as.getDeviceID());
                 model = setmodel(as,user);
                 datas.add(model);
             }
@@ -140,7 +140,7 @@ public class showServiceImpl implements showService {
                     as  = asDao.findByAssetsID(s);
                     if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
                         continue;
-                    user = userDao.findByAssetsID(as.getAssetsID());
+                    user = userDao.findByDeviceID(as.getDeviceID());
                     model = setmodel(as,user);
                     datas.add(model);
                 }
@@ -149,7 +149,7 @@ public class showServiceImpl implements showService {
                     for (UserInfo u:userss){
                         if(u==null)  //没有找到
                             continue;
-                        as = asDao.findByAssetsID(u.getAssetsID());
+                        as = asDao.findByDeviceID(u.getDeviceID());
                         if (as==null)
                             continue;
                         model = setmodel(as,u);
@@ -160,7 +160,7 @@ public class showServiceImpl implements showService {
                     as  = asDao.findByDeviceID(s);
                     if(as==null)  //没有资产,不保存因此前端不会显示本次搜索的用户或者资产
                         continue;
-                    user = userDao.findByAssetsID(as.getAssetsID());
+                    user = userDao.findByDeviceID(as.getDeviceID());
                     model = setmodel(as,user);
                     datas.add(model);
                 }

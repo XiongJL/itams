@@ -10,7 +10,7 @@ public class UserInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String AssetsID;
+    private String DeviceID;
     private String UserName;
     private String UserID;
     private String UserDepartment;
@@ -34,12 +34,12 @@ public class UserInfo implements Serializable {
         this.id = id;
     }
 
-    public String getAssetsID() {
-        return AssetsID;
+    public String getDeviceID() {
+        return DeviceID;
     }
 
-    public void setAssetsID(String assetsID) {
-        AssetsID = assetsID;
+    public void setDeviceID(String deviceID) {
+        DeviceID = deviceID;
     }
 
     public String getUserName() {
@@ -86,13 +86,13 @@ public class UserInfo implements Serializable {
     public String toString() {
         return "UserInfo{" +
                 "id=" + id +
-                ", AssetsID='" + AssetsID + '\'' +
+                ", DeviceID='" + DeviceID + '\'' +
                 ", UserName='" + UserName + '\'' +
                 ", UserID='" + UserID + '\'' +
-                ", Department='" + UserDepartment + '\'' +
+                ", UserDepartment='" + UserDepartment + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", Lphone='" + Lphone + '\'' +
-                ", GetTime='" + GetTime + '\'' +
+                ", GetTime=" + GetTime +
                 '}';
     }
 }

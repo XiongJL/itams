@@ -17,8 +17,8 @@ public interface UserInfoDao extends JpaRepository<UserInfo,Integer> , JpaSpecif
     @Query(value = "select u from  UserInfo u where u.UserID = :userid")
     List<UserInfo> findByUserID(String userid);
 
-    @Query(value = "select u from  UserInfo u where u.AssetsID = :assetsID")
-    UserInfo findByAssetsID(String assetsID);
+    @Query(value = "select u from  UserInfo u where u.DeviceID = :deviceID")
+    UserInfo findByDeviceID(String deviceID);
 
     @Query(value = "SELECT u.UserName,u.UserID,u.UserDepartment,u.AssetsID,h.Model,u.GetTime " +
             "FROM ITAMS_UserInfo u,ITAMS_Hardware h " +

@@ -73,7 +73,7 @@ public class operateServiceImpl implements operateService {
             return "资产已经不存在!";
         }
         assetsDao.delete(assets);
-        UserInfo userInfo = userInfoDao.findByAssetsID(assets.getAssetsID());
+        UserInfo userInfo = userInfoDao.findByDeviceID(deviceid);
         userInfoDao.delete(userInfo);
         return "ok";
     }
