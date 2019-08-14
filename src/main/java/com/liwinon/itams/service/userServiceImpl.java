@@ -151,7 +151,7 @@ public class userServiceImpl implements userService{
     @Override
     @Transactional
     public String delUser(int id) {
-        User user = userDao.findById(id);
+        User user = userDao.findByUid(id);
         if (user ==null)
             return "userEmpty";
         List<UserRole> roles = userRoleDao.findByUid(id);

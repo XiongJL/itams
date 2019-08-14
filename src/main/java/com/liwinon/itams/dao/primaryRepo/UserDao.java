@@ -19,7 +19,7 @@ public interface UserDao extends JpaRepository<User,Integer>, JpaSpecificationEx
     @Query(value = "select u.pwd from User u where uname = :uname")
     String getPwdByUname(String uname);
 
-    User findById(int id);
+    User findByUid(int id);
 
     @Query(value = "select p.name" +
             "                    from ITAMS_Role_Permission rp " +
