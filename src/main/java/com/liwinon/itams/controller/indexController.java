@@ -67,9 +67,12 @@ public class indexController {
             /** 超级管理员只能有超级管理员权限!!!
              * **/
             String permission = userDao.getPermissionByRole((String) urms.get(0).getName());
+            System.out.println(permission+"------------1----");
             session.setAttribute("userid",userid);
+            System.out.println(userid+"-------2--------");
             User user = userDao.findByPERSONID(userid);
             session.setAttribute("username",user.getUname());
+            System.out.println(user.getUname()+"-----------3----------");
             System.out.println("permission is  : " + permission);
             session.setAttribute("permission",permission);
         } catch (UnknownAccountException e) {
