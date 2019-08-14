@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class helpController {
     @GetMapping(value = "/help")
     public  String help(){
-        return "/common/help";
+        return "common/help";
     }
 }
