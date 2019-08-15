@@ -35,8 +35,6 @@ public class apiController {
      */
     @GetMapping(value="/getFormInfo")
     public JSONObject getFormInfo(String DeviceID,String UserID,String Event,String FormID,String State){
-
-
         return api.getFormInfo(DeviceID, UserID, Event, FormID, State);
     }
 }
