@@ -89,23 +89,23 @@ public class indexController {
         return "ok";
     }
 
-    @GetMapping(value = "/itams/register")
-    public String register(){
-        return "register";
-    }
-
-    /**
-     * 注册
-     * @param userid
-     * @param username
-     * @param password
-     * @return
-     */
-    @PostMapping(value = "/itams/register")
-    @ResponseBody
-    public String register(String userid,String username,String password){
-        return userService.register(userid,username,password);
-    }
+//    @GetMapping(value = "/itams/register")
+//    public String register(){
+//        return "register";
+//    }
+//
+//    /**
+//     * 注册
+//     * @param userid
+//     * @param username
+//     * @param password
+//     * @return
+//     */
+//    @PostMapping(value = "/itams/register")
+//    @ResponseBody
+//    public String register(String userid,String username,String password){
+//        return userService.register(userid,username,password);
+//    }
 
     /**
      * 获取用户角色 ,这里没有使用shiro ,业务特殊.
