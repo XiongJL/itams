@@ -48,6 +48,9 @@ public class operateServiceImpl implements operateService {
                 if ("已报废".equals(event2.getState())){
                     return "已报废";
                 }
+                if ("已转移".equals(event2.getState())){
+                    return "已转移";
+                }
                 if ("报废改造".equals(event2.getState())){
                     return "报废改造";
                 }

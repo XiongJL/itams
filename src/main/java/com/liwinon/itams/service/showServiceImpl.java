@@ -131,6 +131,16 @@ public class showServiceImpl implements showService {
                 datas.add(model);
             }
             result.put("total",page.getTotalElements());
+        }else if ("9".equals(type)){
+            //根据资产名模糊搜索
+            Page<Assets> page = getAssets(pageable, strs,type);
+            List<Assets> list = page.getContent();
+            for(Assets as : list){
+                user = userDao.findByDeviceID(as.getDeviceID());
+                model = setmodel(as,user);
+                datas.add(model);
+            }
+            result.put("total",page.getTotalElements());
         }
         else{
             for (String s : strs){ //搜索内容
@@ -197,6 +207,9 @@ public class showServiceImpl implements showService {
         }
         if ("7".equals(type)){
             return asDao.findByPerson(l1,l2,l3,l4,l5,pageable);
+        }
+        if ("9".equals(type)){
+            return asDao.findByAssetsName(l1,l2,l3,l4,l5,pageable);
         }
         return  null;
     }

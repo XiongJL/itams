@@ -82,5 +82,8 @@ public interface AssetsDao extends JpaRepository<Assets,String>, JpaSpecificatio
     @Query(value = "select * from ITAMS_Assets  where AState = :l1 or AState = :l2 or AState = :l3 or AState = :l4",nativeQuery = true)
     Page<Assets> findBtAState(String l1, String l2, String l3, String l4, Pageable pageable);
 
-
+    //根据资产名模糊搜索
+    @Query(value="select * from ITAMS_Assets where AssetsName LIKE %:l1% OR AssetsName like %:l2%" +
+            " OR AssetsName like %:l3% OR AssetsName like %:l4% OR AssetsName like %:l5%",nativeQuery = true)
+    Page<Assets> findByAssetsName(String l1, String l2, String l3, String l4, String l5, Pageable pageable);
 }

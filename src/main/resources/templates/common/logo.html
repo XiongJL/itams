@@ -3,10 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{../css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/loadStyle.css">
 </head>
 <body>
 <div th:fragment="logo">
+    <link th:href="@{../css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .container .text {
+            background: #fff;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            font-family: sans-serif;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            font-weight: 800;
+            position: relative;
+        }
+        .container .text:hover::after {
+            background: #e02121;
+        }
+        .container--box {
+            width: 100%;
+            height: 100%;
+        }
+        .container--box .box {
+            display: grid;
+            justify-items: center;
+        }
+        .container--box .box .spinner {
+            height: 40px;
+            width: 40px;
+            background: rgba(0, 0, 0, .2);
+            border-radius: 50%;
+        }
+
+        /* Spinner 1 */
+
+        .container--box .box .spinner--1 {
+            border-top: 2px solid #fff;
+            animation: spinner1 600ms linear infinite;
+        }
+        @keyframes spinner1 {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Spinner 2 */
+
+        .container--box .box .spinner--2 {
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            border-top-color: #fff;
+            animation: spinner2 600ms linear infinite;
+        }
+        @keyframes spinner2 {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Spinner 3 */
+
+        .container--box .box .spinner--3 {
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            border-bottom-color: #fff;
+            border-top-color: #fff;
+            animation: spinner3 800ms ease infinite;
+        }
+        @keyframes spinner3 {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Spinner 4 */
+
+        .container--box .box .spinner--4 {
+            transform: scale(0);
+            background: rgba(0, 0, 0, .8);
+            opacity: 1;
+            animation: spinner4 800ms linear infinite;
+        }
+        @keyframes spinner4 {
+            to {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Spinner 5 */
+
+        .container--box .box .spinner--5 {
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            animation: spinner5 800ms linear infinite;
+        }
+        @keyframes spinner5 {
+            0% {
+                border-radius: 50%;
+                transform: rotate(0);
+            }
+            50% {
+                transform: rotate(180deg);
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+            100% {
+                border-radius: 50%;
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Spinner 6 */
+
+        .container--box .box .spinner--6 {
+            border-top: 2px solid #fff;
+            border-right: 2px solid transparent;
+            animation: spinner6 700ms linear infinite;
+        }
+        @keyframes spinner6 {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+    <style>
+        /*按钮合一css*/
+
+        /*
+        将初始的checkbox的样式改变
+        */
+        .checkbox-custom input[type="checkbox"] {
+            opacity: 0;/*将初始的checkbox隐藏起来*/
+            position: absolute;
+            cursor: pointer;
+            z-index: 2;
+            margin: -6px 0 0 0;
+            top: 50%;
+            left: 3px;
+        }
+        /*
+        设计新的checkbox，位置
+        */
+        .checkbox-custom label:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -9px;
+            width: 19px;
+            height: 18px;
+            display: inline-block;
+            border-radius: 2px;
+            border: 1px solid #bbb;
+            background: #fff;
+        }
+        /*
+        点击初始的checkbox，将新的checkbox关联起来
+        */
+        .checkbox-custom input[type="checkbox"]:checked +label:after {
+            position: absolute;
+            display: inline-block;
+            font-family: 'Glyphicons Halflings';
+            content: "\e013";
+            top: 42%;
+            left: 3px;
+            margin-top: -5px;
+            font-size: 11px;
+            line-height: 1;
+            width: 16px;
+            height: 16px;
+            color: #333;
+        }
+        .checkbox-custom label {
+            cursor: pointer;
+            line-height: 1.2;
+            font-weight: normal;/*改变了rememberme的字体*/
+            margin-bottom: 0;
+            text-align: left;
+        }
+        .form-group{
+            border-bottom: 1px lavenderblush solid;
+        }
+        .fileUpload {
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .fileUpload input.upload {  position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+    </style>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,11 +226,23 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul  class="nav navbar-nav">
 <!--                <li id="index"><a href="/itams/search">首 页<span class="sr-only">(current)</span></a></li>-->
-                    <li id="modify"><a href="/itams/datas">数据浏览</a></li>
-                    <li th:if="${session.permission=='sadmin'}" id="operate"><a href="/itams/operate">数据录入</a></li>
+                    <li  id="modify" class="dropdown" >
+                        <a href="#" onclick="jump('/itams/datas')" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据浏览<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/itams/download/AssetsData">导出全部资产数据</a></li>
+                        </ul>
+                    </li>
+<!--                    <li th:if="${session.permission=='sadmin'}" id="operate"><a href="/itams/operate">数据录入</a></li>-->
+                    <li th:if="${session.permission=='sadmin'}" id="operate" class="dropdown">
+                        <a href="/itams/operate" onclick="jump('/itams/operate')" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据录入<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="import" data-toggle="modal"data-target="#update"  >导入Excel数据</a></li>
+                            <li><a id="example" data-toggle="modal"data-target="#download" >下载示例</a></li>
+                        </ul>
+                    </li>
 <!--                    <li id="show"><a href="/itams/showData">数据图表</a></li>-->
                     <li th:if="${session.permission=='sadmin'}" id="permission" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">权限系统 <span class="caret"></span></a>
+                        <a href="/itams/newrole" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">权限系统 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/itams/newrole">权限设置</a></li>
                             <li><a href="/itams/role">权限查看</a></li>
@@ -55,13 +266,13 @@
                 	 <li class="dropdown">
                     	<a id="itemid"></a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">导出数据<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/itams/download/AssetsData">导出全部资产数据</a></li>
-<!--                            <li><a href="/itams/download/ITData" class="btn " type="button" style="width: auto;">导出IT资产数据</a></li>-->
-                        </ul>
-                    </li>
+<!--                    <li class="dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">导出数据<span class="caret"></span></a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a href="/itams/download/AssetsData">导出全部资产数据</a></li>-->
+<!--&lt;!&ndash;                            <li><a href="/itams/download/ITData" class="btn " type="button" style="width: auto;">导出IT资产数据</a></li>&ndash;&gt;-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li th:if="${session.userid == null || session.userid ==''}">
                     <a  href="/itams/login" class="dropdown-toggle" data-toggle="" role="button" aria-haspopup="" aria-expanded="false">
                     管理员登录</a>
@@ -87,7 +298,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" id="close3" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 >您好: <span th:text="${session.username}"></span></h4>
                 </div>
                 <div class="modal-body">
@@ -103,12 +314,173 @@
             </div>
         </div>
     </div>
+    <!-- Modal copy -->
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="update">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal2">选择文件上传</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center">
+                        <div  STYLE="width: auto; ">
+                            <label  >上传类型</label>
+                            <br>
+                            <select id="Uptype"  style="width: auto; border: 1px solid #CCC;padding: 0.6rem 1.2rem;border-radius: 0.4rem;">
+                                <option>资产</option>
+                                <option>IT</option>
+                            </select>
+                        </div>
+                        <br>
+                        <form id="upForm" method="post" action="#" enctype="multipart/form-data">
+                            <input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+                            <div class="fileUpload btn btn-primary">
+                                <span><span class="glyphicon glyphicon-upload"></span>选择文件</span>
+                                <input id="uploadBtn" type="file" name="file"  class="upload" />
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="uploadButton" type="button" class="fileUpload btn btn-warning" onclick="uploadfile();">上传</button>
+                    <!-- 加载动画 -->
+                    <div id="loading" class="container--box">
+                        <div class="box">
+                            <div class="spinner spinner--3"></div>
+                            处理中...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal copy2 -->
+    <div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="example">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="close2" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >选择要下载的示例</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center">
+                        <a type="button" href="/itams/download/Example?name=Assets" class="btn btn-primary" style="width: auto;">下载资产示例</a>
+                        <!--                        <br>-->
+                        <!--                        <br>-->
+                        <!--                        <a type="button" href="/itams/download/Example?name=IT" class="btn btn-primary" style="width: auto;">下载IT资产信息示例</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script type="text/javascript">
 </script>
     <script>
+        function jump(url){
+            window.location.href = url;
+        }
+        function uploadfile() {
+            var filename = document.getElementById("uploadBtn").value
+            if(filename==null||filename==""){
+                toastr.warning("请先选择文件!")
+            }else{
+                var str = filename.split(".")
+                var type = str[str.length-1];
+                if(type=="xlsx" || type == "xls"){
+                    var fileObj = document.getElementById("uploadBtn").files[0];
+                    var form = new FormData();
+                    var uptype = $("#Uptype").val();
+                    if(uptype=="资产"){
+                        uptype = 0
+                    }
+                    if(uptype=="IT"){
+                        uptype = 1
+                    }
+                    //form.append("author", "hooyes"); // 可以增加表单数据
+                    form.append("file",fileObj);
+                    $("#loading").show() //显示加载动画
+                    $("#uploadButton").prop("disabled",true)//禁用button按钮
+                    $.ajax({
+                        url: "/itams/upload/excel",
+                        type: "post",
+                        data: form,
+                        /**
+                         *必须false才会自动加上正确的Content-Type
+                         */
+                        contentType: false,
+                        /**
+                         * 必须false才会避开jQuery对 formdata 的默认处理
+                         * XMLHttpRequest会对 formdata 进行正确的处理
+                         */
+                        processData: false,
+                        success: function (res) {
+                            if(res=="fail"){
+                                toastr.warning("上传失败!")
+                                $("#loading").hide()
+                                $("#uploadButton").prop("disabled",false)//启用button按钮
+                            }
+                            else{ //返回文件服务器路径
+                                //请求去解析,.
+                                $.ajax({
+                                    url: "/itams/upload/resolvExcel",
+                                    type: "get",
+                                    data: {"path":res,"type":uptype},
+                                    success: function (result) {
+                                        if(result=="ok"){
+                                            toastr.success("上传成功!解析成功!")
+                                            $("#loading").hide();//隐藏加载
+                                            $("#uploadButton").prop("disabled",false)//启用button按钮
+                                            $('#close').click();// 关闭弹出层
+                                            setTimeout(function () {
+                                                $('#update').modal('hide');//用js来控制模板弹窗。
+                                                $('#update').modal('toogle');
+                                            },10)
+                                        }else{
+                                            toastr.warning("上传成功,但解析失败!!")
+                                            $("#uploadButton").prop("disabled",false)//启用button按钮
+                                            $("#loading").hide();//隐藏加载
+                                        }
+                                    },
+                                    error: function () {
+                                        toastr.warning("请下载示例模板进行导入!")
+                                        $("#uploadButton").prop("disabled",false)//启用button按钮
+                                        $("#loading").hide();//隐藏加载
+                                    }
+                                })
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err)
+                            $("#uploadButton").prop("disabled",false)//启用button按钮
+                            $("#loading").hide();//隐藏加载
+                        }
+                    })
+                }else{
+                    toastr.warning("文件类型错误!")
+                    $("#uploadButton").prop("disabled",false)//启用button按钮
+                    $("#loading").hide();//隐藏加载
+                }
+            }
+
+
+        }
     window.onload=function()//用window的onload事件，窗体加载完毕的时候
     {
+        //隐藏加载动画
+        $("#loading").hide();
     	getad();
+        $(".dropdown").mouseover(function () {
+            $(this).addClass("open");
+        });
+        $(".dropdown").mouseleave(function(){
+            $(this).removeClass("open");
+        })
+        document.getElementById("uploadBtn").onchange = function () { //上传按钮合一
+            document.getElementById("uploadFile").value = this.value;
+        };
     }
 function Adduser(data){
 	if(data.status){
@@ -168,5 +540,6 @@ function  getad(){
 <script th:src="@{../js/jquery-3.4.0.min.js}" src="../js/jquery-3.4.0.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script th:src="@{../js/bootstrap.min.js}" src="../js/bootstrap.min.js"></script>
+<script src="../js/operate/upload.js"></script>
 
 </html>

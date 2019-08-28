@@ -157,14 +157,14 @@ function operateFormatter(value, row, index) {//赋予的参数
     if (permission=='sadmin') {
         return [
             '<a style="margin-right: 4px;" href="/itams/operate?DeviceID=' + row.deviceID + '">编辑</a>',
-            '<a style="margin-right: 4px;"  onclick="zhuanshou(this)" data-deviceid="' + row.deviceID + '" href="#">转售</a>',
+            '<a style="margin-right: 4px;"  onclick="zhuanyi(this)" data-deviceid="' + row.deviceID + '" href="#">转移</a>',
             '<a style="margin-right: 4px;"class=""  onclick="baofei(this) " data-deviceid="' + row.deviceID + '"  href="#">报废</a>'
            // , '<a class=""  onclick="del(this) " data-deviceid="' + row.deviceID + '"  href="#">删除</a>'
             // , '<a class="btn " href="#">删除</a>'
         ].join('');
     }else if(permission=='admin'){
         return [
-            '<a style="margin-right: 4px;"  onclick="zhuanshou(this)" data-deviceid="' + row.deviceID + '" href="#">转售</a>',
+            '<a style="margin-right: 4px;"  onclick="zhuanyi(this)" data-deviceid="' + row.deviceID + '" href="#">转移</a>',
             '<a class=""  onclick="baofei(this) " data-deviceid="' + row.deviceID + '"  href="#">报废</a>',
         ].join('');
     } else {
@@ -175,9 +175,9 @@ function operateFormatter(value, row, index) {//赋予的参数
 
 }
 //转售
-function zhuanshou(a){
+function zhuanyi(a){
     //请求接口,将当前设备,存入请求事件,保存用户工号,操作类型,发起时间
-    var event="转售";
+    var event="转移";
     reqOption(event,a.dataset.deviceid);
 }
 //报废
@@ -216,8 +216,14 @@ function reqOption(event,deviceID){
             console.log(res)
             if (res=="ok"){
                 toastr.success("请求成功,跳转中...")
-                setTimeout(window.open('http://192.168.6.163/ekp/km/review/km_review_main/kmReviewMain.do?method=add&fdTemplateId=16416b486c61a8db9d6e927402495999',
-                    "_blank"), 100);
+                if (event=="报废"){
+                    setTimeout(window.open('http://192.168.6.163/ekp/km/review/km_review_main/kmReviewMain.do?method=add&fdTemplateId=16416b486c61a8db9d6e927402495999',
+                        "_blank"), 100);
+                } else if (event=="转移"){
+                    setTimeout(window.open('http://192.168.6.163/ekp/km/review/km_review_main/kmReviewMain.do?method=add&fdTemplateId=16416bf453ae625e6365d2c4715af3b9',
+                        "_blank"), 100);
+                }
+
 
             }else {
                 toastr.warning(res+",可根据单号到OA查询")
@@ -266,6 +272,7 @@ $('#searchAssets').click(function () {
     var Type = "1";
     chaxun(Type)
 });
+
 //工号查询
 $('#searchUserID').click(function () {
     var Type = "2";
@@ -324,7 +331,12 @@ $('#searchByAState').click(function () {
             $('#myModal').modal('toogle');
         },10)
 })
-
+//模糊查询资产名
+$('#searchName').click(function () {
+    toastr.warning("注意,最多同时搜索五个.")
+    var Type = "9"
+    chaxun(Type)
+})
 /*查询方法*/
 function chaxun(Type) {
     if ($("#searchValue").val().length == 0 && Type!="4" && Type!="8") {

@@ -48,10 +48,6 @@
                     </select>
                 </div>
                 <label class="col-sm-2"></label>
-                <button type="button" id="import" data-toggle="modal"data-target="#update" class=" btn btn-info" style="width: auto;">导入Excel数据</button>
-                <button type="button" id="example" data-toggle="modal"data-target="#download" class=" btn btn-info" style="width: auto;">下载示例</button>
-
-
 
             </div>
             <div class="form-group">
@@ -209,66 +205,66 @@
         </div>
     </form>
     <!-- Modal copy -->
-    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="update">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modal2">选择文件上传</h4>
-                </div>
-                <div class="modal-body">
-                    <div style="text-align: center">
-                        <div  STYLE="width: auto; ">
-                            <label for="AssetsType" >上传类型</label>
-                            <br>
-                            <select id="Uptype"  style="width: auto; border: 1px solid #CCC;padding: 0.6rem 1.2rem;border-radius: 0.4rem;">
-                                <option>资产</option>
-                                <option>IT</option>
-                            </select>
-                        </div>
-                            <br>
-                        <form id="upForm" method="post" action="#" enctype="multipart/form-data">
-                            <input id="uploadFile" placeholder="Choose File" disabled="disabled" />
-                            <div class="fileUpload btn btn-primary">
-                                <span><span class="glyphicon glyphicon-upload"></span>选择文件</span>
-                                <input id="uploadBtn" type="file" name="file"  class="upload" />
-                            </div>
-                        </form>
+<!--    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="update">-->
+<!--        <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--                    <h4 class="modal-title" id="modal2">选择文件上传</h4>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <div style="text-align: center">-->
+<!--                        <div  STYLE="width: auto; ">-->
+<!--                            <label for="AssetsType" >上传类型</label>-->
+<!--                            <br>-->
+<!--                            <select id="Uptype"  style="width: auto; border: 1px solid #CCC;padding: 0.6rem 1.2rem;border-radius: 0.4rem;">-->
+<!--                                <option>资产</option>-->
+<!--                                <option>IT</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                            <br>-->
+<!--                        <form id="upForm" method="post" action="#" enctype="multipart/form-data">-->
+<!--                            <input id="uploadFile" placeholder="Choose File" disabled="disabled" />-->
+<!--                            <div class="fileUpload btn btn-primary">-->
+<!--                                <span><span class="glyphicon glyphicon-upload"></span>选择文件</span>-->
+<!--                                <input id="uploadBtn" type="file" name="file"  class="upload" />-->
+<!--                            </div>-->
+<!--                        </form>-->
 
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="uploadButton" type="button" class="fileUpload btn btn-warning" onclick="uploadfile();">上传</button>
-                    <!-- 加载动画 -->
-                    <div id="loading" class="container--box">
-                        <div class="box">
-                            <div class="spinner spinner--3"></div>
-                            处理中...
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button id="uploadButton" type="button" class="fileUpload btn btn-warning" onclick="uploadfile();">上传</button>-->
+<!--                    &lt;!&ndash; 加载动画 &ndash;&gt;-->
+<!--                    <div id="loading" class="container&#45;&#45;box">-->
+<!--                        <div class="box">-->
+<!--                            <div class="spinner spinner&#45;&#45;3"></div>-->
+<!--                            处理中...-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <!-- Modal copy2 -->
-    <div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="example">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" id="close2" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" >选择要下载的示例</h4>
-                </div>
-                <div class="modal-body">
-                    <div style="text-align: center">
-                        <a type="button" href="/itams/download/Example?name=Assets" class="btn btn-primary" style="width: auto;">下载资产示例</a>
-<!--                        <br>-->
-<!--                        <br>-->
-<!--                        <a type="button" href="/itams/download/Example?name=IT" class="btn btn-primary" style="width: auto;">下载IT资产信息示例</a>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="example">-->
+<!--        <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <button type="button" id="close2" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--                    <h4 class="modal-title" >选择要下载的示例</h4>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <div style="text-align: center">-->
+<!--                        <a type="button" href="/itams/download/Example?name=Assets" class="btn btn-primary" style="width: auto;">下载资产示例</a>-->
+<!--&lt;!&ndash;                        <br>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <br>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a type="button" href="/itams/download/Example?name=IT" class="btn btn-primary" style="width: auto;">下载IT资产信息示例</a>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 
 </body>
@@ -340,9 +336,9 @@
         minView: 2,
         forceParse: 0
     });
-    document.getElementById("uploadBtn").onchange = function () { //上传按钮合一
-        document.getElementById("uploadFile").value = this.value;
-    };
+    // document.getElementById("uploadBtn").onchange = function () { //上传按钮合一
+    //     document.getElementById("uploadFile").value = this.value;
+    // };
 
     /*插入更新前的判断操作.*/
 
