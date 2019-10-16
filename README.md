@@ -6,7 +6,7 @@ function  getad(){
 	
         $.ajax({
             type:"get",
-            url:"http://iis-server.liwinon.com:9090/api/Add/GetClientUser",
+            url:"##########:9090/api/Add/GetClientUser",
             ......
     	    	 $("#itemid").html("当前访问员工 :"+ typeaa);
             },
